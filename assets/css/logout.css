@@ -1,0 +1,40 @@
+body {
+    background-color: #121212;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+  }
+  
+  .logout-box {
+    background-color: #1e1e1e;
+    padding: 40px;
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.05);
+  }
+  
+  .logout-box h1 {
+    color: #FFD700;
+    margin-bottom: 20px;
+  }
+  
+  .logout-box p {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  a.botao-voltar {
+    background-color: #FFD700;
+    color: #121212;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  a.botao-voltar:hover {
+    background-color: #e6c200;
+  }
+  

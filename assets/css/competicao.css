@@ -1,0 +1,61 @@
+.secao-competicao {
+    background-color: #121212;
+    color: #f0f0f0;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .secao-competicao h1 {
+    font-size: 28px;
+    color: #FFD700;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .descricao {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #ddd;
+  }
+  
+  .secao-competicao h2 {
+    font-size: 22px;
+    color: #FFD700;
+    margin-bottom: 15px;
+  }
+  
+  .lista-temporadas {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .lista-temporadas li {
+    background-color: #1e1e1e;
+    border-radius: 6px;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+  }
+  
+  .lista-temporadas a {
+    text-decoration: none;
+    color: #FFD700;
+    font-size: 16px;
+  }
+  
+  .lista-temporadas li:hover {
+    background-color: #2a2a2a;
+  }
+  

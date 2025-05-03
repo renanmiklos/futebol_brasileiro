@@ -1,0 +1,41 @@
+.secao-temporada {
+    background-color: #121212;
+    color: #f0f0f0;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .secao-temporada h1 {
+    font-size: 28px;
+    color: #FFD700;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .descricao {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    color: #ddd;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  
+  .secao-temporada h2 {
+    font-size: 22px;
+    color: #FFD700;
+    margin-bottom: 15px;
+  }
+  
+  .secao-temporada p {
+    font-size: 15px;
+    color: #ccc;
+  }
+  

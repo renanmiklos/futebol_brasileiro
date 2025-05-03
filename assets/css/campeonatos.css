@@ -1,0 +1,121 @@
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.secao-campeonatos {
+    background-color: #121212;
+    color: #f0f0f0;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    padding: 30px 20px;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* MENU LATERAL */
+  .menu-lateral {
+    width: 220px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  
+  .menu-lateral h2 {
+    color: #FFD700;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  
+  .menu-lateral ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-lateral li {
+    margin-bottom: 10px;
+  }
+  
+  .menu-lateral a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  
+  .menu-lateral a:hover,
+  .menu-lateral a.ativo {
+    background-color: #FFD700;
+    color: #121212;
+  }
+  
+  /* CONTEÚDO PRINCIPAL */
+  .conteudo-campeonatos {
+    flex: 1;
+    padding: 10px 0;
+  }
+  
+  .conteudo-campeonatos h1 {
+    color: #FFD700;
+    font-size: 26px;
+    margin-bottom: 15px;
+  }
+  
+  .conteudo-campeonatos p {
+    font-size: 15px;
+    color: #ddd;
+    margin-bottom: 20px;
+  }
+
+  .lista {
+    display: flex;
+  }
+  
+  .lista-competicoes {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+  }
+  
+  .lista-competicoes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2; /* << AQUI faz duas colunas automaticamente */
+    column-gap: 40px; /* Espaço entre as colunas */
+  }
+  
+  .lista-competicoes li {
+    margin-bottom: 4px;
+    break-inside: avoid; /* Evita quebra feia de linha entre colunas */
+  }
+  
+  .lista-competicoes a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+  }
+  
+  .lista-competicoes a:hover {
+    background-color: #FFD700;
+    color: #121212;
+  }
+  

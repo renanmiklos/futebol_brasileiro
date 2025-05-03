@@ -1,0 +1,42 @@
+.rodape {
+    background-color: #1e1e1e;
+    padding: 20px 10px;
+    border-top: 2px solid #FFD700;
+    color: #f0f0f0;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .rodape-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .rodape-container p {
+    margin: 8px 0;
+  }
+  
+  .admin-link {
+    color: #FFD700;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .admin-link:hover {
+    color: #fff;
+  }
+  
+  .btn-link-admin {
+    background-color: transparent;
+    border: none;
+    color: #FFD700;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 0.95em;
+  }
+  
+  .btn-link-admin:hover {
+    color: #fff;
+  }
+  
