@@ -20,6 +20,23 @@ try {
     $stmt_artigos->execute();
     $artigos = $stmt_artigos->fetchAll(PDO::FETCH_ASSOC);
 
+    $stmt = $pdo->query("
+        SELECT f.*
+        FROM fotos f
+        INNER JOIN (
+            SELECT banco_id, MAX(data_publicacao) as ultima_data
+            FROM fotos
+            GROUP BY banco_id
+        ) ultimas
+        ON f.banco_id = ultimas.banco_id AND f.data_publicacao = ultimas.ultima_data
+        ORDER BY f.data_publicacao DESC
+    ");
+    $fotos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt_videos = $pdo->prepare("SELECT * FROM videos ORDER BY data_publicacao DESC LIMIT 1");
+    $stmt_videos->execute();
+    $videos = $stmt_videos->fetchAll(PDO::FETCH_ASSOC);
+
 } catch (PDOException $e) {
     die("Erro na conexão com o banco de dados: " . $e->getMessage());
 }
@@ -65,6 +82,7 @@ try {
     </header>
 
     <main>
+        <h1>Destaques</h1>
         <section class="principal">
             <div class="conteudo">
                 <div class="noticias-container">
@@ -123,11 +141,65 @@ try {
             </div>
         </section>
 
-        <section class="secao-historia">
-            <div class="secao-container">
-                <h2>A História do Futebol Brasileiro</h2>
-                <p>Desde os primeiros jogos no século XIX até os dias de hoje, o futebol brasileiro construiu uma trajetória única, recheada de títulos, ídolos e emoções. Descubra como esse esporte se tornou parte da nossa identidade nacional.</p>
-                <a class="botao" href="historia.php">Leia mais sobre a história</a>
+        <!-- Seção: História - Vídeos e Fotos -->
+        <h1>História</h1>
+        <p style="margin-left: 150px;">Conheça momentos marcantes, ídolos e estádios que fizeram parte da história do nosso futebol.</p>
+        <section class="historia">
+            <div class="galerias">
+                <!-- Galeria de Fotos -->
+                <div class="galeria-fotos">
+                    <h3>Galeria de Fotos</h3>
+                    <div class="carrossel2-fotos">
+                        <?php foreach ($fotos as $index => $foto): ?>
+                            <div class="carrossel2-item<?= $index === 0 ? ' active' : '' ?>">
+                                <img src="<?= htmlspecialchars($foto['caminho_imagem']) ?>" alt="<?= htmlspecialchars($foto['titulo']) ?>">
+                                <div class="carrossel2-caption">
+                                    <h5><?= htmlspecialchars($foto['titulo']) ?></h5>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <p>
+                        <?= htmlspecialchars($fotos[0]['descricao'] ?? 'Clique aqui para ver mais fotos históricas do futebol brasileiro.') ?>
+                        <br><br>
+                        <a href="historia.php" class="botao">Ver todas as fotos</a>
+                    </p>
+                </div>
+                <!-- Galeria de Vídeos -->
+                <div class="galeria-video">
+                    <?php
+                    // Buscar o último vídeo do banco
+                    $stmt_video = $pdo->prepare("SELECT * FROM videos ORDER BY data_publicacao DESC LIMIT 1");
+                    $stmt_video->execute();
+                    $video = $stmt_video->fetch(PDO::FETCH_ASSOC);
+
+                    if ($video):
+                        // Extrair o ID do vídeo do YouTube da URL
+                        $video_id = '';
+                        parse_str(parse_url($video['url'], PHP_URL_QUERY), $params);
+                        if (isset($params['v'])) {
+                            $video_id = $params['v'];
+                        } else {
+                            $video_id = basename($video['url']); // caso seja um link encurtado ou formato diferente
+                        }
+                    ?>
+                        <h3>Último Vídeo</h3>
+                        <iframe width="100%" height="350" 
+                                src="https://www.youtube.com/embed/<?= $video_id ?>" 
+                                title="<?= htmlspecialchars($video['titulo']) ?>"
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                        <p>
+                            <?= htmlspecialchars($video['descricao'] ?? 'Clique aqui para ver mais vídeos históricos do futebol brasileiro.') ?>
+                            <br><br>
+                            <a href="historia.php" class="botao">Ver todos os vídeos</a>
+                        </p>
+                    <?php else: ?>
+                        <p>Nenhum vídeo encontrado.</p>
+                    <?php endif; ?>
+                </div>
             </div>
         </section>
     </main>
@@ -177,6 +249,37 @@ try {
             if (carrosselItems.length > 0) {
                 carrosselItems[0].classList.add("active");
             }
+        });
+    </script>
+
+    <!-- Carrossel da galeria de fotos -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const carrosselItems = document.querySelectorAll(".carrossel2-item");
+            
+            if (carrosselItems.length === 0) {
+                console.warn("Nenhum item encontrado para o carrossel.");
+                return;
+            }
+
+            let currentIndex = 0;
+
+            function showNextSlide() {
+                // Remove a classe 'active' do slide atual
+                carrosselItems[currentIndex].classList.remove("active");
+
+                // Calcula o próximo índice
+                currentIndex = (currentIndex + 1) % carrosselItems.length;
+
+                // Adiciona a classe 'active' ao próximo slide
+                carrosselItems[currentIndex].classList.add("active");
+            }
+
+            // Troca de slide a cada 5 segundos
+            setInterval(showNextSlide, 5000);
+
+            // Garante que o primeiro slide esteja ativo
+            carrosselItems[0].classList.add("active");
         });
     </script>
 

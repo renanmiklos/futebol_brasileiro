@@ -1,61 +1,109 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .secao-competicao {
-    background-color: #121212;
-    color: #f0f0f0;
-    font-family: 'Roboto', sans-serif;
-    min-height: 100vh;
-    padding: 40px 20px;
+  background-color: #121212;
+  color: #f0f0f0;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.secao-competicao h1 {
+  font-size: 28px;
+  color: #FFD700;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.conteudo-com-coluna {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap; /* Padrão para telas pequenas */
+  margin-top: 30px;
+}
+
+@media (min-width: 768px) {
+  .conteudo-com-coluna {
+    flex-wrap: nowrap; /* Mantém lado a lado em telas médias/grandes */
   }
-  
-  .container {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  
-  .secao-competicao h1 {
-    font-size: 28px;
-    color: #FFD700;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  
-  .descricao {
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 30px;
-    font-size: 15px;
-    line-height: 1.6;
-    color: #ddd;
-  }
-  
-  .secao-competicao h2 {
-    font-size: 22px;
-    color: #FFD700;
-    margin-bottom: 15px;
-  }
-  
-  .lista-temporadas {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  
-  .lista-temporadas li {
-    background-color: #1e1e1e;
-    border-radius: 6px;
-    padding: 10px 15px;
-    transition: background-color 0.3s;
-  }
-  
-  .lista-temporadas a {
-    text-decoration: none;
-    color: #FFD700;
-    font-size: 16px;
-  }
-  
-  .lista-temporadas li:hover {
-    background-color: #2a2a2a;
-  }
-  
+}
+
+.coluna-esquerda {
+  flex: 1;
+  min-width: 300px;
+}
+
+.coluna-direita {
+  flex: 0 0 300px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.coluna-direita h2 {
+  font-size: 22px;
+  color: #FFD700;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+/* Estilo atualizado para temporadas em colunas usando grid */
+.lista-temporadas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.lista-temporadas li {
+  background-color: #2a2a2a;
+  border-radius: 6px;
+  padding: 8px 12px;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.lista-temporadas a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  display: block;
+}
+
+.lista-temporadas li:hover {
+  background-color: #363636;
+}
+
+.descricao {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.voltar-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.voltar-link:hover {
+  color: #fff;
+}

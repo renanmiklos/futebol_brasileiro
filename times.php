@@ -4,7 +4,9 @@ $regioes = [
   'Sul' => ['RS', 'PR', 'SC'],
   'Nordeste' => ['BA', 'PE', 'CE', 'RN', 'MA', 'PB', 'PI', 'AL', 'SE'],
   'Centro-Oeste' => ['DF', 'GO', 'MT', 'MS'],
-  'Norte' => ['AM', 'PA', 'AC', 'RO', 'RR', 'AP', 'TO']
+  'Norte' => ['AM', 'PA', 'AC', 'RO', 'RR', 'AP', 'TO'],
+  'Times Extintos' => ['AC','AL', 'AP','AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PR', 'PB', 'PE', 'PI', 
+  'RN', 'RS', 'RJ', 'RO', 'RR', 'SC', 'SP', 'SE','TO'],
 ];
 
 // Captura a região selecionada pela URL
@@ -67,7 +69,6 @@ $estadosPorRegiao = $regiaoSelecionada && isset($regioes[$regiaoSelecionada]) ? 
               </a>
             </li>
           <?php endforeach; ?>
-          <li><a href="times_extintos.php">Times extintos</a></li>
         </ul>
       </aside>
 
@@ -83,7 +84,7 @@ $estadosPorRegiao = $regiaoSelecionada && isset($regioes[$regiaoSelecionada]) ? 
             <ul>
               <?php foreach ($estadosPorRegiao as $uf): ?>
                 <li>
-                  <a href="times_estado.php?uf=<?= htmlspecialchars($uf) ?>">
+                  <a href="times_estado.php?uf=<?= htmlspecialchars($uf) ?><?= $regiaoSelecionada === 'Times Extintos' ? '&extintos=1' : '' ?>">
                     <?= htmlspecialchars($uf) ?>
                   </a>
                 </li>

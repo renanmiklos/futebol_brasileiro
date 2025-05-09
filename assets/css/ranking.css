@@ -33,10 +33,12 @@ body {
   }
   
   table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 700px;
-  }
+  width: auto;
+  border-collapse: collapse;
+  table-layout: auto; 
+  min-width: 100%; 
+ }
+
   
   thead {
     background-color: #FFD700;
@@ -69,3 +71,7 @@ body {
     font-weight: bold;
   }
   
+  thead th, tbody td {
+  padding: 8px 10px;
+  white-space: nowrap;
+  }

@@ -61,7 +61,7 @@ try {
           <a class="card-noticia" href="detalhes_noticia.php?id=<?= $noticia['id'] ?>">
             <img src="<?= htmlspecialchars($noticia['imagem']) ?>" alt="<?= htmlspecialchars($noticia['titulo']) ?>">
             <div class="info">
-              <h3><?= htmlspecialchars($noticia['titulo']) ?></h3>
+              <h3 style="letter-spacing: 1.1px;"><?= htmlspecialchars($noticia['titulo']) ?></h3>
               <p><?= htmlspecialchars($noticia['subtitulo']) ?></p>
               <span><?= date('d/m/Y', strtotime($noticia['data_publicacao'])) ?></span>
             </div>

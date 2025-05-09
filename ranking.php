@@ -11,6 +11,8 @@ $sql = "
   SELECT 
     t.id,
     t.nome,
+    t.estado,
+    t.escudo,
     SUM(CASE WHEN c.tipo = 'Internacional' THEN cl.pontos ELSE 0 END) AS internacionais,
     SUM(CASE WHEN c.tipo = 'Nacional' THEN cl.pontos ELSE 0 END) AS nacionais,
     SUM(CASE WHEN c.tipo = 'Regional' THEN cl.pontos ELSE 0 END) AS regionais,
@@ -20,7 +22,7 @@ $sql = "
   INNER JOIN temporadas tp ON cl.id_temporada = tp.id
   INNER JOIN competicoes c ON tp.id_competicao = c.id
   INNER JOIN times t ON cl.id_time = t.id
-  WHERE cl.nacional = 1
+  WHERE cl.nacional = 1 AND t.extinto = 0
   GROUP BY t.id
   ORDER BY total DESC
 ";
@@ -74,18 +76,22 @@ $ranking = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
           <tr>
             <th onclick="ordenar(0)">Pos</th>
             <th onclick="ordenar(1)">Clube</th>
-            <th onclick="ordenar(2)">Internacionais</th>
-            <th onclick="ordenar(3)">Nacionais</th>
-            <th onclick="ordenar(4)">Regionais</th>
-            <th onclick="ordenar(5)">Estaduais</th>
-            <th onclick="ordenar(6)">Total</th>
+            <th onclick="ordenar(2)">Estado</th>
+            <th onclick="ordenar(3)">Internacionais</th>
+            <th onclick="ordenar(4)">Nacionais</th>
+            <th onclick="ordenar(5)">Regionais</th>
+            <th onclick="ordenar(6)">Estaduais</th>
+            <th onclick="ordenar(7)">Total</th>
           </tr>
         </thead>
         <tbody>
           <?php $pos = 1; foreach ($ranking as $clube): ?>
             <tr>
               <td><?= $pos++ ?></td>
-              <td><?= htmlspecialchars($clube['nome']) ?></td>
+              <td style="text-align: left;">
+                <img src="<?= htmlspecialchars($clube['escudo']) ?>" alt="Escudo de <?= htmlspecialchars($clube['nome']) ?>" style="height: 20px; vertical-align: middle; margin-right: 6px;">
+                <?= htmlspecialchars($clube['nome']) ?></td>
+              <td><?= htmlspecialchars($clube['estado']) ?></td>
               <td><?= $clube['internacionais'] ?></td>
               <td><?= $clube['nacionais'] ?></td>
               <td><?= $clube['regionais'] ?></td>
@@ -124,7 +130,7 @@ $ranking = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       const tabela = document.getElementById("ranking-table");
       const linhas = Array.from(tabela.rows).slice(1);
       const corpo = tabela.tBodies[0];
-      const tipoNumero = coluna !== 1;
+      const tipoNumero = (coluna !== 1 && coluna !== 2);
 
       linhas.sort((a, b) => {
         let valA = a.cells[coluna].innerText;

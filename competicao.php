@@ -36,65 +36,75 @@ try {
   <link rel="stylesheet" href="assets/css/header.css">
   <link rel="stylesheet" href="assets/css/footer.css">
   <link rel="stylesheet" href="assets/css/competicao.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto :wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="site-header">
-        <div class="header-container">
-            <div class="logo-area">
-                <img src="assets/images/logo.png" alt="Logo" class="logo">
-                <span class="logo-text">Futebol Brasileiro</span>
-            </div>
-            <div class="menu-area">
-                <form class="search-bar" action="busca.php" method="GET">
-                    <input type="text" name="query" placeholder="Buscar...">
-                    <button type="submit">🔍</button>
-                </form>
-                <nav class="menu-principal">
-                    <ul>
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="noticias.php">Notícias</a></li>
-                        <li><a href="historia.php">História</a></li>
-                        <li><a href="times.php">Times</a></li>
-                        <li><a href="campeonatos.php">Campeonatos</a></li>
-                        <li><a href="ranking.php">Ranking</a></li>
-                        <li><a href="artigos.php">Artigos</a></li>
-                    </ul>
-                </nav>
-            </div>
+    <div class="header-container">
+        <div class="logo-area">
+            <img src="assets/images/logo.png" alt="Logo" class="logo">
+            <span class="logo-text">Futebol Brasileiro</span>
         </div>
-    </header>
+        <div class="menu-area">
+            <form class="search-bar" action="busca.php" method="GET">
+                <input type="text" name="query" placeholder="Buscar...">
+                <button type="submit">🔍</button>
+            </form>
+            <nav class="menu-principal">
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="noticias.php">Notícias</a></li>
+                    <li><a href="historia.php">História</a></li>
+                    <li><a href="times.php">Times</a></li>
+                    <li><a href="campeonatos.php">Campeonatos</a></li>
+                    <li><a href="ranking.php">Ranking</a></li>
+                    <li><a href="artigos.php">Artigos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
 
-  <main>
-    <section class="secao-competicao">
-      <div class="container">
-        <h1><?= htmlspecialchars($competicao['nome']) ?></h1>
+<main>
+  <section class="secao-competicao">
+    <div class="container">
+      <a href="campeonatos.php" class="voltar-link">← Voltar para Campeonatos</a>
 
-        <?php if (!empty($competicao['descricao'])): ?>
-          <div class="descricao">
-            <p><?= nl2br(htmlspecialchars($competicao['descricao'])) ?></p>
-          </div>
-        <?php endif; ?>
+      <h1><?= htmlspecialchars($competicao['nome']) ?></h1>
 
-        <h2>Temporadas disponíveis</h2>
-        <ul class="lista-temporadas">
-          <?php foreach ($temporadas as $temp): ?>
-            <li>
-              <a href="temporada.php?id_competicao=<?= $competicao['id'] ?>&ano=<?= $temp['ano'] ?>">
-                <?= $temp['ano'] ?>
-              </a>
-            </li>
-          <?php endforeach; ?>
-        </ul>
+      <div class="conteudo-com-coluna">
+        <!-- Conteúdo Principal -->
+        <div class="coluna-esquerda">
+          <?php if (!empty($competicao['descricao'])): ?>
+            <div class="descricao">
+              <p><?= nl2br(htmlspecialchars($competicao['descricao'])) ?></p>
+            </div>
+          <?php endif; ?>
+        </div>
 
-        <?php if (empty($temporadas)): ?>
-          <p>Temporadas ainda não cadastradas.</p>
-        <?php endif; ?>
+        <!-- Temporadas à Direita -->
+        <div class="coluna-direita">
+          <h2>Temporadas disputadas</h2>
+          <?php if (!empty($temporadas)): ?>
+            <ul class="lista-temporadas">
+              <?php foreach ($temporadas as $temp): ?>
+                <li>
+                  <a href="temporada.php?id_competicao=<?= $competicao['id'] ?>&ano=<?= $temp['ano'] ?>">
+                    <?= $temp['ano'] ?>
+                  </a>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          <?php else: ?>
+            <p>Temporadas ainda não cadastradas.</p>
+          <?php endif; ?>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
-  <footer class="rodape">
+<footer class="rodape">
   <div class="rodape-container">
     <p>&copy; <?= date('Y') ?> Futebol Brasileiro. Todos os direitos reservados.</p>
 

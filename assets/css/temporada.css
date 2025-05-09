@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .secao-temporada {
     background-color: #121212;
     color: #f0f0f0;
@@ -10,6 +15,20 @@
     max-width: 1000px;
     margin: 0 auto;
   }
+
+  .voltar-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.voltar-link:hover {
+  color: #fff;
+}
   
   .secao-temporada h1 {
     font-size: 28px;
@@ -39,3 +58,75 @@
     color: #ccc;
   }
   
+  .flex-container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.conteudo-esquerdo {
+  flex: 1;
+  min-width: 280px;
+}
+
+.classificacao-direita {
+  flex: 1;
+  min-width: 300px;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.tabela-classificacao {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #2c2c2c;
+  border: 1px solid #444;
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.tabela-classificacao thead th {
+  background-color: #FFD700;
+  color: black;
+  text-transform: uppercase;
+}
+
+.tabela-classificacao th,
+.tabela-classificacao td {
+  padding: 15px;
+  text-align: left;
+}
+
+.tabela-classificacao tr:nth-child(even) {
+  background-color: #252525;
+}
+
+.tabela-classificacao tr:nth-child(odd) {
+  background-color: #1c1c1c;
+}
+
+.tabela-classificacao td {
+  color: #f0f0f0;
+}
+
+.tabela-classificacao tr:hover {
+  background-color: #333;
+}
+
+.escudo-clube {
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
