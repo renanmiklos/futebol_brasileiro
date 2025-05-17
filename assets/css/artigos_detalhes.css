@@ -35,9 +35,9 @@ h2 {
 }
 
 .artigo-detalhe img {
-  width: 100%; /* A imagem ocupa toda a largura do contêiner */
-  height: 500px; /* Altura fixa de 500px */
-  object-fit: cover; /* Mantém a proporção e corta o excesso, se necessário */
+  width: auto; 
+  height: 500px; 
+  object-fit: contain;
   border-radius: 6px;
   margin-bottom: 20px;
 }

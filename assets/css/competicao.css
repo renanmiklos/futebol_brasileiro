@@ -23,6 +23,13 @@ body {
   text-align: center;
 }
 
+@media (min-width: 768px) {
+  .conteudo-com-coluna {
+    flex-wrap: nowrap; /* Mantém lado a lado em telas médias/grandes */
+  }
+}
+
+
 .conteudo-com-coluna {
   display: flex;
   gap: 30px;
@@ -30,11 +37,6 @@ body {
   margin-top: 30px;
 }
 
-@media (min-width: 768px) {
-  .conteudo-com-coluna {
-    flex-wrap: nowrap; /* Mantém lado a lado em telas médias/grandes */
-  }
-}
 
 .coluna-esquerda {
   flex: 1;
@@ -106,4 +108,30 @@ body {
 
 .voltar-link:hover {
   color: #fff;
+}
+
+/* Container principal da foto */
+.foto-item {
+  width: 100%; /* Ocupa toda a largura disponível do conteúdo esquerdo */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Estilo da imagem */
+.imagem-item {
+  width: 100%; /* A imagem ocupa toda a largura do container */
+  max-height: 300px; /* Mantém a proporção da imagem */
+  max-width: 100%; /* Evita estouro em telas menores */
+  display: block; /* Remove espaçamento extra abaixo da imagem */
+  object-fit: contain; /* Mostra a imagem inteira sem cortar */
+  border-radius: 8px; /* (Opcional) Cantos arredondados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* (Opcional) Sombra suave */
+}
+
+/* Legenda da imagem */
+.legenda {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 8px;
+  font-style: italic;
 }

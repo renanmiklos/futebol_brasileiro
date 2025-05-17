@@ -14,6 +14,10 @@ try {
     $stmt->execute([$slug]);
     $competicao = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    $stmt_fotos = $pdo->prepare("SELECT * FROM fotos WHERE id_competicao = ?");
+    $stmt_fotos->execute([$competicao['id']]);
+    $fotos = $stmt_fotos->fetchAll(PDO::FETCH_ASSOC);
+
     if (!$competicao) {
         die("Competição não encontrada.");
     }
@@ -84,6 +88,26 @@ try {
 
         <!-- Temporadas à Direita -->
         <div class="coluna-direita">
+          <?php if (!empty($fotos)): ?>
+            <div class="galeria-fotos">
+              <?php foreach ($fotos as $foto): ?>
+                <div class="foto-item">
+                  <?php
+                    $src = $foto['caminho_imagem'];
+                    // Se for uma URL externa (começa com http ou https), usa direto
+                    if (preg_match('/^https?:\/\//', $src)) {
+                        $imagem_src = $src;
+                    } else {
+                        // Caminho interno
+                        $imagem_src = htmlspecialchars($src);
+                    }
+                  ?>
+                  <img class="imagem-item" src="<?= $imagem_src ?>" alt="<?= htmlspecialchars($foto['titulo']) ?>">
+                  <p class="legenda"><?= htmlspecialchars($foto['titulo']) ?></p>
+                </div>
+              <?php endforeach; ?>
+            </div>
+          <?php endif; ?>
           <h2>Temporadas disputadas</h2>
           <?php if (!empty($temporadas)): ?>
             <ul class="lista-temporadas">

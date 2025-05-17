@@ -55,15 +55,13 @@ $fotos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h1 class="titulo-galeria"><?= htmlspecialchars($banco['nome']) ?></h1>
 
     <div class="grid-fotos">
-        <?php for ($i = 0; $i < 6; $i++): ?>
+        <?php foreach ($fotos as $foto): ?>
             <div class="foto-slot">
-                <?php if (isset($fotos[$i])): ?>
-                    <img src="<?= htmlspecialchars($fotos[$i]['caminho_imagem']) ?>" 
-                         alt="<?= htmlspecialchars($fotos[$i]['titulo']) ?>">
-                    <p><?= htmlspecialchars($fotos[$i]['titulo']) ?></p>
-                <?php endif; ?>
+                <img src="<?= htmlspecialchars($foto['caminho_imagem']) ?>" 
+                    alt="<?= htmlspecialchars($foto['titulo']) ?>">
+                <p><?= htmlspecialchars($foto['titulo']) ?></p>
             </div>
-        <?php endfor; ?>
+        <?php endforeach; ?>
     </div>
 
     <a href="galeria-fotos.php" class="botao voltar-galeria">Voltar à Galeria</a>

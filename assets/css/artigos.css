@@ -34,6 +34,7 @@ body {
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.2s;
+    text-decoration: none;
   }
   
   .card-artigo:hover {

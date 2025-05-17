@@ -66,8 +66,7 @@ try {
       <div class="container">
         <h1><?= htmlspecialchars($artigo['titulo']) ?></h1>
         <h4><?= htmlspecialchars($artigo['subtitulo']) ?></h4>
-        <span style="margin-bottom: 5px;" class="data-publicacao"><?= date('d/m/Y', strtotime($artigo['data_publicacao'])) ?></span>
-
+        
         <?php if (!empty($artigo['imagem'])): ?>
           <img src="<?= htmlspecialchars($artigo['imagem']) ?>" alt="Imagem do Artigo">
         <?php endif; ?>
@@ -76,6 +75,7 @@ try {
           <?= nl2br(htmlspecialchars($artigo['conteudo'])) ?>
         </div>
       </div>
+      <span class="data-publicacao">Publicado em: <?= date('d/m/Y', strtotime($artigo['data_publicacao'])) ?></span>
     </section>
   </main>
 

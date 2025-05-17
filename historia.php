@@ -6,25 +6,33 @@ function extract_youtube_id($url) {
     return end($parts); // pega a última parte da URL (ex: abc123)
 }
 
-
 // Configurações do banco de dados
 $host = 'localhost';
 $dbname = 'futebol';
 $username = 'root';
 $password = '';
 
-
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Buscar as 3 últimas fotos
-    $stmt_fotos = $pdo->prepare("SELECT * FROM fotos ORDER BY data_publicacao DESC LIMIT 3");
+    // Buscar a última foto de cada banco de fotos
+    $stmt_fotos = $pdo->prepare("
+        SELECT f.*, b.nome AS nome_banco
+        FROM fotos f
+        INNER JOIN (
+            SELECT banco_id, MAX(data_publicacao) AS ultima_data
+            FROM fotos
+            GROUP BY banco_id
+        ) ultimas ON f.banco_id = ultimas.banco_id AND f.data_publicacao = ultimas.ultima_data
+        INNER JOIN bancos_de_fotos b ON b.id = f.banco_id
+        ORDER BY f.data_publicacao DESC
+    ");
     $stmt_fotos->execute();
     $galeriaFotos = $stmt_fotos->fetchAll(PDO::FETCH_ASSOC);
 
-    // Buscar os 3 últimos vídeos
-    $stmt_videos = $pdo->prepare("SELECT * FROM videos ORDER BY data_publicacao DESC LIMIT 3");
+    // Buscar os 2 últimos vídeos
+    $stmt_videos = $pdo->prepare("SELECT * FROM videos ORDER BY data_publicacao DESC LIMIT 2");
     $stmt_videos->execute();
     $galeriaVideos = $stmt_videos->fetchAll(PDO::FETCH_ASSOC);
 

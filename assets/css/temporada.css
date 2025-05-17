@@ -125,6 +125,32 @@ body {
   margin-right: 5px;
 }
 
+/* Container principal da foto */
+.foto-temporada {
+  width: 100%; /* Ocupa toda a largura disponível do conteúdo esquerdo */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Estilo da imagem */
+.imagem-temporada {
+  width: 100%; /* A imagem ocupa toda a largura do container */
+  max-height: 300px; /* Mantém a proporção da imagem */
+  max-width: 100%; /* Evita estouro em telas menores */
+  display: block; /* Remove espaçamento extra abaixo da imagem */
+  object-fit: contain; /* Mostra a imagem inteira sem cortar */
+  border-radius: 8px; /* (Opcional) Cantos arredondados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* (Opcional) Sombra suave */
+}
+
+/* Legenda da imagem */
+.legenda {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 8px;
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .flex-container {
     flex-direction: column;
