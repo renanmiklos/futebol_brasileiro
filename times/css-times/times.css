@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo base */
+.secao-times {
+  background-color: #121212;
+  color: #f0f0f0;
+  font-family: 'Roboto', sans-serif;
+  padding: 30px 20px;
+  min-height: 100vh;
+}
+
+/* Container geral com layout horizontal */
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* MENU LATERAL */
+.menu-lateral {
+  width: 220px;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.menu-lateral h2 {
+  color: #FFD700;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.menu-lateral ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-lateral li {
+  margin-bottom: 10px;
+}
+
+.menu-lateral a {
+  color: #ccc;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  display: block;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.menu-lateral a:hover,
+.menu-lateral a.ativo {
+  background-color: #FFD700;
+  color: #121212;
+}
+
+/* CONTEÚDO PRINCIPAL */
+.conteudo-times {
+  flex: 1;
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.conteudo-times h1 {
+  color: #FFD700;
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.conteudo-times p {
+  font-size: 15px;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.conteudo-times h2 {
+  color: #FFD700;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+/* Lista de estados (botões/links por estado) */
+.lista-estados {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.lista-estados ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lista-estados li {
+  margin: 10px 0;
+}
+
+.lista-estados a {
+  background-color: #333;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+
+.lista-estados a:hover {
+  background-color: #FFD700;
+  color: #121212;
+}

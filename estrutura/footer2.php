@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="css-estrutura/footer.css">
     <title>Footer</title>
 </head>
 <body>
@@ -17,12 +17,12 @@
             </p>
 
             <p id="link-admin-revelado" style="display: none; font-size: 0.8em;">
-            <a href="admin/admin.php" class="admin-link" style="color: #FFD700;">Acessar Painel</a>
+            <a href="../admin/admin.php" class="admin-link" style="color: #FFD700;">Acessar Painel</a>
             </p>
         </div>        
     </footer>
 
-    <script src = "estrutura/js-estrutura/footer.js"></script>
+    <script src = "../estrutura/js-estrutura/footer.js"></script>
 
 </body>
 </html>

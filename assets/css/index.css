@@ -113,6 +113,10 @@ h1::after {
     gap: 20px;
 }
 
+h3 {
+    margin-top: 0;
+}
+
 .links-importantes {
     background-color: #1e1e1e;
     padding: 15px;
