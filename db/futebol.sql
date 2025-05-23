@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21-Maio-2025 às 09:46
+-- Tempo de geração: 23-Maio-2025 às 08:42
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -66,7 +66,9 @@ CREATE TABLE `bancos_de_fotos` (
 --
 
 INSERT INTO `bancos_de_fotos` (`id`, `nome`, `descricao`, `data_criacao`) VALUES
-(1, 'Hexa é luxo', 'Imagens do Náutico da década de 60', '2025-05-08 07:19:00');
+(1, 'Hexa é luxo', 'Imagens do Náutico da década de 60', '2025-05-08 07:19:00'),
+(2, 'Bahia Campeão Brasileiro 1959', 'Primeiro título brasileiro do Bahia em 1959', '2025-05-23 06:48:33'),
+(3, 'Sport Campeão Brasileiro 1987', 'Título Brasileiro do Sport', '2025-05-23 07:33:34');
 
 -- --------------------------------------------------------
 
@@ -112,25 +114,25 @@ INSERT INTO `classificacao` (`id`, `id_temporada`, `id_time`, `fase`, `pontos`, 
 (15, 3088, 17, 'SF', 900, 1, 1, 0, 1, 6, 4),
 (16, 9, 4, 'Camp', 1200, 1, 2, 0, 0, 8, 4),
 (17, 10, 4, 'Camp', 1200, 1, 2, 0, 1, 7, 6),
-(18, 14, 1, 'Camp', 1200, 1, 0, 0, 0, 0, 0),
-(19, 18, 16, 'Vice', 0, 1, 0, 0, 0, 0, 0),
-(20, 13, 26, 'Camp', 1200, 1, 0, 0, 0, 0, 0),
-(21, 17, 23, 'Vice', 0, 1, 0, 0, 0, 0, 0),
-(22, 15, 1, 'Camp', 1200, 1, 0, 0, 0, 0, 0),
-(23, 19, 2, 'Vice', 0, 1, 0, 0, 0, 0, 0),
-(24, 12, 17, 'Camp', 1200, 1, 0, 0, 0, 0, 0),
-(25, 16, 26, 'Vice', 0, 1, 0, 0, 0, 0, 0),
-(26, 11, 23, 'Vice', 0, 1, 0, 0, 0, 0, 0),
+(18, 14, 1, 'Camp', 1200, 1, 1, 0, 0, 2, 1),
+(19, 18, 16, 'Vice', 0, 1, 0, 0, 1, 1, 2),
+(20, 13, 26, 'Camp', 1200, 1, 1, 0, 0, 2, 1),
+(21, 17, 23, 'Vice', 0, 1, 0, 0, 1, 0, 2),
+(22, 15, 1, 'Camp', 1200, 1, 1, 0, 0, 3, 2),
+(23, 19, 2, 'Vice', 0, 1, 0, 0, 1, 0, 1),
+(24, 12, 17, 'Camp', 1200, 1, 1, 0, 0, 3, 0),
+(25, 16, 26, 'Vice', 0, 1, 0, 1, 0, 0, 0),
+(26, 11, 23, 'Vice', 0, 1, 0, 1, 1, 0, 2),
 (27, 20, 2, 'Camp', 750, 1, 0, 0, 0, 0, 0),
 (28, 20, 16, 'SF', 450, 1, 0, 0, 0, 0, 0),
 (29, 21, 18, 'Camp', 750, 1, 0, 0, 0, 0, 0),
 (30, 21, 3, 'Vice', 600, 1, 0, 0, 0, 0, 0),
 (31, 22, 4, 'Camp', 450, 1, 0, 0, 0, 0, 0),
-(32, 23, 46, 'QF', 840, 1, 0, 0, 0, 0, 0),
-(33, 24, 2, 'Vice', 960, 1, 0, 0, 0, 0, 0),
-(34, 25, 4, 'Camp', 1200, 1, 0, 0, 0, 0, 0),
-(35, 26, 4, 'Camp', 1200, 1, 0, 0, 0, 0, 0),
-(36, 26, 19, 'SF', 900, 1, 0, 0, 0, 0, 0),
+(32, 23, 46, 'QF', 840, 1, 1, 0, 1, 3, 5),
+(33, 24, 2, 'Vice', 960, 1, 3, 2, 1, 10, 5),
+(34, 25, 4, 'Camp', 1200, 1, 6, 2, 1, 29, 11),
+(35, 26, 4, 'Camp', 1200, 1, 3, 1, 0, 10, 4),
+(36, 26, 19, 'SF', 900, 1, 3, 1, 1, 6, 6),
 (37, 27, 4, 'SF', 900, 1, 0, 0, 0, 0, 0),
 (38, 27, 46, '1F', 450, 1, 0, 0, 0, 0, 0),
 (39, 28, 4, 'SF', 900, 1, 0, 0, 0, 0, 0),
@@ -17261,7 +17263,13 @@ INSERT INTO `fotos` (`id`, `titulo`, `descricao`, `caminho_imagem`, `data_public
 (274, 'Galo é campeão', NULL, 'https://multimidia.boavontade.com/sites/default/files/styles/infografico/public/atletico-mg-supercopa-do-brasil-1024x683_0.jpg?itok=BNRYpSLN', '2025-05-16 17:47:04', NULL, 375, NULL),
 (275, 'Mais um título para o Verdão', NULL, 'https://blogafonte.com.br/wp-content/uploads/2023/01/supercopa-do-brasil-palmeiras-e-flamengo-28012023192457328.jpeg', '2025-05-16 17:47:04', NULL, 376, NULL),
 (276, 'São Paulo campeão de tudo!', NULL, 'https://tntsports.com.br/__export/1707084268471/sites/esporteinterativo/img/2024/02/04/20240204-200401_1993610_2871_1.jpg_423682103.jpg', '2025-05-16 17:47:04', NULL, 377, NULL),
-(277, 'Flamengo Tricampeão', NULL, 'https://cassiozirpoli.com.br/wp-content/uploads/2025/02/2025_flamengo_3x1_botafogo_supercopa_do_brasil_700_4.jpg', '2025-05-16 17:47:04', NULL, 378, NULL);
+(277, 'Flamengo Tricampeão', NULL, 'https://cassiozirpoli.com.br/wp-content/uploads/2025/02/2025_flamengo_3x1_botafogo_supercopa_do_brasil_700_4.jpg', '2025-05-16 17:47:04', NULL, 378, NULL),
+(278, 'Bita maior artilheiro da história do Náutico', 'Hexacampeão', 'https://s2-ge.glbimg.com/zuj4xOvUCIMdb0n7KFlowE8ZP0Q=/0x0:2000x2000/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2020/Z/B/M5IKIqR6q2FyD2sMBjAQ/webp.net-resizeimage-2-.jpg', '2025-05-23 06:32:12', 1, NULL, NULL),
+(279, 'Estádio dos Aflitos no jogo do Hexa', 'Mais de 30 000 pessoas', 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhC0pNUauxCmOTXRQB6M35hsW0Ttl7nTTZhwVgcukopIM8sDRD04KY-G1cOV_g14eoJI2WmmWX9N5zq9EDEI6U6pTYu27n2RINmSCZ0VOP4SoiHJhzOtBPQZQNCeVzunjdul8zAZfZGPDg/w640-h360/Hexa+53+anos+Aflitos.jpg', '2025-05-23 06:32:12', 1, NULL, NULL),
+(280, 'Ramos faz gol do título contra o Sport', 'Gol do Hexa', 'https://imgsapp.pe.superesportes.com.br/app/foto_12711703576/2018/07/20/2227/20180720185332543514e_750x405.jpg', '2025-05-23 06:32:12', 1, NULL, NULL),
+(281, 'Time da Final', 'Time do Bahia que jogou a final contra o Santos', 'https://www.ecbahia.com/imgs/rfm_upload/2017-03-29-18-18_tacabrasil59.jpg', '2025-05-23 06:52:23', 2, NULL, NULL),
+(282, 'Time Campeão 1959', 'Time com as faixas e o troféu de campeão', 'https://conteudo.imguol.com.br/c/esporte/30/2020/03/26/elenco-do-bahia-campeao-brasileiro-de-1959-1585264292554_v2_615x300.jpg', '2025-05-23 06:52:23', 2, NULL, NULL),
+(283, 'Time do Sport Campeão', 'Time que jogou a final', 'https://sportrecife.com.br/wp-content/uploads/2024/02/Sport-Recife.jpg', '2025-05-23 07:35:28', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -17296,7 +17304,10 @@ INSERT INTO `noticias` (`id`, `titulo`, `subtitulo`, `imagem`, `conteudo`, `data
 (10, 'Finalmente, CBF anuncia Ancelotti', 'Acaba a novela e o italiano é o novo técnico da seleção', 'https://asset-ng.skoiy.com/jnrcnjwljorqgsbu/mntlc4hwezwk.jpg?w=972&q=80&fm=webp&', 'Fim da novela. A CBF anunciou hoje Carlo Ancelotti como técnico da seleção brasileira. O treinador deixa o Real Madrid para assumir a missão de levar a seleção à Copa do Mundo faltando um ano para o Mundial.\r\n\r\nO italiano de 65 anos substitui Dorival Júnior, demitido em março, após a derrota do Brasil para a Argentina, pelas Eliminatórias.\r\n\r\nCom contrato até o fim da Copa, Ancelotti começa sua missão já na próxima semana. E ela é reerguer uma seleção que patinou ao longo de três anos do ciclo.\r\n \r\n Ele se reunirá com Rodrigo Caetano, coordenador geral das seleções, e Juan, coordenador técnico, para definir a lista larga de convocados para os confrontos contra Equador e Paraguai, no próximo mês, nas Eliminatórias da Copa do Mundo.\r\n\r\nSegundo a CBF, no dia 26, no Brasil, o técnico anunciará os escolhidos para os jogos em Guayaquil e São Paulo.\r\n\r\nO anúncio da seleção brasileira veio antes mesmo de qualquer manifestação do Real Madrid.\r\n \r\n \"Trazer Carlo Ancelotti para comandar o Brasil é mais do que um movimento estratégico. É uma declaração ao mundo de que estamos determinados a recuperar o lugar mais alto do pódio. Ele é o maior técnico da história e, agora, está à frente da maior seleção do planeta. Juntos, escreveremos novos capítulos gloriosos do futebol brasileiro\", disse Ednaldo Rodrigues, presidente da CBF, ao site da entidade.\r\n\r\nO último ato de Ancelotti como técnico do Real Madrid, antes do anúncio da CBF, foi a derrota por 4 a 3 para o Barcelona, que deixou muito difícil a luta pelo título espanhol.\r\n\r\nO anúncio do novo técnico da seleção brasileira é importante para a CBF dar uma resposta à crise política que ronda a entidade.', '2025-05-12 20:27:48', 1),
 (11, 'Ceará empata com Santos no Allianz Parque', 'Ceará segura o 0 x 0 e termina a rodada em 6º', 'https://s2-ge.glbimg.com/yYZemeUAtIQVjFnmCRVKokPDHWg=/0x0:3000x2400/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/P/x/Z2fmJzQgWfV0E0iPthww/rollheiser-santos-x-ceara.jpg', 'O Ceará empatou por 0 a 0 com o Santos hoje, no Allianz Parque, pela oitava rodada do Campeonato Brasileiro.\r\n\r\nO Santos ficou com a bola, abusou dos cruzamentos e não conseguiu furar a defesa do Ceará. O goleiro Fernando Miguel só fez uma defesa importante.\r\n\r\nO Ceará ganhou uma posição é o sexto, com 12 pontos e o Santos continua na vice-lanterna do Brasileirão, após a oitava rodada.\r\n \r\nNeymar esteve no Allianz para ver o jogo, foi ao gramado no intervalo, jogou camisas para a torcida e recebeu das mãos do ídolo Edu uma placa pela realização de 100 jogos na Vila Belmiro.\r\n\r\nNa próxima rodada, o Santos voltará a campo para enfrentar o Corinthians, domingo, na Neo Química Arena. No sábado, o Ceará receberá o Sport no Castelão.', '2025-05-13 13:17:15', 1),
 (12, 'Ceará vence o Sport na Arena Castelão', 'Vovô superou o adversário nordestino e chegou à quinta colocação', 'https://diariodonordeste.verdesmares.com.br/image/contentid/policy:1.3651234:1747516271/WhatsApp%20Image%202025-05-17%20at%2016.11.25_Easy-Resize.com.jpg?f=16x9&h=698&w=1280&$p$f$h$w=19fe16d', 'O Ceará venceu o Sport por 2 a 0 na tarde deste sábado (17), na Arena Castelão, em Fortaleza (CE), em partida válida pela nona rodada da Série A do Brasileirão 2025. Lucas Mugni e Galeano marcaram os dois gols da vitória alvinegra.\r\n Com o resultado positivo, o Ceará chega a 15 pontos conquistados em nove rodadas disputadas, ocupando pelo menos momentaneamente a quinta colocação na tabela de classificação. Já o Sport, com apenas dois pontos, é o lanterna da competição.', '2025-05-19 20:44:11', 1),
-(13, 'Náutico perde para São Paulo e está eliminado da Copa do Brasil', 'Timbu conseguiu a maior renda da história como mandante com o jogo', 'https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2025/05/20/806x444/1_nautico_x_sao_paulo-34488123.jpg', 'O Náutico lutou até o fim do jogo contra o São Paulo, mas não teve jeito. O Timbu sofreu um gol no início do duelo e não conseguiu reagir. Assim, em campo, acabou derrotado por 2x1, nesta terça-feira (20), nos Aflitos, na partida de volta pela terceira fase da Copa do Brasil.\r\n Os gols do clube paulista foram marcados por Luciano e Rodriguinho. Hélio Borges descontou para os alvirrubros. No jogo de ida, o Alvirrubro tinha perdido por 2x1 e precisava de pelo menos um triunfo simples para decidir nos pênaltis.\r\n Apesar da boa performance das equipes em campo, o confronto ficou marcado pelas duas expulsões com pouco mais de 20 minutos de jogo. Primeiro, Marquinhos, do Náutico, aos 10. E, segundo, de Ferraresi, do São Paulo, aos 21. Ambos os lances em entradas duras dos jogadores.', '2025-05-21 07:11:14', 0);
+(13, 'Náutico perde para São Paulo e está eliminado da Copa do Brasil', 'Timbu conseguiu a maior renda da história como mandante com o jogo', 'https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2025/05/20/806x444/1_nautico_x_sao_paulo-34488123.jpg', 'O Náutico lutou até o fim do jogo contra o São Paulo, mas não teve jeito. O Timbu sofreu um gol no início do duelo e não conseguiu reagir. Assim, em campo, acabou derrotado por 2x1, nesta terça-feira (20), nos Aflitos, na partida de volta pela terceira fase da Copa do Brasil.\r\n Os gols do clube paulista foram marcados por Luciano e Rodriguinho. Hélio Borges descontou para os alvirrubros. No jogo de ida, o Alvirrubro tinha perdido por 2x1 e precisava de pelo menos um triunfo simples para decidir nos pênaltis.\r\n Apesar da boa performance das equipes em campo, o confronto ficou marcado pelas duas expulsões com pouco mais de 20 minutos de jogo. Primeiro, Marquinhos, do Náutico, aos 10. E, segundo, de Ferraresi, do São Paulo, aos 21. Ambos os lances em entradas duras dos jogadores.', '2025-05-21 07:11:14', 0),
+(14, 'CSA elimina Grêmio e avança na Copa do Brasil', 'Após empate, no Sul, CSA vai às oitavas de final', 'https://s3.tribunahoje.com/uploads/tribunahoje/imagens/img-20250521-wa0107.jpg', 'O CSA garantiu sua classificação para as oitavas de final da Copa do Brasil ao segurar um empate por 0 a 0 contra o Grêmio na noite desta terça-feira (20), na Arena do Grêmio, em Porto Alegre, no jogo de volta da terceira fase da competição nacional. O Azulão confirmou sua vaga por ter vencido o Tricolor por 3 a 2 na partida de ida, realizada em Maceió.\r\n\r\nO jogo foi marcado pela pressão do Grêmio, que precisava da vitória para seguir na competição. O Tricolor Gaúcho criou diversas oportunidades, acertou a trave e teve um gol anulado nos minutos finais, mas não conseguiu furar a defesa do CSA. O time alagoano, por sua vez, apostou em uma postura defensiva sólida e buscou explorar os contra-ataques. O goleiro Gabriel Félix foi um dos destaques da partida, realizando defesas importantes para garantir o resultado que classificou sua equipe.\r\n\r\nCom a classificação, o CSA segue firme na Copa do Brasil e aguarda o sorteio para conhecer seu próximo adversário nas oitavas de final. O time alagoano também busca manter sua campanha na Série C, onde luta para se consolidar na zona de classificação para a próxima fase. Já o Grêmio, após a queda na Copa do Brasil, volta suas atenções para o Campeonato Brasileiro, onde tenta se recuperar de um início irregular.\r\n\r\nNos próximos jogos da temporada, o CSA enfrentará o Confiança pela Série C no dia 24 de maio, no Estádio Rei Pelé, em Maceió. O Grêmio, por sua vez, terá um duelo contra o Bahia pela Série A do Brasileirão no dia 25 de maio, na Arena do Grêmio, em Porto Alegre.', '2025-05-22 06:53:51', 0),
+(15, 'Retrô vence nos pênaltis e elimina Fortaleza', 'Fortaleza dá vexame e é eliminado da Copa do Brasil', 'https://cdn.folhape.com.br/img/pc/1100/1/dn_arquivo/2025/05/retro.jpg', 'O Retrô é o único pernambucano vivo na Copa do Brasil. Em confronto disputado na noite desta quarta-feira (21), no Castelão, a Fênix ficou no 1x1 com o Fortaleza, no tempo normal, mas despachou os cearenses nos pênaltis, por 4x1, com brilho de Fabian Volpi, e está classificada pela primeira vez às oitavas de final do mata-mata nacional.\r\n\r\nNa Arena Pernambuco, no mês passado, os clubes haviam empatado pelo mesmo placar. Por seguir vivo no torneio, o clube de Camaragibe garante mais R$ 3.638.250,00 em premiação.\r\n\r\nAssim como já havia sido no confronto na Arena de Pernambuco, o Retrô não se intimidou diante do Fortaleza, desta vez na casa do adversário. Na primeira metade do primeiro tempo, não é exagero afirmar que a Fênix foi superior ao Tricolor do Pici, marcando bem a saída de bola do oponente e ameaçando a meta defendida por João Ricardo.\r\n\r\nAos 21 minutos, por exemplo, Mascote foi o responsável pela principal oportunidade de todo o primeiro tempo. Após boa chegada dos pernambucanos pela esquerda, João Ricardo afastou o perigo por baixo para o meio da área e a bola caiu nos pés do atacante, que mandou por cima com o gol aberto. O camisa 9 viria a aparecer novamente aos 37, mas parou em defesa do goleiro cearense.Apesar do fraco rendimento, o Fortaleza também teve suas chances em raras vezes que incomodou o sistema defensivo azulino. Marinho, de fora da área, chutou no canto, mas viu Fabian Volpi fazer a intervenção. Já perto do término da etapa inicial, Martínez se atrapalhou na jogada e mandou sua tentativa para fora.\r\n\r\nEnquanto o Retrô voltou para o segundo tempo com Fialho na vaga de Maycon Douglas, o Fortaleza manteve a formação inicial, mas mudou a postura. Passou a rondar mais a zaga da Fênix e acabou premiado, aos 11 minutos. Marinho cruzou da direita, Deyverson desviou e Breno Lopes chutou forte, no ângulo, para abrir o placar.\r\n\r\nO tento fez os cearenses diminuírem o ímpeto, mas não desanimou o Retrô, que melhorou em campo e não demorou a igualar o marcador. Em bela jogada coletiva, aos 19, Eduardo recebeu de Iba Ly e cruzou na medida para Mike estufar as redes. \r\n \r\nEmpolgado com o empate, o time de Wires Souza se manteve no campo ofensivo, no intuito de resolver o confronto no tempo normal. No entanto, Bruno Marques, de cabeça, e Fialho viram João Ricardo salvar a pela do Leão do Pici. Nas penalidades, Bruno Marques, Fialho, Radsley e Richard Franco converteram as quatro cobranças do Retrô, enquanto Volpi defendeu as batidas de Lucero e Kervin Andrade para levar a Fênix de forma inédita às oitavas de final. ', '2025-05-22 07:03:21', 1),
+(16, 'Bahia atropela o Paysandu na Copa do Brasil', '4 x 0 foi o  placar do jogo na Fonte Nova', 'https://www.oliberal.com/image/contentid/policy:1.966039:1747874976/sfgsfgfgfgf.png?f=3x2&q=1.0&w=700&$p$f$q$w=eec3155', 'Com um time praticamente todo reserva, o Bahia não tomou conhecimento do Paysandu e venceu por 4 a 0 na Arena Fonte Nova, em Salvador, pela 3ª fase da Copa do Brasil. O desfalcado time bicolor, que teve Rossi e Nicolas no banco, foi completamente dominado e se despediu de forma melancólica da competição nacional. Luizinho Lopes entrou com uma escalação alternativa. Com oito desfalques, o treinador ainda poupou Nicolas e Rossi, colocando Reverson e Bryan como pontas e Benítez centralizado. Não deu certo.\r\n \r\nO Bahia fez um primeiro tempo arrasador e foi para o vestiário no intervalo já vencendo a partida por 3 x 0 com gols de Michel Araújo e William José duas vezes. Na segunda etapa, com uma larga vantagem, o Tricolor da boa terra levou o jogo de forma mais cadenciada. Mesmo assim, ainda marcou o quarto gol com Rodrigo Nestor.\r\n \r\nAgora o Bahia aguarda sorteio para saber quem será seu adversário nas oitavas de final da competição. Já o Paysandu foca totalmente na série B, do Campeonato Brasileiro, tentando se recuperar de uma campanha irregular.', '2025-05-22 07:15:12', 0);
 
 -- --------------------------------------------------------
 
@@ -21874,7 +21885,7 @@ ALTER TABLE `artigos`
 -- AUTO_INCREMENT de tabela `bancos_de_fotos`
 --
 ALTER TABLE `bancos_de_fotos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `classificacao`
@@ -21892,13 +21903,13 @@ ALTER TABLE `competicoes`
 -- AUTO_INCREMENT de tabela `fotos`
 --
 ALTER TABLE `fotos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=284;
 
 --
 -- AUTO_INCREMENT de tabela `noticias`
 --
 ALTER TABLE `noticias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de tabela `pontuacoes_fase`
