@@ -25,7 +25,6 @@
                     <?php endforeach; ?>
                 </div>
                 <p>
-                    <?= htmlspecialchars($fotos[0]['descricao'] ?? 'Clique aqui para ver mais fotos históricas do futebol brasileiro.') ?>
                     <br><br>
                     <a href="historia/historia.php" class="botao">Ver todas as fotos</a>
                 </p>

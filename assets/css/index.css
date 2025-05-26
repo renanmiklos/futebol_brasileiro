@@ -171,7 +171,7 @@ h3 {
 .carrossel-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
 }
 
@@ -268,7 +268,6 @@ h3 {
     margin-bottom: 15px;
 }
 
-
 .carrossel2-fotos {
     position: relative;
     width: 100%;
@@ -292,7 +291,7 @@ h3 {
 .carrossel2-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
 }
 

@@ -62,7 +62,12 @@ $ultimosArtigos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php if (!empty($ultimosArtigos)): ?>
                         <?php foreach ($ultimosArtigos as $artigo): ?>
                             <a class="card-artigo" href="artigos_detalhes.php?id=<?= htmlspecialchars($artigo['id']) ?>">
-                                <img src="<?= '../' . htmlspecialchars($artigo['imagem']) ?>" alt="<?= htmlspecialchars($artigo['titulo']) ?>">
+                                <?php
+                                    $imagem = htmlspecialchars($artigo['imagem']);
+                                    $caminhoImagem = (preg_match('/^https?:\/\//', $imagem)) ? $imagem : '../' . $imagem;
+                                ?>
+                                <img src="<?= $caminhoImagem ?>" alt="<?= htmlspecialchars($artigo['titulo']) ?>">
+
                                 <div class="info">
                                     <h3><?= htmlspecialchars($artigo['titulo']) ?></h3>
                                     <p><?= htmlspecialchars($artigo['subtitulo']) ?></p>
