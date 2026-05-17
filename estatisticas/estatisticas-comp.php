@@ -1,276 +1,544 @@
 <?php
-require_once '../estrutura/conexaodb.php';
+// estatisticas-comp.php
 
-// Captura e normaliza o título recebido via GET
-$item = isset($_GET['item']) ? urldecode($_GET['item']) : '';
-$tituloNormalizado = mb_strtolower(trim($item));
-$tituloOriginal = $item ?: 'Estatística não especificada';
+require_once 'estatistica-process.php';
 
-$descricao = '';
-$dados = [];
-$tabela_estatisticas = [];
-$id_competicao = null;
+/* =========================================
+   GARANTIA DE VARIÁVEIS VINDAS DO PROCESSAMENTO
+========================================= */
 
-// Determina os dados com base no título
-switch ($tituloNormalizado) {
-    case 'era da taça brasil (1959 - 1968)':
-        $descricao = "A Taça Brasil foi o primeiro campeonato nacional oficial do futebol brasileiro, realizado entre 1959 e 1968. Foi organizado pela CBF e reunia os campeões estaduais das diversas federações do país.";
-        $dados = [
-            "Primeira edição em 1959",
-            "Última edição em 1968",
-            "Formato de eliminatória simples",
-            "Clubes participantes eram os campeões estaduais",
-            "Palmeiras foi o maior campeão com 2 títulos"
-        ];
-        $id_competicao = [17];
-        break;
+$tituloOriginal = $tituloOriginal ?? 'Estatística';
+$descricao = $descricao ?? '';
+$dados = $dados ?? [];
+$tabela_estatisticas = $tabela_estatisticas ?? [];
 
-    case 'era do torneio roberto gomes pedrosa (1967 - 1970)':
-        $descricao = "O Torneio Roberto Gomes Pedrosa foi um torneio disputado por clubes brasileiros entre 1967 e 1970. Era considerado uma espécie de campeonato prévio ao Campeonato Nacional.";
-        $dados = [
-            "Realizado entre 1967 e 1970",
-            "Também conhecido como 'Taça Rio'",
-            "Participavam clubes brasileiros e estrangeiros convidados",
-            "Formato misto com fase regional e final",
-            "Cruzeiro foi o maior campeão com 2 títulos"
-        ];
-        $id_competicao = [18];
-        break;
+$coluna_ordem = $coluna_ordem ?? 'pontos';
+$tipo_ordem = $tipo_ordem ?? 'DESC';
 
-    case 'brasileirão unificado (1959 - ...)':
-        $descricao = "O Campeonato Brasileiro, também chamado de Brasileirão, é o principal torneio nacional do futebol brasileiro, reunindo clubes de todo o país desde sua criação em 1959.";
-        $dados = [
-            "Principal campeonato nacional do Brasil",
-            "Disputado anualmente desde 1959",
-            "Formato moderno iniciado em 2003",
-            "Sistema de pontos corridos desde então",
-            "Palmeiras é o maior campeão"
-        ];
-        $id_competicao = [17, 18, 19];
-        break;
+/* =========================================
+   FUNÇÕES AUXILIARES
+========================================= */
 
-    case 'brasileirão (1971 - ...)':
-        $descricao = "Campeonato Brasileiro disputado entre 1971 e os anos seguintes, sendo uma evolução dos formatos anteriores até a consolidação do formato de pontos corridos em 2003.";
-        $dados = [
-            "Sucessor do Torneio Roberto Gomes Pedrosa",
-            "Disputado desde 1971",
-            "Formato variou até 2002",
-            "Reuniu os principais clubes do Brasil",
-            "Santos e Corinthians são alguns dos maiores campeões"
-        ];
-        $id_competicao = [19];
-        break;
-
-    case 'brasileirão pontos corridos (2003 - ...)':
-        $descricao = "A partir de 2003, o Campeonato Brasileiro adotou o formato de pontos corridos, similar ao modelo europeu, aumentando a competitividade e o número de jogos.";
-        $dados = [
-            "Formato adotado desde 2003",
-            "Sistema de pontos corridos com todos contra todos",
-            "Maior número de jogos por temporada",
-            "Palmeiras é o maior campeão nesse formato",
-            "Mais transparência e equilíbrio na competição"
-        ];
-        $id_competicao = 19;
-        $ano_inicio = 2003;
-        break;
-
-    // === COMPETIÇÕES INTERNACIONAIS ===
-
-    case 'copa do mundo de clubes (2000 - 2024)':
-        $descricao = "A Copa do Mundo de Clubes é a competição mais prestigiada do futebol mundial, reunindo os campeões continentais e o campeão local do país sede.";
-        $dados = [
-            "Substituiu a Copa Intercontinental em 2000",
-            "Organizada pela FIFA",
-            "Participam 7 clubes de cada confederação",
-            "Formato com eliminatórias diretas",
-            "Santos e Corinthians representaram bem o Brasil"
-        ];
-        $id_competicao = [1];
-        break;
-
-    case 'copa intercontinental (1960 - 1999)':
-        $descricao = "A Copa Intercontinental era disputada entre o campeão da Europa e o campeão da América do Sul. Hoje substituída pela Copa do Mundo de Clubes.";
-        $dados = [
-            "Disputada entre 1960 e 2004",
-            "Enfrentavam-se o campeão da Europa e da América do Sul",
-            "Formato de ida e volta",
-            "Peñarol, Santos e Boca Juniors foram destaques",
-            "Brasil tem 8 títulos conquistados"
-        ];
-        $id_competicao = [2];
-        break;
-
-    case 'libertadores da américa (1960 - ...)':
-        $descricao = "A Copa Libertadores da América é a principal competição sul-americana de clubes, promovida pela CONMEBOL desde 1960.";
-        $dados = [
-            "Criada em 1960 como Taça Libertadores da América",
-            "Participam clubes da CONMEBOL e convidados",
-            "Formato de grupos e mata-mata",
-            "River Plate e Boca Juniors lideram número de títulos",
-            "Brasil é o país com mais títulos: 22"
-        ];
-        $id_competicao = [5];
-        break;
-
-    case 'copa sul-americana (2002 - ...)':
-        $descricao = "A Copa Sul-Americana é a segunda competição mais importante da CONMEBOL, criada em 2002 como sucessora da Supercopa Libertadores.";
-        $dados = [
-            "Criada em 2002",
-            "Segunda competição mais importante da América do Sul",
-            "Participação de times de toda a CONMEBOL",
-            "Formato similar à antiga Copa UEFA",
-            "Internacional e Athletico Paranaense são campeões brasileiros"
-        ];
-        $id_competicao = [7];
-        break;
-
-    default:
-        $descricao = '';
-        $dados = [];
-        $id_competicao = null;
-}
-
-// Consulta SQL dinâmica com base no tipo de competição
-if (is_array($id_competicao)) {
-    $ids_sql = implode(',', $id_competicao);
-
-    $sql = "
-        SELECT 
-            t.nome AS nome_time,
-            SUM(c.jogos) AS jogos,
-            SUM(c.vitorias) AS vitorias,
-            SUM(c.empates) AS empates,
-            SUM(c.derrotas) AS derrotas,
-            SUM(c.gp) AS gols_pro,
-            SUM(c.gc) AS gols_contra,
-            SUM(c.saldo) AS saldo,
-            SUM(c.pontos) AS pontos
-        FROM classificacao c
-        INNER JOIN temporadas temp ON temp.id = c.id_temporada
-        INNER JOIN times t ON t.id = c.id_time
-        WHERE temp.id_competicao IN ($ids_sql)
-        GROUP BY c.id_time
-        ORDER BY SUM(c.pontos) DESC
-    ";
-
-    $stmt = $pdo->query($sql);
-    if ($stmt !== false) {
-        $tabela_estatisticas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if (!function_exists('eComp')) {
+    function eComp($valor)
+    {
+        return htmlspecialchars((string)$valor, ENT_QUOTES, 'UTF-8');
     }
-
-} elseif (!empty($id_competicao)) {
-    $sql = "
-        SELECT 
-            t.nome AS nome_time,
-            SUM(c.jogos) AS jogos,
-            SUM(c.vitorias) AS vitorias,
-            SUM(c.empates) AS empates,
-            SUM(c.derrotas) AS derrotas,
-            SUM(c.gp) AS gols_pro,
-            SUM(c.gc) AS gols_contra,
-            SUM(c.saldo) AS saldo,
-            SUM(c.pontos) AS pontos
-        FROM classificacao c
-        INNER JOIN temporadas temp ON temp.id = c.id_temporada
-        INNER JOIN times t ON t.id = c.id_time
-        WHERE temp.id_competicao = :id_competicao
-        GROUP BY c.id_time
-        ORDER BY SUM(c.pontos) DESC
-    ";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id_competicao' => $id_competicao]);
-    $tabela_estatisticas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+if (!function_exists('caminhoEscudoComp')) {
+    function caminhoEscudoComp($escudo, $fallback = '../assets/images/escudo_padrao.png')
+    {
+        if (empty($escudo)) {
+            return $fallback;
+        }
+
+        $escudo = trim((string)$escudo);
+
+        if (
+            str_starts_with($escudo, 'http://') ||
+            str_starts_with($escudo, 'https://') ||
+            str_starts_with($escudo, 'data:')
+        ) {
+            return eComp($escudo);
+        }
+
+        return '../' . eComp(ltrim($escudo, '/'));
+    }
+}
+
+if (!function_exists('formatarNumeroComp')) {
+    function formatarNumeroComp($valor)
+    {
+        if ($valor === null || $valor === '') {
+            return '—';
+        }
+
+        if (is_numeric($valor)) {
+            return number_format((float)$valor, 0, ',', '.');
+        }
+
+        return eComp($valor);
+    }
+}
+
+if (!function_exists('link_coluna')) {
+    function link_coluna($coluna, $tituloOriginal, $coluna_ordem, $tipo_ordem)
+    {
+        $tipo_ordem = strtoupper((string)$tipo_ordem);
+
+        $novaOrdem = ($coluna_ordem === $coluna && $tipo_ordem === 'DESC') ? 'ASC' : 'DESC';
+
+        return 'estatisticas-comp.php?item=' . urlencode($tituloOriginal)
+            . '&coluna_ordem=' . urlencode($coluna)
+            . '&tipo_ordem=' . urlencode($novaOrdem);
+    }
+}
+
+if (!function_exists('classeOrdenacaoComp')) {
+    function classeOrdenacaoComp($coluna, $coluna_ordem, $tipo_ordem)
+    {
+        if ($coluna !== $coluna_ordem) {
+            return '';
+        }
+
+        return strtoupper((string)$tipo_ordem) === 'ASC' ? 'ordenado asc' : 'ordenado desc';
+    }
+}
+
+if (!function_exists('renderEscudoNomeClubeComp')) {
+    function renderEscudoNomeClubeComp($linha)
+    {
+        $nome = $linha['nome_time'] ?? $linha['clube'] ?? $linha['time'] ?? 'Clube não informado';
+        $escudo = $linha['escudo'] ?? '';
+        $idTime = $linha['id_time'] ?? null;
+
+        $html = '<div class="celula-clube">';
+
+        $html .= '<img 
+            src="' . caminhoEscudoComp($escudo) . '" 
+            alt="Escudo de ' . eComp($nome) . '" 
+            class="escudo-clube"
+            onerror="this.onerror=null; this.src=\'../assets/images/escudo_padrao.png\';"
+        >';
+
+        if (!empty($idTime)) {
+            $html .= '<a href="../times/detalhes_time.php?id=' . (int)$idTime . '">' . eComp($nome) . '</a>';
+        } else {
+            $html .= '<span>' . eComp($nome) . '</span>';
+        }
+
+        $html .= '</div>';
+
+        return $html;
+    }
+}
+
+if (!function_exists('tituloTabelaComp')) {
+    function tituloTabelaComp($tipoTabela)
+    {
+        switch ($tipoTabela) {
+            case 'rebaixados':
+                return 'Rebaixados com Mais Pontos';
+
+            case 'nao_rebaixados':
+                return 'Não-Rebaixados com Menor Pontuação';
+
+            case 'ultimos':
+                return 'Últimos Colocados';
+
+            case 'campeoes_pontos':
+                return 'Campeões por Pontos Marcados';
+
+            case 'participacoes':
+                return 'Participações e Títulos por Clube';
+
+            default:
+                return 'Resumo Estatístico por Clube';
+        }
+    }
+}
+
+/* =========================================
+   DETECÇÃO DO TIPO DE TABELA
+========================================= */
+
+$primeira_linha = !empty($tabela_estatisticas) ? reset($tabela_estatisticas) : [];
+
+$eh_participacao = is_array($primeira_linha) && isset($primeira_linha['participacoes']);
+
+$eh_campeoes_pontos_corridos = is_array($primeira_linha)
+    && isset($primeira_linha['ano'])
+    && isset($primeira_linha['pontos_marcados']);
+
+$titulo_minusculo = mb_strtolower((string)$tituloOriginal, 'UTF-8');
+
+$eh_rebaixados_mais_pontos = $eh_campeoes_pontos_corridos
+    && (strpos($titulo_minusculo, 'rebaixad') !== false)
+    && (strpos($titulo_minusculo, 'mais') !== false);
+
+$eh_nao_rebaixados_menor = $eh_campeoes_pontos_corridos
+    && (strpos($titulo_minusculo, 'rebaixad') !== false)
+    && (
+        strpos($titulo_minusculo, 'menor') !== false ||
+        strpos($titulo_minusculo, 'não') !== false ||
+        strpos($titulo_minusculo, 'nao') !== false
+    );
+
+$eh_ultimos_colocados = $eh_campeoes_pontos_corridos
+    && (
+        strpos($titulo_minusculo, 'ultim') !== false ||
+        strpos($titulo_minusculo, 'últim') !== false ||
+        strpos($titulo_minusculo, 'ultimo') !== false
+    )
+    && (
+        strpos($titulo_minusculo, 'coloc') !== false ||
+        strpos($titulo_minusculo, 'colocados') !== false
+    );
+
+$tipoTabela = 'resumo';
+
+if ($eh_rebaixados_mais_pontos) {
+    $tipoTabela = 'rebaixados';
+} elseif ($eh_nao_rebaixados_menor) {
+    $tipoTabela = 'nao_rebaixados';
+} elseif ($eh_ultimos_colocados) {
+    $tipoTabela = 'ultimos';
+} elseif ($eh_campeoes_pontos_corridos) {
+    $tipoTabela = 'campeoes_pontos';
+} elseif ($eh_participacao) {
+    $tipoTabela = 'participacoes';
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= htmlspecialchars($tituloOriginal) ?> - Futebol Brasileiro</title>
-  <link rel="stylesheet" href="../estrutura/css-estrutura/header.css">
-  <link rel="stylesheet" href="../estrutura/css-estrutura/footer.css">
-  <link rel="stylesheet" href="../estatisticas/css-estisticas/estatisticas-comp.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto :wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><?= eComp($tituloOriginal) ?> - Futebol Brasileiro</title>
+
+    <link rel="stylesheet" href="../estrutura/css-estrutura/header.css">
+    <link rel="stylesheet" href="../estrutura/css-estrutura/footer.css">
+    <link rel="stylesheet" href="../estatisticas/css-estatisticas/estatisticas-comp.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-  <?php include '../estrutura/header2.php'; ?>
+<?php include '../estrutura/header2.php'; ?>
 
-  <main>
-    <section class="secao-estatisticas">
-      <div class="container">
-        <aside class="menu-lateral">
-          <h2>Detalhes</h2>
-          <ul>
-            <li><a href="#" class="ativo"><?= htmlspecialchars($tituloOriginal) ?></a></li>
-          </ul>
-        </aside>
+<main>
+    <section class="secao-estatisticas-comp">
+        <div class="container">
 
-        <div class="conteudo-estatisticas">
-          <h1><?= htmlspecialchars($tituloOriginal) ?></h1>
-          <p><?= htmlspecialchars($descricao) ?></p>
+            <a href="estatisticas.php" class="voltar-link">
+                ← Voltar para Estatísticas
+            </a>
 
-          <!-- Exibe a lista de dados -->
-          <?php if (!empty($dados)): ?>
-            <div class="lista">
-              <div class="lista-estatisticas">
-                <ul>
-                  <?php foreach ($dados as $dado): ?>
-                    <li><span><?= htmlspecialchars($dado) ?></span></li>
-                  <?php endforeach; ?>
-                </ul>
-              </div>
+            <div class="layout-estatisticas-comp">
+
+                <aside class="menu-lateral menu-estatisticas-comp">
+                    <div class="menu-bloco">
+                        <h2>Detalhes</h2>
+
+                        <ul>
+                            <li>
+                                <a href="#" class="ativo">
+                                    <?= eComp($tituloOriginal) ?>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <div class="conteudo-estatisticas-comp">
+
+                    <section class="hero-estatisticas hero-categoria-estatisticas">
+                        <span class="eyebrow">Estatísticas</span>
+
+                        <h1><?= eComp($tituloOriginal) ?></h1>
+
+                        <?php if (!empty($descricao)): ?>
+                            <p class="descricao-intro">
+                                <?= eComp($descricao) ?>
+                            </p>
+                        <?php endif; ?>
+                    </section>
+
+                    <?php if (!empty($dados)): ?>
+                        <section class="card-estatisticas lista-dados-estatisticas">
+                            <div class="titulo-bloco-estatisticas">
+                                <h2>Resumo</h2>
+                                <span><?= count($dados) ?> item<?= count($dados) === 1 ? '' : 's' ?></span>
+                            </div>
+
+                            <div class="lista-estatisticas-simples">
+                                <ul>
+                                    <?php foreach ($dados as $dado): ?>
+                                        <li>
+                                            <span><?= eComp($dado) ?></span>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </section>
+                    <?php endif; ?>
+
+                    <?php if (!empty($tabela_estatisticas)): ?>
+
+                        <section class="card-estatisticas tabela-wrapper-estatisticas-comp">
+
+                            <div class="titulo-bloco-estatisticas">
+                                <h2><?= eComp(tituloTabelaComp($tipoTabela)) ?></h2>
+                                <span><?= count($tabela_estatisticas) ?> registro<?= count($tabela_estatisticas) === 1 ? '' : 's' ?></span>
+                            </div>
+
+                            <div class="pesquisa-time">
+                                <input
+                                    type="text"
+                                    id="filtro-time"
+                                    placeholder="Pesquisar por nome do time..."
+                                    autocomplete="off"
+                                >
+                            </div>
+
+                            <div class="tabela-scroll">
+
+                                <?php if (in_array($tipoTabela, ['rebaixados', 'nao_rebaixados', 'ultimos', 'campeoes_pontos'], true)): ?>
+
+                                    <table class="tabela-estatisticas-comp" id="tabela-estatisticas-comp">
+                                        <thead>
+                                            <tr>
+                                                <th>Pos</th>
+                                                <th>Clube</th>
+                                                <th>Ano</th>
+                                                <th>Pontos Marcados</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php $i = 1; foreach ($tabela_estatisticas as $linha): ?>
+                                                <tr>
+                                                    <td><?= $i++ ?></td>
+
+                                                    <td>
+                                                        <?= renderEscudoNomeClubeComp($linha) ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <?= eComp($linha['ano'] ?? '—') ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="badge-pontos">
+                                                            <?= formatarNumeroComp($linha['pontos_marcados'] ?? 0) ?>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+
+                                <?php elseif ($tipoTabela === 'participacoes'): ?>
+
+                                    <table class="tabela-estatisticas-comp" id="tabela-estatisticas-comp">
+                                        <thead>
+                                            <tr>
+                                                <th>Pos</th>
+                                                <th>Clube</th>
+                                                <th>Participações</th>
+                                                <th>Títulos</th>
+                                                <th>Top 4</th>
+                                                <th>Última</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php $i = 1; foreach ($tabela_estatisticas as $linha): ?>
+                                                <tr>
+                                                    <td><?= $i++ ?></td>
+
+                                                    <td>
+                                                        <?= renderEscudoNomeClubeComp($linha) ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="badge-pontos">
+                                                            <?= formatarNumeroComp($linha['participacoes'] ?? 0) ?>
+                                                        </span>
+                                                    </td>
+
+                                                    <td>
+                                                        <?php if (!empty($linha['qtd_titulos']) && (int)$linha['qtd_titulos'] > 0): ?>
+                                                            <span class="titulos-anos">
+                                                                <?= formatarNumeroComp($linha['qtd_titulos']) ?>
+
+                                                                <?php if (!empty($linha['anos_titulos'])): ?>
+                                                                    <small>(<?= eComp($linha['anos_titulos']) ?>)</small>
+                                                                <?php endif; ?>
+                                                            </span>
+                                                        <?php else: ?>
+                                                            0
+                                                        <?php endif; ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <?= formatarNumeroComp($linha['top4'] ?? 0) ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <?= eComp($linha['ultima_participacao'] ?? '—') ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+
+                                <?php else: ?>
+
+                                    <table class="tabela-estatisticas-comp" id="tabela-estatisticas-comp">
+                                        <thead>
+                                            <tr>
+                                                <th>Pos</th>
+
+                                                <th>
+                                                    <a 
+                                                        href="<?= eComp(link_coluna('nome_time', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                        class="<?= eComp(classeOrdenacaoComp('nome_time', $coluna_ordem, $tipo_ordem)) ?>"
+                                                    >
+                                                        Clube
+                                                    </a>
+                                                </th>
+
+                                                <?php if (isset($primeira_linha['pontos_marcados'])): ?>
+                                                    <th>
+                                                        <a 
+                                                            href="<?= eComp(link_coluna('pontos_marcados', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                            class="<?= eComp(classeOrdenacaoComp('pontos_marcados', $coluna_ordem, $tipo_ordem)) ?>"
+                                                        >
+                                                            Pontos Marcados
+                                                        </a>
+                                                    </th>
+                                                <?php endif; ?>
+
+                                                <th>
+                                                    <a 
+                                                        href="<?= eComp(link_coluna('jogos', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                        class="<?= eComp(classeOrdenacaoComp('jogos', $coluna_ordem, $tipo_ordem)) ?>"
+                                                    >
+                                                        Jogos
+                                                    </a>
+                                                </th>
+
+                                                <th>
+                                                    <a 
+                                                        href="<?= eComp(link_coluna('vitorias', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                        class="<?= eComp(classeOrdenacaoComp('vitorias', $coluna_ordem, $tipo_ordem)) ?>"
+                                                    >
+                                                        Vitórias
+                                                    </a>
+                                                </th>
+
+                                                <th>
+                                                    <a 
+                                                        href="<?= eComp(link_coluna('empates', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                        class="<?= eComp(classeOrdenacaoComp('empates', $coluna_ordem, $tipo_ordem)) ?>"
+                                                    >
+                                                        Empates
+                                                    </a>
+                                                </th>
+
+                                                <th>
+                                                    <a 
+                                                        href="<?= eComp(link_coluna('derrotas', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                        class="<?= eComp(classeOrdenacaoComp('derrotas', $coluna_ordem, $tipo_ordem)) ?>"
+                                                    >
+                                                        Derrotas
+                                                    </a>
+                                                </th>
+
+                                                <th>
+                                                    <a 
+                                                        href="<?= eComp(link_coluna('gols_pro', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                        class="<?= eComp(classeOrdenacaoComp('gols_pro', $coluna_ordem, $tipo_ordem)) ?>"
+                                                    >
+                                                        Gols Pró
+                                                    </a>
+                                                </th>
+
+                                                <th>
+                                                    <a 
+                                                        href="<?= eComp(link_coluna('gols_contra', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                        class="<?= eComp(classeOrdenacaoComp('gols_contra', $coluna_ordem, $tipo_ordem)) ?>"
+                                                    >
+                                                        Gols Contra
+                                                    </a>
+                                                </th>
+
+                                                <th>
+                                                    <a 
+                                                        href="<?= eComp(link_coluna('saldo', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                        class="<?= eComp(classeOrdenacaoComp('saldo', $coluna_ordem, $tipo_ordem)) ?>"
+                                                    >
+                                                        Saldo
+                                                    </a>
+                                                </th>
+
+                                                <th>
+                                                    <a 
+                                                        href="<?= eComp(link_coluna('pontos', $tituloOriginal, $coluna_ordem, $tipo_ordem)) ?>"
+                                                        class="<?= eComp(classeOrdenacaoComp('pontos', $coluna_ordem, $tipo_ordem)) ?>"
+                                                    >
+                                                        Pontos
+                                                    </a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php $i = 1; foreach ($tabela_estatisticas as $linha): ?>
+                                                <tr>
+                                                    <td><?= $i++ ?></td>
+
+                                                    <td>
+                                                        <?= renderEscudoNomeClubeComp($linha) ?>
+                                                    </td>
+
+                                                    <?php if (isset($primeira_linha['pontos_marcados'])): ?>
+                                                        <td>
+                                                            <?= formatarNumeroComp($linha['pontos_marcados'] ?? '-') ?>
+                                                        </td>
+                                                    <?php endif; ?>
+
+                                                    <td><?= formatarNumeroComp($linha['jogos'] ?? '-') ?></td>
+                                                    <td><?= formatarNumeroComp($linha['vitorias'] ?? '-') ?></td>
+                                                    <td><?= formatarNumeroComp($linha['empates'] ?? '-') ?></td>
+                                                    <td><?= formatarNumeroComp($linha['derrotas'] ?? '-') ?></td>
+                                                    <td><?= formatarNumeroComp($linha['gols_pro'] ?? '-') ?></td>
+                                                    <td><?= formatarNumeroComp($linha['gols_contra'] ?? '-') ?></td>
+                                                    <td><?= formatarNumeroComp($linha['saldo'] ?? '-') ?></td>
+                                                    <td>
+                                                        <span class="badge-pontos">
+                                                            <?= formatarNumeroComp($linha['pontos'] ?? '-') ?>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+
+                                <?php endif; ?>
+
+                            </div>
+
+                        </section>
+
+                    <?php elseif (empty($dados)): ?>
+
+                        <section class="card-estatisticas">
+                            <p class="mensagem-vazia">
+                                Nenhum dado encontrado para esta estatística.
+                            </p>
+                        </section>
+
+                    <?php endif; ?>
+
+                </div>
+
             </div>
-          <?php endif; ?>
-
-          <!-- Exibe a tabela de estatísticas -->
-          <?php if (!empty($tabela_estatisticas)): ?>
-            <h2>Resumo Estatístico por Clube</h2>
-            <div class="tabela-estatisticas">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Pos</th>
-                    <th>Clube</th>
-                    <th>Jogos</th>
-                    <th>Vitórias</th>
-                    <th>Empates</th>
-                    <th>Derrotas</th>
-                    <th>Gols Pró</th>
-                    <th>Gols Contra</th>
-                    <th>Saldo</th>
-                    <th>Pontos</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php $i = 1; foreach ($tabela_estatisticas as $linha): ?>
-                    <tr>
-                      <td><?= $i++ ?></td>
-                      <td><?= htmlspecialchars($linha['nome_time']) ?></td>
-                      <td><?= $linha['jogos'] ?></td>
-                      <td><?= $linha['vitorias'] ?></td>
-                      <td><?= $linha['empates'] ?></td>
-                      <td><?= $linha['derrotas'] ?></td>
-                      <td><?= $linha['gols_pro'] ?></td>
-                      <td><?= $linha['gols_contra'] ?></td>
-                      <td><?= $linha['saldo'] ?></td>
-                      <td><?= $linha['pontos'] ?></td>
-                    </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-            </div>
-          <?php endif; ?>
 
         </div>
-      </div>
     </section>
-  </main>
+</main>
 
-  <?php include '../estrutura/footer2.php'; ?>
+<?php include '../estrutura/footer2.php'; ?>
+
+<script src="../estatisticas/js-estatisticas/estatisticas-comp.js"></script>
 
 </body>
 </html>

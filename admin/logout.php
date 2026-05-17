@@ -1,26 +1,60 @@
 <?php
+/* =========================================
+   LOGOUT.PHP
+   Encerramento seguro da sessão administrativa
+========================================= */
+
+$isLocalhost = in_array($_SERVER['HTTP_HOST'] ?? '', [
+    'localhost',
+    '127.0.0.1',
+    'localhost:80',
+    'localhost:8080'
+], true);
+
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => '',
+    'secure' => !$isLocalhost,
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
+
 session_start();
 
-// Limpa todas as variáveis da sessão
+/* =========================================
+   LIMPAR VARIÁVEIS DA SESSÃO
+========================================= */
+
 $_SESSION = [];
 
-// Se quiser destruir completamente a sessão, também apague o cookie da sessão
-if (ini_get("session.use_cookies")) {
+/* =========================================
+   REMOVER COOKIE DA SESSÃO
+========================================= */
+
+if (ini_get('session.use_cookies')) {
     $params = session_get_cookie_params();
+
     setcookie(
         session_name(),
         '',
         time() - 42000,
-        $params["path"],
-        $params["domain"],
-        $params["secure"],
-        $params["httponly"]
+        $params['path'] ?? '/',
+        $params['domain'] ?? '',
+        $params['secure'] ?? !$isLocalhost,
+        $params['httponly'] ?? true
     );
 }
 
-// Destroi a sessão
+/* =========================================
+   DESTRUIR SESSÃO
+========================================= */
+
 session_destroy();
 
-// Redireciona para login
-header("Location: login.php");
+/* =========================================
+   REDIRECIONAR PARA LOGIN
+========================================= */
+
+header('Location: login.php');
 exit;

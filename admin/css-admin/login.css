@@ -1,195 +1,495 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
+/* ========================================
+   LOGIN.CSS
+   Painel Administrativo - Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS
+======================================== */
+
+:root {
+  --admin-bg: #0b0f14;
+  --admin-card: #151d27;
+  --admin-card-2: #1b2633;
+
+  --admin-gold: #ffd700;
+  --admin-gold-2: #ffb700;
+  --admin-green: #0f8b4c;
+
+  --admin-text: #f5f7fa;
+  --admin-muted: #b8c2cc;
+  --admin-muted-2: #8f9ba8;
+
+  --admin-border: rgba(255, 255, 255, 0.08);
+  --admin-border-gold: rgba(255, 215, 0, 0.26);
+
+  --admin-danger: #b42318;
+  --admin-danger-bg: rgba(180, 35, 24, 0.16);
+  --admin-danger-border: rgba(255, 120, 120, 0.32);
+
+  --admin-shadow: rgba(0, 0, 0, 0.46);
+  --admin-radius: 24px;
+  --admin-container: 960px;
+  --admin-transition: 0.25s ease;
+}
+
+/* ========================================
+   BASE
+======================================== */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* Body */
+html {
+  min-height: 100%;
+}
+
 body {
-  background-color: #121212;
-  font-family: 'Roboto', sans-serif;
-  color: #fff;
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.09), transparent 32%),
+    linear-gradient(180deg, #0b0f14 0%, #0d131a 55%, #0b0f14 100%);
+  color: var(--admin-text);
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+/* ========================================
+   PÁGINA
+======================================== */
+
+.pagina-login {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 38px 16px;
 }
 
-/* Container principal com layout flexível */
 .container {
-  display: flex;
-  width: 100%;
-  max-width: 900px;
-  background-color: #1c1c1c;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
-  flex-direction: row;
-  flex-wrap: wrap;
   position: relative;
+  overflow: hidden;
+  width: min(var(--admin-container), 100%);
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.94);
+  border: 1px solid var(--admin-border);
+  box-shadow: 0 28px 70px var(--admin-shadow);
 }
 
-/* Lado esquerdo - Logo */
+.container::before {
+  content: '';
+  position: absolute;
+  inset: -140px auto auto -140px;
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.container::after {
+  content: '';
+  position: absolute;
+  inset: auto -130px -170px auto;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.16), transparent 66%);
+  pointer-events: none;
+}
+
+/* ========================================
+   ÁREA DA LOGO
+======================================== */
+
 .logo-container {
-  background-color: #121212;
-  padding: 40px;
+  position: relative;
+  z-index: 1;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 42px 34px;
   text-align: center;
-  flex: 1;
-  min-width: 250px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(15, 139, 76, 0.07)),
+    rgba(0, 0, 0, 0.20);
+  border-right: 1px solid rgba(255, 255, 255, 0.075);
 }
 
 .logo-img {
-  width: 300px;
-  height: 300px;
+  width: min(260px, 78%);
+  height: auto;
+  max-height: 260px;
   object-fit: contain;
-  margin-bottom: 20px;
+  padding: 18px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
 }
 
 .logo-container h2 {
-  font-size: 18px;
-  line-height: 1.4;
-  color: #FFD700;
+  max-width: 330px;
+  margin: 0;
+  color: var(--admin-gold);
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  line-height: 1.18;
+  font-weight: 900;
+  letter-spacing: -0.035em;
 }
 
-/* Lado direito - Formulário */
+.logo-container p {
+  max-width: 330px;
+  margin: 0;
+  color: var(--admin-muted);
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+/* ========================================
+   ÁREA DO LOGIN
+======================================== */
+
 .login-container {
-  background-color: #1e1e1e;
-  padding: 40px;
-  flex: 1;
+  position: relative;
+  z-index: 1;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: clamp(34px, 5vw, 54px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--admin-gold), var(--admin-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .login-container h1 {
-  color: #FFD700;
-  text-align: center;
-  margin-bottom: 30px;
+  margin: 0 0 26px;
+  color: var(--admin-text);
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
 }
 
-/* Formulário */
+/* ========================================
+   FORMULÁRIO
+======================================== */
+
 form {
   display: flex;
   flex-direction: column;
+  gap: 18px;
+}
+
+.campo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 label {
-  font-weight: bold;
-  margin-bottom: 5px;
+  color: var(--admin-gold);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
 }
 
 input[type="text"],
 input[type="password"] {
-  padding: 12px;
-  background-color: #2c2c2c;
-  border: 1px solid #333;
-  color: #fff;
-  border-radius: 4px;
-  margin-bottom: 15px;
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(0, 0, 0, 0.24);
+  color: var(--admin-text);
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 700;
+  transition:
+    border-color var(--admin-transition),
+    box-shadow var(--admin-transition),
+    background-color var(--admin-transition);
 }
 
-/* Botões */
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: rgba(255, 215, 0, 0.42);
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.10);
+  background-color: rgba(0, 0, 0, 0.32);
+}
+
+/* ========================================
+   BOTÕES
+======================================== */
+
 .botoes {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 4px;
 }
 
 button,
 .voltar {
-  font-size: 16px;
-  background-color: #FFD700;
-  color: #121212;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 18px;
   border: none;
-  padding: 12px;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  flex: 1;
-  text-align: center;
+  border-radius: 999px;
   text-decoration: none;
+  color: #111;
+  background: linear-gradient(135deg, var(--admin-gold), var(--admin-gold-2));
+  font-size: 0.98rem;
+  font-family: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(255, 215, 0, 0.16);
+  transition:
+    transform var(--admin-transition),
+    filter var(--admin-transition),
+    box-shadow var(--admin-transition),
+    color var(--admin-transition),
+    background-color var(--admin-transition);
 }
 
 button:hover,
 .voltar:hover {
-  background-color: #e6c200;
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 16px 30px rgba(255, 215, 0, 0.23);
 }
 
-/* Mensagem de erro */
+.voltar {
+  color: var(--admin-text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), transparent),
+    rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow: none;
+}
+
+.voltar:hover {
+  color: var(--admin-gold);
+}
+
+/* ========================================
+   MENSAGEM DE ERRO
+======================================== */
+
 .erro {
-  background-color: #8b0000;
-  padding: 10px;
-  border-radius: 4px;
+  margin: 0 0 18px;
+  padding: 13px 15px;
+  border-radius: 15px;
   color: #fff;
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    var(--admin-danger-bg);
+  border: 1px solid var(--admin-danger-border);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  font-weight: 800;
 }
 
-/* Informação de Segurança */
+/* ========================================
+   INFORMAÇÃO DE SEGURANÇA
+======================================== */
+
 .seguranca-info {
-  margin-top: 20px;
-  font-size: 13px;
-  color: #ccc;
-  text-align: center;
-  border-top: 1px solid #333;
-  padding-top: 15px;
+  margin-top: 22px;
+  padding: 14px 15px;
+  border-radius: 15px;
+  color: var(--admin-muted);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(0, 0, 0, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  font-size: 0.86rem;
+  line-height: 1.5;
 }
 
-/* Rodapé */
+/* ========================================
+   RODAPÉ
+======================================== */
+
 .rodape {
-  width: 100%;
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / -1;
+  padding: 18px 24px;
+  color: var(--admin-muted-2);
+  background-color: rgba(0, 0, 0, 0.18);
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
   text-align: center;
-  font-size: 13px;
-  color: #666;
-  padding: 20px 0;
-  margin-top: 20px;
-  border-top: 1px solid #333;
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+button:focus-visible,
+.voltar:focus-visible,
+input[type="text"]:focus-visible,
+input[type="password"]:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 820px) {
+  .pagina-login {
+    align-items: flex-start;
+    padding: 28px 14px;
+  }
+
   .container {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    border-radius: 24px;
   }
 
   .logo-container {
-    padding: 30px;
+    min-height: auto;
+    padding: 34px 24px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+  }
+
+  .logo-img {
+    width: min(220px, 72%);
+    max-height: 220px;
   }
 
   .login-container {
-    padding: 30px;
+    min-height: auto;
+    padding: 34px 24px;
   }
 
   .rodape {
-    order: 1;
-    margin-top: 0;
-    padding-top: 15px;
+    padding: 16px 18px;
   }
 }
 
-@media (max-width: 480px) {
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 520px) {
+  .pagina-login {
+    padding: 20px 12px;
+  }
+
+  .container {
+    border-radius: 20px;
+  }
+
+  .logo-container {
+    padding: 28px 18px;
+  }
+
+  .logo-img {
+    width: min(190px, 74%);
+    max-height: 190px;
+    border-radius: 22px;
+  }
+
+  .logo-container h2 {
+    font-size: 1.18rem;
+  }
+
+  .logo-container p {
+    font-size: 0.92rem;
+  }
+
+  .login-container {
+    padding: 28px 18px;
+  }
+
+  .login-container h1 {
+    font-size: 1.85rem;
+    margin-bottom: 22px;
+  }
+
+  .botoes {
+    grid-template-columns: 1fr;
+  }
+
   input[type="text"],
   input[type="password"] {
     font-size: 16px;
-    padding: 14px;
+    min-height: 52px;
   }
 
   button,
   .voltar {
-    padding: 14px;
-    font-size: 16px;
+    min-height: 50px;
+    font-size: 1rem;
   }
 
+  .seguranca-info {
+    font-size: 0.82rem;
+  }
+
+  .rodape {
+    font-size: 0.76rem;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 360px) {
   .login-container h1 {
-    font-size: 24px;
+    font-size: 1.62rem;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .logo-img {
+    width: 160px;
   }
 }

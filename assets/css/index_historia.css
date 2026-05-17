@@ -1,0 +1,493 @@
+/* ========================================
+   INDEX_HISTORIA.CSS
+   Bloco História da Página Inicial
+   Portal Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS LOCAIS
+======================================== */
+
+:root {
+  --hist-index-bg: #0b0f14;
+  --hist-index-card: #151d27;
+  --hist-index-card-2: #1b2633;
+
+  --hist-index-gold: #ffd700;
+  --hist-index-gold-2: #ffb700;
+  --hist-index-green: #0f8b4c;
+
+  --hist-index-text: #f5f7fa;
+  --hist-index-muted: #b8c2cc;
+  --hist-index-muted-2: #8f9ba8;
+
+  --hist-index-border: rgba(255, 255, 255, 0.08);
+  --hist-index-border-gold: rgba(255, 215, 0, 0.26);
+
+  --hist-index-shadow: rgba(0, 0, 0, 0.46);
+  --hist-index-radius: 20px;
+  --hist-index-container: 1220px;
+  --hist-index-transition: 0.25s ease;
+}
+
+/* ========================================
+   SEÇÃO PRINCIPAL
+======================================== */
+
+.index-historia {
+  width: min(var(--hist-index-container), calc(100% - 32px));
+  margin: 38px auto 34px;
+  padding: 0;
+}
+
+/* ========================================
+   CABEÇALHO DO BLOCO
+======================================== */
+
+.index-historia-header {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  padding: clamp(26px, 4vw, 42px);
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--hist-index-card);
+  border: 1px solid var(--hist-index-border-gold);
+  box-shadow: 0 24px 58px var(--hist-index-shadow);
+}
+
+.index-historia-header::before {
+  content: '';
+  position: absolute;
+  inset: -120px auto auto -120px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.index-historia-header::after {
+  content: '';
+  position: absolute;
+  inset: auto -120px -170px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.index-historia-header .eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--hist-index-gold), var(--hist-index-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.index-historia-header h1 {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  color: var(--hist-index-text);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.index-historia-header h1::after {
+  display: none;
+}
+
+.index-historia-header p {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 16px 0 0;
+  color: var(--hist-index-muted);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+}
+
+/* ========================================
+   GRID PRINCIPAL
+======================================== */
+
+.index-historia-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* ========================================
+   CARD BASE
+======================================== */
+
+.index-historia-card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 22px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--hist-index-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.index-historia-card::after {
+  content: '';
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.10), transparent 68%);
+  pointer-events: none;
+}
+
+.index-historia-card:hover {
+  border-color: rgba(255, 215, 0, 0.24);
+}
+
+/* ========================================
+   TÍTULO DOS CARDS
+======================================== */
+
+.titulo-bloco-index-historia {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.titulo-bloco-index-historia h3 {
+  margin: 0;
+  color: var(--hist-index-gold);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.titulo-bloco-index-historia span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--hist-index-gold), var(--hist-index-gold-2));
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* ========================================
+   GALERIA DE FOTOS / CARROSSEL
+======================================== */
+
+.index-historia .carrossel2-fotos {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+  border-radius: 18px;
+  background-color: #080b0f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.index-historia .carrossel2-item {
+  position: absolute;
+  inset: 0 auto auto 100%;
+  width: 100%;
+  height: 100%;
+  transition: left 0.55s ease-in-out;
+}
+
+.index-historia .carrossel2-item.active {
+  left: 0;
+}
+
+.index-historia .carrossel2-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.index-historia .carrossel2-caption {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(5, 8, 12, 0.78);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 215, 0, 0.20);
+}
+
+.index-historia .carrossel2-caption h5 {
+  margin: 0;
+  color: var(--hist-index-text);
+  font-size: 0.96rem;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+/* ========================================
+   VÍDEO DESTAQUE
+======================================== */
+
+.video-destaque-index {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  background-color: #000;
+  border: 1px solid rgba(255, 215, 0, 0.16);
+}
+
+.video-destaque-index iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+.descricao-video-index {
+  position: relative;
+  z-index: 1;
+  margin: 16px 0 0;
+  color: var(--hist-index-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+/* ========================================
+   AÇÕES / BOTÕES
+======================================== */
+
+.index-historia-acoes {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.index-historia .botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #111 !important;
+  background: linear-gradient(135deg, var(--hist-index-gold), var(--hist-index-gold-2));
+  font-size: 0.95rem;
+  font-weight: 900;
+  border: none;
+  box-shadow: 0 10px 22px rgba(255, 215, 0, 0.18);
+  transition:
+    transform var(--hist-index-transition),
+    box-shadow var(--hist-index-transition),
+    filter var(--hist-index-transition);
+}
+
+.index-historia .botao:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 16px 30px rgba(255, 215, 0, 0.26);
+}
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.index-historia .mensagem-vazia {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+  color: var(--hist-index-muted);
+  line-height: 1.6;
+}
+
+/* ========================================
+   COMPATIBILIDADE COM CLASSES ANTIGAS
+======================================== */
+
+.index-historia .galeria-fotos,
+.index-historia .galeria-video {
+  flex: initial;
+  min-width: 0;
+}
+
+.index-historia .galeria-fotos p,
+.index-historia .galeria-video p {
+  color: var(--hist-index-muted);
+}
+
+/* ========================================
+   ACESSIBILIDADE / FOCUS
+======================================== */
+
+.index-historia .botao:focus-visible,
+.index-historia .carrossel2-item a:focus-visible,
+.video-destaque-index iframe:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - NOTEBOOK
+======================================== */
+
+@media (max-width: 1100px) {
+  .index-historia {
+    width: calc(100% - 32px);
+  }
+
+  .index-historia-grid {
+    gap: 20px;
+  }
+
+  .index-historia .carrossel2-fotos {
+    height: 310px;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  .index-historia {
+    width: calc(100% - 28px);
+    margin: 32px auto 28px;
+  }
+
+  .index-historia-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .index-historia-header {
+    border-radius: 22px;
+    padding: 28px;
+  }
+
+  .index-historia-card {
+    border-radius: 20px;
+  }
+
+  .index-historia .carrossel2-fotos {
+    height: 320px;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 620px) {
+  .index-historia {
+    width: calc(100% - 24px);
+    margin: 28px auto 24px;
+  }
+
+  .index-historia-header {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .index-historia-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .index-historia-header p {
+    font-size: 0.96rem;
+  }
+
+  .index-historia-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .titulo-bloco-index-historia {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .titulo-bloco-index-historia h3 {
+    font-size: 1.22rem;
+  }
+
+  .index-historia .carrossel2-fotos {
+    height: 245px;
+    border-radius: 15px;
+  }
+
+  .video-destaque-index {
+    border-radius: 15px;
+  }
+
+  .index-historia .botao {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  .index-historia-header h1 {
+    font-size: 1.55rem;
+  }
+
+  .index-historia-header .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .index-historia .carrossel2-fotos {
+    height: 215px;
+  }
+
+  .descricao-video-index {
+    font-size: 0.9rem;
+  }
+}

@@ -1,28 +1,35 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <title>Footer</title>
-</head>
-<body>
-    
-    <footer class="rodape">
-        <div class="rodape-container">
-            <p>&copy; <?= date('Y') ?> Futebol Brasileiro. Todos os direitos reservados.</p>
+<footer class="rodape">
+    <div class="rodape-container">
+        <div class="rodape-brand">
+            <img src="assets/images/logo.png" alt="Logo Futebol Brasileiro" class="rodape-logo">
+            <div>
+                <strong>Futebol Brasileiro</strong>
+                <span>História, clubes, ranking, jogos e estatísticas</span>
+            </div>
+        </div>
 
-            <p style="font-size: 0.9em;">
-            <button onclick="mostrarLinkAdmin()" class="btn-link-admin">Área Administrativa</button>
-            </p>
+        <div class="rodape-links">
+            <a href="index.php">Home</a>
+            <a href="noticias/noticias.php">Notícias</a>
+            <a href="times/times.php">Times</a>
+            <a href="estatisticas/ranking-introducao.php">Ranking</a>
+            <a href="estatisticas/estatisticas.php">Estatísticas</a>
+        </div>
 
-            <p id="link-admin-revelado" style="display: none; font-size: 0.8em;">
-            <a href="admin/admin.php" class="admin-link" style="color: #FFD700;">Acessar Painel</a>
-            </p>
-        </div>        
-    </footer>
+        <div class="rodape-admin">
+            <button onclick="mostrarLinkAdmin()" class="btn-link-admin" type="button">
+                Área Administrativa
+            </button>
 
-    <script src = "estrutura/js-estrutura/footer.js"></script>
+            <span id="link-admin-revelado" class="link-admin-revelado">
+                <a href="admin/admin.php" class="admin-link">Acessar Painel</a>
+            </span>
+        </div>
 
-</body>
-</html>
+        <p class="rodape-copy">
+            &copy; <?= date('Y') ?> Futebol Brasileiro. Todos os direitos reservados.
+        </p>
+    </div>
+</footer>
+
+<script src="estrutura/js-estrutura/footer.js"></script>

@@ -1,75 +1,232 @@
 <?php
-
 require_once '../estrutura/conexaodb.php';
 
-// Função para extrair o ID do vídeo do YouTube (a partir de URLs embed)
-function extract_youtube_id($url) {
-    $url = parse_url($url, PHP_URL_PATH);
-    $parts = explode('/', trim($url, '/'));
-    return end($parts); // pega a última parte da URL
+/* =========================================
+   VERIFICAÇÃO DE CONEXÃO
+========================================= */
+
+if (!isset($pdo)) {
+    die('Erro: Conexão com o banco de dados não estabelecida.');
 }
 
+/* =========================================
+   FUNÇÕES AUXILIARES
+========================================= */
 
-    // Buscar todos os vídeos
-    $stmt = $pdo->query("SELECT * FROM videos ORDER BY data_publicacao DESC");
-    $videos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+function eGaleriaVideos($valor)
+{
+    return htmlspecialchars((string)$valor, ENT_QUOTES, 'UTF-8');
+}
 
+/**
+ * Extrai o ID do YouTube a partir de:
+ * - iframe completo
+ * - youtube.com/watch?v=ID
+ * - youtube.com/embed/ID
+ * - youtube.com/shorts/ID
+ * - youtu.be/ID
+ * - ID puro
+ */
+function extract_youtube_id(string $input): string
+{
+    if (empty(trim($input))) {
+        return '';
+    }
+
+    $url = trim($input);
+
+    // Se for iframe, extrai o src
+    if (stripos($url, '<iframe') !== false) {
+        if (preg_match('/src=["\']([^"\']+)["\']/i', $url, $matches)) {
+            $url = $matches[1];
+        } else {
+            return '';
+        }
+    }
+
+    // Se já for ID puro
+    if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $url)) {
+        return $url;
+    }
+
+    $parsed = parse_url($url);
+
+    if (!$parsed || empty($parsed['host'])) {
+        return '';
+    }
+
+    $host = strtolower($parsed['host']);
+    $path = $parsed['path'] ?? '';
+    $query = $parsed['query'] ?? '';
+
+    // youtube.com/watch?v=ID
+    if (strpos($host, 'youtube.com') !== false && !empty($query)) {
+        parse_str($query, $q);
+
+        if (!empty($q['v']) && preg_match('/^[a-zA-Z0-9_-]{11}$/', $q['v'])) {
+            return $q['v'];
+        }
+    }
+
+    // youtube.com/embed/ID, /shorts/ID ou /v/ID
+    if (strpos($host, 'youtube.com') !== false) {
+        if (preg_match('#/embed/([a-zA-Z0-9_-]{11})#i', $path, $m)) {
+            return $m[1];
+        }
+
+        if (preg_match('#/shorts/([a-zA-Z0-9_-]{11})#i', $path, $m)) {
+            return $m[1];
+        }
+
+        if (preg_match('#/v/([a-zA-Z0-9_-]{11})#i', $path, $m)) {
+            return $m[1];
+        }
+    }
+
+    // youtu.be/ID
+    if (strpos($host, 'youtu.be') !== false) {
+        $id = trim($path, '/');
+
+        if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $id)) {
+            return $id;
+        }
+    }
+
+    return '';
+}
+
+function thumbnailYoutubeGaleria($url)
+{
+    $videoId = extract_youtube_id((string)$url);
+
+    if (!empty($videoId)) {
+        return 'https://img.youtube.com/vi/' . eGaleriaVideos($videoId) . '/mqdefault.jpg';
+    }
+
+    return 'https://via.placeholder.com/320x180/000000/FFFFFF?text=Video+Indisponivel';
+}
+
+/* =========================================
+   BUSCAR VÍDEOS
+========================================= */
+
+$stmt = $pdo->query("
+    SELECT *
+    FROM videos
+    ORDER BY data_publicacao DESC, id DESC
+");
+
+$videos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Galeria de Vídeos - Futebol Brasileiro</title>
+
     <link rel="stylesheet" href="../estrutura/css-estrutura/header.css">
     <link rel="stylesheet" href="../estrutura/css-estrutura/footer.css">
     <link rel="stylesheet" href="css-historia/galeria-videos.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto :wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
 <?php include '../estrutura/header2.php'; ?>
 
-<!-- Conteúdo Principal -->
 <main>
-    <a href="historia.php" class="voltar-link">← Voltar para História</a>
-    <section class="galeria-videos">
+    <section class="secao-galeria-videos">
         <div class="galeria-container">
-            <h1>Galeria de Vídeos</h1>
-            <p>Confira momentos históricos, entrevistas marcantes e jogos inesquecíveis do futebol brasileiro.</p>
 
-            <div class="galeria-lista">
-                <?php if (!empty($videos)): ?>
+            <a href="historia.php" class="voltar-link">
+                ← Voltar para História
+            </a>
+
+            <section class="hero-galeria-videos">
+                <span class="eyebrow">Galeria</span>
+
+                <h1>Galeria de Vídeos</h1>
+
+                <p>
+                    Confira momentos históricos, entrevistas marcantes, jogos inesquecíveis,
+                    registros audiovisuais e memórias importantes da trajetória do futebol brasileiro.
+                </p>
+            </section>
+
+            <?php if (!empty($videos)): ?>
+                <section class="galeria-lista">
                     <?php foreach ($videos as $video): ?>
                         <?php
-                            // Extrair ID do vídeo do campo 'url' (espera-se que seja algo como https://www.youtube.com/embed/abc123 )
-                            $videoId = extract_youtube_id($video['url']);
-                            $thumbnailUrl = "https://img.youtube.com/vi/" . urlencode($videoId) . "/mqdefault.jpg";
+                            $videoId = (int)($video['id'] ?? 0);
+                            $tituloVideo = $video['titulo'] ?? 'Vídeo histórico do futebol brasileiro';
+                            $descricaoVideo = $video['descricao'] ?? '';
+                            $thumbnailUrl = thumbnailYoutubeGaleria($video['url'] ?? '');
                         ?>
-                        <div class="galeria-card">
-                            <a style="text-decoration: none;" href="detalhes-galeria-videos.php?video_id=<?= $video['id'] ?>">
-                                <h2><?= htmlspecialchars($video['titulo']) ?></h2>
-                            </a>
-                            <p><?= htmlspecialchars($video['descricao']) ?></p>
 
-                            <!-- Vídeo embutido -->
-                            <div class="video-frame">
-                                <a href="detalhes-galeria-videos.php?video_id=<?= $video['id'] ?>">
-                                <img src="https://img.youtube.com/vi/<?=urlencode(extract_youtube_id($video['url']))?>/mqdefault.jpg" 
-                                    alt="<?=htmlspecialchars($video['titulo'])?>" width="95%">
-                                <p><?=htmlspecialchars($video['titulo'])?></p></a>
-                            </div>
-                        </div>
+                        <article class="galeria-card">
+                            <a 
+                                href="detalhes-galeria-videos.php?video_id=<?= $videoId ?>" 
+                                class="galeria-card-link"
+                            >
+                                <div class="video-preview-wrapper">
+                                    <img
+                                        src="<?= $thumbnailUrl ?>"
+                                        alt="<?= eGaleriaVideos($tituloVideo) ?>"
+                                        class="video-preview"
+                                        loading="lazy"
+                                    >
+
+                                    <span class="play-indicador" aria-hidden="true">
+                                        ▶
+                                    </span>
+                                </div>
+
+                                <div class="galeria-card-conteudo">
+                                    <h2><?= eGaleriaVideos($tituloVideo) ?></h2>
+
+                                    <?php if (!empty($descricaoVideo)): ?>
+                                        <p><?= eGaleriaVideos($descricaoVideo) ?></p>
+                                    <?php else: ?>
+                                        <p>Registro audiovisual da história do futebol brasileiro.</p>
+                                    <?php endif; ?>
+
+                                    <span class="botao">
+                                        Ver Vídeo
+                                    </span>
+                                </div>
+                            </a>
+                        </article>
                     <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Nenhum vídeo foi encontrado no momento.</p>
-                <?php endif; ?>
-            </div>
+                </section>
+            <?php else: ?>
+                <section class="card-mensagem-vazia">
+                    <p class="mensagem-vazia">
+                        Nenhum vídeo foi encontrado no momento.
+                    </p>
+                </section>
+            <?php endif; ?>
+
         </div>
     </section>
 </main>
 
 <?php include '../estrutura/footer2.php'; ?>
+
+<div id="voltar-ao-topo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e1e1e"
+        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+
+    <span class="tooltip-text">Voltar ao Topo</span>
+</div>
+
+<script src="js-historia/historia.js"></script>
 
 </body>
 </html>

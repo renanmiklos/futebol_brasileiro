@@ -1,60 +1,142 @@
+/* ========================================
+   ADMIN.JS
+   Funções globais do Painel Administrativo
+   Futebol Brasileiro
+======================================== */
 
-
-// Script para filtrar tabela times
-
-function filtrarTabela() {
-        const input = document.getElementById("filtro-nome");
-        const filtro = input.value.toLowerCase();
-        const tabela = document.getElementById("tabela-times");
-        const linhas = tabela.getElementsByTagName("tr");
-
-        for (let i = 1; i < linhas.length; i++) { // Começa em 1 para pular o cabeçalho
-            const celulaNome = linhas[i].getElementsByTagName("td")[1]; // A coluna "Nome" é a segunda (índice 1)
-            if (celulaNome) {
-                const texto = celulaNome.textContent || celulaNome.innerText;
-                if (texto.toLowerCase().indexOf(filtro) > -1) {
-                    linhas[i].style.display = "";
-                } else {
-                    linhas[i].style.display = "none";
-                }
-            }
-        }
-    }
-
-
-    document.getElementById('id_competicao').addEventListener('change', async function () {
-    const id = this.value;
-
-    // Carrega temporadas
-    const resTemp = await fetch('admin-process.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'acao=get_temporadas_por_competicao&id_competicao=' + encodeURIComponent(id)
-    });
-    const htmlTemp = await resTemp.text();
-    document.getElementById('id_temporada').innerHTML = htmlTemp;
-
-    // Carrega fases
-    const resFase = await fetch('admin-process.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'acao=get_fases_por_competicao&id_competicao=' + encodeURIComponent(id)
-    });
-    const htmlFase = await resFase.text();
-    document.getElementById('fase').innerHTML = htmlFase;
+document.addEventListener("DOMContentLoaded", function () {
+  inicializarConfirmacoesGlobais();
+  inicializarFeedbackAutoHide();
+  inicializarAtalhosDeModal();
 });
 
-// Captura o ID do time selecionado no datalist
-document.getElementById('input_time').addEventListener('input', function () {
-    const input = this.value.toLowerCase();
-    const datalist = document.getElementById('lista_times').options;
-    let idSelecionado = "";
-    for (let opt of datalist) {
-        if (opt.value.toLowerCase() === input) {
-            idSelecionado = opt.dataset.id;
-            break;
-        }
-    }
-    document.getElementById('id_time').value = idSelecionado;
-});
+/* ========================================
+   CONFIRMAÇÕES GLOBAIS
+======================================== */
 
+function inicializarConfirmacoesGlobais() {
+  /*
+    Mantido de forma leve.
+    A maior parte das confirmações já está diretamente nos forms.
+    Este bloco serve para elementos futuros com data-confirm.
+  */
+  document.querySelectorAll("[data-confirm]").forEach(function (elemento) {
+    elemento.addEventListener("click", function (event) {
+      const mensagem = elemento.dataset.confirm || "Tem certeza?";
+
+      if (!confirm(mensagem)) {
+        event.preventDefault();
+      }
+    });
+  });
+}
+
+/* ========================================
+   FEEDBACK AUTO HIDE
+======================================== */
+
+function inicializarFeedbackAutoHide() {
+  const feedback = document.querySelector(".feedback");
+
+  if (!feedback) return;
+
+  setTimeout(function () {
+    feedback.style.opacity = "0";
+    feedback.style.transform = "translateY(-6px)";
+    feedback.style.transition = "opacity 0.35s ease, transform 0.35s ease";
+  }, 4500);
+
+  setTimeout(function () {
+    feedback.style.display = "none";
+  }, 5000);
+}
+
+/* ========================================
+   MODAIS - FUNÇÕES GLOBAIS OPCIONAIS
+======================================== */
+
+function inicializarAtalhosDeModal() {
+  /*
+    Os arquivos específicos de cada página controlam seus próprios modais.
+    Este bloco apenas adiciona suporte genérico para botões com:
+    data-modal-open="id-do-modal"
+  */
+
+  document.querySelectorAll("[data-modal-open]").forEach(function (botao) {
+    botao.addEventListener("click", function () {
+      const modalId = botao.dataset.modalOpen;
+      const modal = document.getElementById(modalId);
+
+      if (modal) {
+        abrirModalGlobalAdmin(modal);
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-modal-close-global]").forEach(function (botao) {
+    botao.addEventListener("click", function () {
+      const modalId = botao.dataset.modalCloseGlobal;
+      const modal = document.getElementById(modalId);
+
+      if (modal) {
+        fecharModalGlobalAdmin(modal);
+      }
+    });
+  });
+}
+
+function abrirModalGlobalAdmin(modal) {
+  modal.style.display = "block";
+}
+
+function fecharModalGlobalAdmin(modal) {
+  modal.style.display = "none";
+}
+
+/* ========================================
+   HELPERS GLOBAIS
+   Podem ser usados por scripts específicos se necessário
+======================================== */
+
+window.AdminUtils = {
+  normalizarTexto: function (valor) {
+    return String(valor || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
+  },
+
+  setValorCampo: function (id, valor) {
+    const campo = document.getElementById(id);
+
+    if (!campo) return;
+
+    campo.value = valor ?? "";
+  },
+
+  filtrarTabela: function (input, tabela) {
+    if (!input || !tabela) return;
+
+    const filtro = window.AdminUtils.normalizarTexto(input.value);
+    const linhas = tabela.querySelectorAll("tbody tr");
+
+    linhas.forEach(function (linha) {
+      const textoLinha = window.AdminUtils.normalizarTexto(linha.textContent || "");
+
+      linha.style.display = textoLinha.includes(filtro) ? "" : "none";
+    });
+  },
+
+  abrirModal: function (modal) {
+    if (modal) {
+      modal.style.display = "block";
+    }
+  },
+
+  fecharModal: function (modal) {
+    if (modal) {
+      modal.style.display = "none";
+    }
+  }
+};

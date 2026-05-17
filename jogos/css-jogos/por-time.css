@@ -1,0 +1,262 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.secao-por-time {
+  background-color: #121212;
+  color: #f0f0f0;
+  min-height: 100vh;
+  padding: 30px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.voltar-link {
+  display: inline-block;
+  color: #FFD700;
+  text-decoration: none;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.voltar-link:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  color: #FFD700;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+/* === FORMULÁRIO === */
+.form-busca-time {
+  margin-bottom: 30px;
+}
+
+.grupo-campos {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+
+.campo {
+  flex: 1;
+  min-width: 200px;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 6px;
+  color: #ddd;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.campo select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+  font-size: 15px;
+}
+
+.campo-botao {
+  display: flex;
+  align-items: end;
+  margin-bottom: 1px;
+}
+
+.campo-botao button {
+  padding: 10px 20px;
+  background-color: #FFD700;
+  color: #121212;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.campo-botao button:hover {
+  background-color: #ffcc00;
+}
+
+/* === TABELA === */
+.tabela-resultados {
+  background: #1e1e1e;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.tabela-resultados table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabela-resultados th,
+.tabela-resultados td {
+  padding: 12px 10px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+.tabela-resultados th {
+  background: #252525;
+  color: #FFD700;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+}
+
+.tabela-resultados td {
+  color: #fff;
+}
+
+.tabela-resultados tr:last-child td {
+  border-bottom: none;
+}
+
+/* Escudo na tabela */
+.escudo-pequeno {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  background: #000;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+/* Nome do clube ao lado do escudo */
+.tabela-resultados td:first-child {
+  text-align: left;
+  padding-left: 12px;
+}
+
+.mensagem {
+  color: #aaa;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+/* === RESPONSIVIDADE === */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 15px;
+  }
+  .grupo-campos {
+    gap: 12px;
+  }
+  .campo {
+    min-width: 180px;
+  }
+  .campo select {
+    font-size: 14px;
+    padding: 9px;
+  }
+  .campo-botao button {
+    padding: 9px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Tablets (modo retrato) */
+@media (max-width: 768px) {
+  .grupo-campos {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .campo-botao {
+    align-items: stretch;
+    margin-top: 10px;
+  }
+
+  .campo-botao button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  /* Tabela scroll horizontal */
+  .tabela-resultados {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabela-resultados table {
+    min-width: 650px;
+    width: auto;
+  }
+
+  .tabela-resultados th,
+  .tabela-resultados td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .escudo-pequeno {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+  }
+}
+
+/* Smartphones */
+@media (max-width: 480px) {
+  .secao-por-time {
+    padding: 20px 15px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .campo label {
+    font-size: 13px;
+  }
+
+  .campo select,
+  .campo-botao button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .tabela-resultados table {
+    min-width: 600px;
+  }
+
+  .tabela-resultados th,
+  .tabela-resultados td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+
+  .escudo-pequeno {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tabela-resultados th {
+    font-size: 11px;
+  }
+}

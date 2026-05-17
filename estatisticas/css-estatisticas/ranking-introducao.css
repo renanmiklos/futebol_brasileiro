@@ -1,0 +1,851 @@
+/* ========================================
+   RANKING-INTRODUCAO.CSS
+   Página de Introdução do Ranking
+   Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS
+======================================== */
+
+:root {
+  --rank-intro-bg: #0b0f14;
+  --rank-intro-bg-2: #101720;
+  --rank-intro-card: #151d27;
+  --rank-intro-card-2: #1b2633;
+
+  --rank-intro-gold: #ffd700;
+  --rank-intro-gold-2: #ffb700;
+  --rank-intro-green: #0f8b4c;
+
+  --rank-intro-text: #f5f7fa;
+  --rank-intro-muted: #b8c2cc;
+  --rank-intro-muted-2: #8f9ba8;
+
+  --rank-intro-border: rgba(255, 255, 255, 0.08);
+  --rank-intro-border-gold: rgba(255, 215, 0, 0.26);
+
+  --rank-intro-shadow: rgba(0, 0, 0, 0.46);
+  --rank-intro-radius: 20px;
+  --rank-intro-container: 1240px;
+  --rank-intro-transition: 0.25s ease;
+}
+
+/* ========================================
+   BASE
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.09), transparent 32%),
+    linear-gradient(180deg, #0b0f14 0%, #0d131a 55%, #0b0f14 100%);
+  color: var(--rank-intro-text);
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  overflow: visible;
+}
+
+/* ========================================
+   SEÇÃO PRINCIPAL
+======================================== */
+
+.secao-ranking-introducao {
+  min-height: 100vh;
+  padding: 38px 16px 54px;
+}
+
+.ranking-introducao-container {
+  width: min(var(--rank-intro-container), 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.conteudo-ranking-introducao {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ========================================
+   MENU LATERAL
+======================================== */
+
+.menu-lateral,
+.menu-ranking {
+  position: sticky;
+  top: 112px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: calc(100vh - 132px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.menu-lateral::-webkit-scrollbar,
+.menu-ranking::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb,
+.menu-ranking::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.35);
+  border-radius: 999px;
+}
+
+.menu-bloco,
+.menu-lateral:not(.menu-ranking) {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--rank-intro-border);
+  border-radius: var(--rank-intro-radius);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.34);
+}
+
+.menu-bloco {
+  padding: 18px;
+}
+
+.menu-lateral:not(.menu-ranking) {
+  padding: 18px;
+}
+
+.menu-bloco h2,
+.menu-lateral h2 {
+  margin: 0 0 14px;
+  color: var(--rank-intro-gold);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.menu-bloco ul,
+.menu-lateral ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.menu-bloco li,
+.menu-lateral li {
+  margin: 0;
+}
+
+.menu-bloco a,
+.menu-lateral a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--rank-intro-text);
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid transparent;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.25;
+  transition:
+    transform var(--rank-intro-transition),
+    border-color var(--rank-intro-transition),
+    background-color var(--rank-intro-transition),
+    color var(--rank-intro-transition);
+}
+
+.menu-bloco a:hover,
+.menu-bloco a.ativo,
+.menu-lateral a:hover,
+.menu-lateral a.ativo {
+  transform: translateX(4px);
+  color: var(--rank-intro-gold);
+  background-color: rgba(255, 215, 0, 0.09);
+  border-color: rgba(255, 215, 0, 0.20);
+}
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero-ranking {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(26px, 4vw, 42px);
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--rank-intro-card);
+  border: 1px solid var(--rank-intro-border-gold);
+  box-shadow: 0 24px 58px var(--rank-intro-shadow);
+}
+
+.hero-ranking::before {
+  content: '';
+  position: absolute;
+  inset: -120px auto auto -120px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.hero-ranking::after {
+  content: '';
+  position: absolute;
+  inset: auto -120px -170px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.eyebrow,
+.hero-ranking .eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--rank-intro-gold), var(--rank-intro-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-ranking h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--rank-intro-text);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.hero-ranking p {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 16px 0 0;
+  color: var(--rank-intro-muted);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+}
+
+/* ========================================
+   METADADOS DO HERO
+======================================== */
+
+.ranking-meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.ranking-meta span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 30px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--rank-intro-gold), var(--rank-intro-gold-2));
+  font-size: 0.78rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* ========================================
+   CARDS DA INTRODUÇÃO
+======================================== */
+
+.card-ranking-introducao {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--rank-intro-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.card-ranking-introducao::after {
+  content: '';
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.08), transparent 68%);
+  pointer-events: none;
+}
+
+.titulo-bloco-ranking {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.titulo-bloco-ranking h2 {
+  margin: 0;
+  color: var(--rank-intro-gold);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.titulo-bloco-ranking span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--rank-intro-gold), var(--rank-intro-gold-2));
+  font-size: 0.74rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* ========================================
+   TEXTO DA INTRODUÇÃO
+======================================== */
+
+.texto-ranking {
+  position: relative;
+  z-index: 1;
+  color: var(--rank-intro-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.texto-ranking p {
+  margin: 0 0 16px;
+}
+
+.texto-ranking p:last-child {
+  margin-bottom: 0;
+}
+
+.texto-ranking strong {
+  color: var(--rank-intro-gold);
+  font-weight: 900;
+}
+
+.texto-ranking ul {
+  margin: 16px 0 0;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.texto-ranking li {
+  position: relative;
+  padding: 14px 16px 14px 42px;
+  border-radius: 16px;
+  color: var(--rank-intro-muted);
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.texto-ranking li::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rank-intro-gold), var(--rank-intro-gold-2));
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.10);
+}
+
+.texto-ranking a {
+  color: var(--rank-intro-gold);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.texto-ranking a:hover {
+  color: #fff;
+}
+
+/* ========================================
+   TOP 5
+======================================== */
+
+.ranking-lista,
+.top-ranking-intro {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+}
+
+.ranking-item {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  min-height: 70px;
+  padding: 13px 15px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--rank-intro-text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  transition:
+    transform var(--rank-intro-transition),
+    border-color var(--rank-intro-transition),
+    background-color var(--rank-intro-transition),
+    box-shadow var(--rank-intro-transition);
+}
+
+.ranking-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 215, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.34);
+}
+
+.ranking-pos {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 38px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--rank-intro-gold), var(--rank-intro-gold-2));
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.ranking-nome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.ranking-nome img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  flex: 0 0 42px;
+  padding: 4px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.26);
+}
+
+.ranking-nome span {
+  color: var(--rank-intro-text);
+  font-size: 1rem;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color var(--rank-intro-transition);
+}
+
+.ranking-item:hover .ranking-nome span {
+  color: var(--rank-intro-gold);
+}
+
+.ranking-pontos {
+  min-width: 80px;
+  text-align: right;
+  color: var(--rank-intro-gold);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+/* ========================================
+   BOTÕES / AÇÕES
+======================================== */
+
+.acoes-ranking-introducao {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.botao,
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--rank-intro-gold), var(--rank-intro-gold-2));
+  color: #111 !important;
+  text-decoration: none;
+  font-size: 0.96rem;
+  font-weight: 900;
+  box-shadow: 0 10px 22px rgba(255, 215, 0, 0.18);
+  transition:
+    transform var(--rank-intro-transition),
+    box-shadow var(--rank-intro-transition),
+    filter var(--rank-intro-transition);
+}
+
+.botao:hover,
+.btn-link:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 16px 30px rgba(255, 215, 0, 0.26);
+}
+
+.botao-secundario {
+  color: var(--rank-intro-text) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), transparent),
+    rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow: none;
+}
+
+.botao-secundario:hover {
+  color: var(--rank-intro-gold) !important;
+}
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.card-mensagem-vazia {
+  position: relative;
+  z-index: 1;
+  padding: 18px;
+  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+}
+
+.mensagem-vazia {
+  margin: 0;
+  color: var(--rank-intro-muted);
+  line-height: 1.6;
+}
+
+/* ========================================
+   COMPATIBILIDADE COM HTML ANTIGO
+======================================== */
+
+.secao-ranking .container {
+  width: min(var(--rank-intro-container), 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.conteudo-ranking {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.conteudo-ranking > h1 {
+  color: var(--rank-intro-gold);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.descricao-ranking,
+.top5-ranking,
+.criticos-ranking {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--rank-intro-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.descricao-ranking p,
+.criticos-ranking p {
+  color: var(--rank-intro-muted);
+  line-height: 1.75;
+}
+
+.descricao-ranking strong,
+.criticos-ranking strong {
+  color: var(--rank-intro-gold);
+}
+
+.top5-ranking h2,
+.criticos-ranking h2 {
+  color: var(--rank-intro-gold);
+  font-weight: 900;
+}
+
+.criticos-ranking a {
+  color: var(--rank-intro-gold);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+.menu-bloco a:focus-visible,
+.menu-lateral a:focus-visible,
+.ranking-item:focus-visible,
+.botao:focus-visible,
+.btn-link:focus-visible,
+.texto-ranking a:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - NOTEBOOK
+======================================== */
+
+@media (max-width: 1100px) {
+  .ranking-introducao-container,
+  .secao-ranking .container {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .ranking-item {
+    grid-template-columns: 54px minmax(0, 1fr) auto;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  .secao-ranking-introducao {
+    padding: 28px 14px 46px;
+  }
+
+  .ranking-introducao-container,
+  .secao-ranking .container {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-lateral,
+  .menu-ranking {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .hero-ranking,
+  .card-ranking-introducao,
+  .descricao-ranking,
+  .top5-ranking,
+  .criticos-ranking {
+    border-radius: 20px;
+  }
+
+  .hero-ranking {
+    padding: 28px;
+  }
+
+  .titulo-bloco-ranking {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .titulo-bloco-ranking h2 {
+    font-size: 1.22rem;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 620px) {
+  .secao-ranking-introducao {
+    padding: 24px 12px 40px;
+  }
+
+  .hero-ranking {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .hero-ranking h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-ranking p {
+    font-size: 0.96rem;
+  }
+
+  .ranking-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ranking-meta span {
+    white-space: normal;
+  }
+
+  .card-ranking-introducao,
+  .descricao-ranking,
+  .top5-ranking,
+  .criticos-ranking {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .texto-ranking {
+    font-size: 0.96rem;
+    line-height: 1.68;
+  }
+
+  .texto-ranking li {
+    padding: 13px 14px 13px 38px;
+  }
+
+  .texto-ranking li::before {
+    left: 14px;
+    top: 19px;
+  }
+
+  .ranking-item {
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .ranking-pontos {
+    grid-column: 2;
+    justify-self: start;
+    text-align: left;
+    min-width: 0;
+    font-size: 0.95rem;
+  }
+
+  .ranking-pos {
+    min-width: 40px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+
+  .ranking-nome img {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+
+  .ranking-nome span {
+    font-size: 0.94rem;
+  }
+
+  .acoes-ranking-introducao {
+    flex-direction: column;
+  }
+
+  .botao,
+  .btn-link {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  .hero-ranking h1 {
+    font-size: 1.62rem;
+  }
+
+  .eyebrow,
+  .hero-ranking .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .ranking-nome {
+    gap: 9px;
+  }
+
+  .ranking-nome img {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+}

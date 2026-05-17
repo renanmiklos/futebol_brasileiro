@@ -1,101 +1,1200 @@
-/* Seção História */
+/* ========================================
+   HISTORIA.CSS
+   Área História - Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS
+======================================== */
+
+:root {
+  --hist-bg: #0b0f14;
+  --hist-bg-2: #101720;
+  --hist-card: #151d27;
+  --hist-card-2: #1b2633;
+  --hist-card-3: #202d3c;
+
+  --hist-gold: #ffd700;
+  --hist-gold-2: #ffb700;
+  --hist-green: #0f8b4c;
+  --hist-green-2: #12a85c;
+
+  --hist-text: #f5f7fa;
+  --hist-muted: #b8c2cc;
+  --hist-muted-2: #8f9ba8;
+
+  --hist-border: rgba(255, 255, 255, 0.08);
+  --hist-border-gold: rgba(255, 215, 0, 0.26);
+
+  --hist-shadow: rgba(0, 0, 0, 0.46);
+  --hist-radius: 20px;
+  --hist-radius-sm: 14px;
+
+  --hist-container: 1220px;
+  --hist-transition: 0.25s ease;
+}
+
+/* ========================================
+   RESET E BASE
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.09), transparent 32%),
+    linear-gradient(180deg, #0b0f14 0%, #0d131a 55%, #0b0f14 100%);
+  color: var(--hist-text);
+  font-family: 'Roboto', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  overflow: visible;
+}
+
+/* ========================================
+   SEÇÃO HISTÓRIA
+======================================== */
+
 .secao-historia {
-    background-color: #121212;
-    color: #f0f0f0;
-    font-family: 'Roboto', sans-serif;
-    padding: 30px 20px;
+  min-height: 100vh;
+  padding: 38px 16px 54px;
 }
 
-.conteudo-historia h1 {
-    color: #FFD700;
-    font-size: 26px;
-    margin-bottom: 15px;
+.container {
+  width: min(var(--hist-container), 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
 }
 
+/* ========================================
+   MENU LATERAL
+======================================== */
+
+.menu-lateral,
+.menu-historia {
+  position: sticky;
+  top: 112px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: calc(100vh - 132px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.menu-lateral::-webkit-scrollbar,
+.menu-historia::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb,
+.menu-historia::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.35);
+  border-radius: 999px;
+}
+
+.menu-bloco,
+.menu-lateral {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--hist-border);
+  border-radius: var(--hist-radius);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.34);
+}
+
+.menu-bloco {
+  padding: 18px;
+}
+
+.menu-lateral:not(.menu-historia) {
+  padding: 18px;
+}
+
+.menu-bloco h2,
+.menu-lateral h2 {
+  margin: 0 0 14px;
+  color: var(--hist-gold);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.menu-bloco ul,
+.menu-lateral ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.menu-bloco li,
+.menu-lateral li {
+  margin: 0;
+}
+
+.menu-bloco a,
+.menu-lateral a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--hist-text);
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid transparent;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.25;
+  transition:
+    transform var(--hist-transition),
+    border-color var(--hist-transition),
+    background-color var(--hist-transition),
+    color var(--hist-transition);
+}
+
+.menu-bloco a:hover,
+.menu-bloco a.ativo,
+.menu-lateral a:hover,
+.menu-lateral a.ativo {
+  transform: translateX(4px);
+  color: var(--hist-gold);
+  background-color: rgba(255, 215, 0, 0.09);
+  border-color: rgba(255, 215, 0, 0.20);
+}
+
+/* ========================================
+   CONTEÚDO PRINCIPAL
+======================================== */
+
+.conteudo-historia {
+  min-width: 0;
+}
+
+.conteudo-historia h1,
+.conteudo-historia h2,
+.conteudo-historia h3,
 .conteudo-historia p {
-    font-size: 15px;
-    color: #ddd;
-    margin-bottom: 20px;
+  margin-top: 0;
 }
+
+.texto-historia {
+  position: relative;
+  z-index: 1;
+  color: var(--hist-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero-historia {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(26px, 4vw, 42px);
+  margin-bottom: 24px;
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--hist-card);
+  border: 1px solid var(--hist-border-gold);
+  box-shadow: 0 24px 58px var(--hist-shadow);
+}
+
+.hero-historia::before {
+  content: '';
+  position: absolute;
+  inset: -120px auto auto -120px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.hero-historia::after {
+  content: '';
+  position: absolute;
+  inset: auto -120px -170px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.eyebrow,
+.hero-historia .eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--hist-gold), var(--hist-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-historia h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--hist-text);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.hero-historia p {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 16px 0 0;
+  color: var(--hist-muted);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+}
+
+/* ========================================
+   CARDS
+======================================== */
+
+.card-historia {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--hist-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.card-historia::after {
+  content: '';
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.10), transparent 68%);
+  pointer-events: none;
+}
+
+.titulo-bloco-historia {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.titulo-bloco-historia h2 {
+  margin: 0;
+  color: var(--hist-gold);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.titulo-bloco-historia span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--hist-gold), var(--hist-gold-2));
+  font-size: 0.74rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* ========================================
+   TIMELINE HISTÓRICA
+======================================== */
+
+.timeline-container {
+  position: relative;
+  z-index: 1;
+  margin: 8px 0 0;
+  padding-left: 44px;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, var(--hist-gold), var(--hist-green-2), var(--hist-gold));
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.22);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-date {
+  position: absolute;
+  left: -44px;
+  top: 4px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  background: linear-gradient(135deg, var(--hist-gold), var(--hist-gold-2));
+  font-weight: 900;
+  font-size: 0.78rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.timeline-content {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.06), rgba(255, 255, 255, 0.025)),
+    rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  transition:
+    transform var(--hist-transition),
+    border-color var(--hist-transition),
+    background-color var(--hist-transition);
+}
+
+.timeline-content:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 215, 0, 0.24);
+  background-color: rgba(255, 255, 255, 0.045);
+}
+
+.timeline-content h3 {
+  color: var(--hist-gold);
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.timeline-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--hist-muted);
+  line-height: 1.6;
+}
+
+/* ========================================
+   CLUBES CAMPEÕES
+======================================== */
+
+.clubes-campeoes {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.clube-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 150px;
+  padding: 14px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--hist-text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: center;
+  transition:
+    transform var(--hist-transition),
+    border-color var(--hist-transition),
+    background-color var(--hist-transition),
+    box-shadow var(--hist-transition);
+}
+
+.clube-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--hist-gold), var(--hist-gold-2));
+  opacity: 0.82;
+}
+
+.clube-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 215, 0, 0.28);
+  background-color: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.36);
+}
+
+.clube-logo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--hist-gold);
+  font-size: 0.92rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.clube-logo img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  padding: 6px;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+.clube-info {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulos-num {
+  color: var(--hist-gold);
+  font-size: 1.85rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.titulos-label {
+  margin-top: 4px;
+  color: var(--hist-muted-2);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ========================================
+   GALERIAS
+======================================== */
 
 .galerias {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 8px;
+  position: relative;
+  z-index: 1;
 }
 
-.conteudo-historia h2 {
-    color: #FFD700;
-    font-size: 20px;
-    margin-top: 30px;
-}
-
-.galeria-miniaturas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: flex-start;
-}
-
-.miniatura-item {
-    min-width: 200px; /* Largura mínima */
-    max-width: 300px; /* Largura máxima */
-    flex: 1 1 calc(33% - 10px); /* Três por linha com espaçamento */
-    background-color: #2c2c2c;
-    padding: 10px;
-    border-radius: 6px;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-
-.miniatura-item img {
-    border-radius: 4px;
-    height: 150px;
-    width: 100%;
-    object-fit: contain;
-    margin-bottom: 8px;
-}
-
-.miniatura-item p {
-    font-size: 14px;
-    color: #FFD700; /* Dourado */
-    font-weight: bold;
-    margin: 0;
-    padding: 0 5px;
-    word-wrap: break-word; /* Garante quebra se palavra for muito longa */
-    overflow-wrap: break-word;
-    white-space: normal; /* Garante que o texto quebre linha */
-}
-
+.galeria-miniaturas,
 .galeria-miniaturas-videos {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
 }
 
+.miniatura-item,
 .miniatura-video {
-    flex: 1;
-    background-color: #2c2c2c;
-    padding: 10px;
-    border-radius: 6px;
-    text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  transition:
+    transform var(--hist-transition),
+    border-color var(--hist-transition),
+    background-color var(--hist-transition),
+    box-shadow var(--hist-transition);
+}
+
+.miniatura-item:hover,
+.miniatura-video:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 215, 0, 0.28);
+  background-color: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.36);
+}
+
+.miniatura-item a,
+.miniatura-video a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: var(--hist-text);
+}
+
+.miniatura-item img,
+.miniatura-video img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: rgba(0, 0, 0, 0.22);
+}
+
+.miniatura-item p,
+.miniatura-video p {
+  margin: 0;
+  padding: 13px 14px;
+  color: var(--hist-gold);
+  font-size: 0.92rem;
+  line-height: 1.35;
+  font-weight: 900;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .miniatura-video img {
-    border-radius: 4px;
-    height: 250px;
-    object-fit: cover;
-    margin-bottom: 8px;
+  height: 210px;
 }
 
-.miniatura-video p {
-    font-size: 14px;
-    color: #FFD700; /* Dourado */
-    font-weight: bold;
-    margin: 0;
-    padding: 0 5px;
-    word-wrap: break-word; /* Garante quebra se palavra for muito longa */
-    overflow-wrap: break-word;
-    white-space: normal; /* Garante que o texto quebre linha */
+/* ========================================
+   BOTÃO PADRÃO
+======================================== */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #111;
+  background: linear-gradient(135deg, var(--hist-gold), var(--hist-gold-2));
+  font-size: 0.95rem;
+  font-weight: 900;
+  box-shadow: 0 12px 26px rgba(255, 215, 0, 0.18);
+  transition:
+    transform var(--hist-transition),
+    filter var(--hist-transition),
+    box-shadow var(--hist-transition);
+}
+
+.botao:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.05);
+  box-shadow: 0 18px 34px rgba(255, 215, 0, 0.26);
+}
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.mensagem-vazia {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+  color: var(--hist-muted);
+  line-height: 1.6;
+}
+
+/* ========================================
+   MODAIS
+======================================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.82);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  overflow: auto;
+  width: min(1100px, 94vw);
+  max-height: 90vh;
+  padding: 22px;
+  border-radius: 22px;
+  color: var(--hist-text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    rgba(21, 29, 39, 0.96);
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.60);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #111;
+  background: linear-gradient(135deg, var(--hist-gold), var(--hist-gold-2));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    transform var(--hist-transition),
+    filter var(--hist-transition);
+}
+
+.modal-close:hover {
+  transform: scale(1.06);
+  filter: brightness(1.05);
+}
+
+/* ========================================
+   CARROSSEL NO MODAL
+======================================== */
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.carousel-slides {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 18px;
+  background-color: #000;
+  display: block;
+  margin: 0 auto;
+}
+
+.slide-titulo-overlay {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.62);
+  color: var(--hist-gold);
+  font-size: 0.95rem;
+  font-weight: 900;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  color: #111;
+  background: linear-gradient(135deg, var(--hist-gold), var(--hist-gold-2));
+  font-size: 1.45rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
+  transition:
+    transform var(--hist-transition),
+    filter var(--hist-transition);
+}
+
+.carousel-prev {
+  left: 12px;
+}
+
+.carousel-next {
+  right: 12px;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  transform: translateY(-50%) scale(1.06);
+  filter: brightness(1.06);
+}
+
+.carousel-indicators {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  transition:
+    background var(--hist-transition),
+    transform var(--hist-transition);
+}
+
+.indicator.active {
+  background: var(--hist-gold);
+  transform: scale(1.18);
+}
+
+/* ========================================
+   MODAL DE VÍDEO
+======================================== */
+
+#modal-video .modal-content {
+  width: min(920px, 95vw);
+  max-height: 90vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#modal-iframe {
+  width: 100%;
+  height: 560px;
+  max-height: 78vh;
+  border: none;
+  border-radius: 22px 22px 0 0;
+  background-color: #000;
+}
+
+#modal-video-titulo {
+  margin: 0;
+  padding: 16px 22px 20px;
+  font-size: 1rem;
+  color: var(--hist-gold);
+  text-align: center;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+/* ========================================
+   BOTÃO VOLTAR AO TOPO
+======================================== */
+
+#voltar-ao-topo {
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+  z-index: 1000;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--hist-gold), var(--hist-gold-2));
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.36);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--hist-transition),
+    visibility var(--hist-transition),
+    transform var(--hist-transition);
+  overflow: visible;
+}
+
+#voltar-ao-topo:hover {
+  transform: translateY(-3px);
+}
+
+#voltar-ao-topo .tooltip-text {
+  position: absolute;
+  bottom: 62px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  color: var(--hist-gold);
+  background-color: #111922;
+  border: 1px solid rgba(255, 215, 0, 0.20);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--hist-transition),
+    visibility var(--hist-transition);
+  pointer-events: none;
+}
+
+#voltar-ao-topo:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+}
+
+#voltar-ao-topo .tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #111922 transparent transparent transparent;
+}
+
+/* ========================================
+   ACESSIBILIDADE / FOCUS
+======================================== */
+
+.menu-bloco a:focus-visible,
+.menu-lateral a:focus-visible,
+.clube-card:focus-visible,
+.miniatura-item a:focus-visible,
+.miniatura-video a:focus-visible,
+.botao:focus-visible,
+.modal-close:focus-visible,
+.carousel-prev:focus-visible,
+.carousel-next:focus-visible,
+#voltar-ao-topo:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - NOTEBOOK
+======================================== */
+
+@media (max-width: 1100px) {
+  .container {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .clubes-campeoes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .galeria-miniaturas,
+  .galeria-miniaturas-videos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #modal-iframe {
+    height: 500px;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  .secao-historia {
+    padding: 28px 14px 46px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-lateral,
+  .menu-historia {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .menu-historia {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .menu-bloco,
+  .menu-lateral,
+  .hero-historia,
+  .card-historia {
+    border-radius: 20px;
+  }
+
+  .hero-historia h1 {
+    font-size: 2rem;
+  }
+
+  .clubes-campeoes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .miniatura-item img,
+  .miniatura-video img {
+    height: 170px;
+  }
+
+  #modal-iframe {
+    height: 440px;
+    max-height: 70vh;
+  }
+
+  .carousel-slide img {
+    max-height: 60vh;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 620px) {
+  .secao-historia {
+    padding: 24px 12px 40px;
+  }
+
+  .menu-historia {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-bloco,
+  .menu-lateral,
+  .hero-historia,
+  .card-historia {
+    border-radius: 18px;
+  }
+
+  .hero-historia {
+    padding: 24px 18px;
+  }
+
+  .hero-historia h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero-historia p,
+  .texto-historia {
+    font-size: 0.96rem;
+  }
+
+  .card-historia {
+    padding: 18px;
+  }
+
+  .titulo-bloco-historia {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .titulo-bloco-historia h2 {
+    font-size: 1.22rem;
+  }
+
+  .timeline-container {
+    padding-left: 38px;
+  }
+
+  .timeline-date {
+    left: -38px;
+    width: 34px;
+    height: 34px;
+    font-size: 0.72rem;
+  }
+
+  .timeline-content {
+    padding: 14px;
+  }
+
+  .clubes-campeoes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .clube-card {
+    min-height: 145px;
+    padding: 14px;
+  }
+
+  .clube-logo img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .titulos-num {
+    font-size: 1.55rem;
+  }
+
+  .galeria-miniaturas,
+  .galeria-miniaturas-videos {
+    grid-template-columns: 1fr;
+  }
+
+  .miniatura-item img,
+  .miniatura-video img {
+    height: 200px;
+  }
+
+  .botao {
+    width: 100%;
+  }
+
+  .modal {
+    padding: 12px;
+  }
+
+  .modal-content {
+    width: 96vw;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  #modal-video .modal-content {
+    border-radius: 18px;
+  }
+
+  #modal-iframe {
+    height: 310px;
+    max-height: 62vh;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .carousel-slide img {
+    max-height: 54vh;
+    border-radius: 14px;
+  }
+
+  .carousel-prev,
+  .carousel-next {
+    width: 38px;
+    height: 38px;
+    font-size: 1.15rem;
+  }
+
+  #voltar-ao-topo {
+    width: 48px;
+    height: 48px;
+    left: 18px;
+    bottom: 18px;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  .hero-historia h1 {
+    font-size: 1.55rem;
+  }
+
+  .eyebrow,
+  .hero-historia .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .clubes-campeoes {
+    grid-template-columns: 1fr;
+  }
+
+  .miniatura-item img,
+  .miniatura-video img {
+    height: 180px;
+  }
+
+  #modal-iframe {
+    height: 260px;
+  }
 }

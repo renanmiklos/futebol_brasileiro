@@ -1,0 +1,650 @@
+/* ========================================
+   BUSCA.CSS
+   Página de Busca - Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS
+======================================== */
+
+:root {
+  --busca-bg: #0b0f14;
+  --busca-card: #151d27;
+  --busca-card-2: #1b2633;
+
+  --busca-gold: #ffd700;
+  --busca-gold-2: #ffb700;
+  --busca-green: #0f8b4c;
+
+  --busca-text: #f5f7fa;
+  --busca-muted: #b8c2cc;
+  --busca-muted-2: #8f9ba8;
+
+  --busca-border: rgba(255, 255, 255, 0.08);
+  --busca-border-gold: rgba(255, 215, 0, 0.26);
+
+  --busca-shadow: rgba(0, 0, 0, 0.46);
+  --busca-radius: 20px;
+  --busca-container: 1120px;
+  --busca-transition: 0.25s ease;
+}
+
+/* ========================================
+   BASE
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.09), transparent 32%),
+    linear-gradient(180deg, #0b0f14 0%, #0d131a 55%, #0b0f14 100%);
+  color: var(--busca-text);
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  overflow: visible;
+}
+
+/* ========================================
+   SEÇÃO PRINCIPAL
+======================================== */
+
+.secao-busca {
+  min-height: 100vh;
+  padding: 38px 16px 54px;
+}
+
+.busca-container {
+  width: min(var(--busca-container), 100%);
+  margin: 0 auto;
+}
+
+/* ========================================
+   LINK VOLTAR
+======================================== */
+
+.voltar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: var(--busca-gold);
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 0.95rem;
+  transition:
+    color var(--busca-transition),
+    transform var(--busca-transition);
+}
+
+.voltar-link:hover {
+  color: #fff;
+  transform: translateX(-3px);
+}
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero-busca {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(26px, 4vw, 42px);
+  margin-bottom: 24px;
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--busca-card);
+  border: 1px solid var(--busca-border-gold);
+  box-shadow: 0 24px 58px var(--busca-shadow);
+}
+
+.hero-busca::before {
+  content: '';
+  position: absolute;
+  inset: -120px auto auto -120px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.hero-busca::after {
+  content: '';
+  position: absolute;
+  inset: auto -120px -170px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.eyebrow,
+.hero-busca .eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--busca-gold), var(--busca-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-busca h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--busca-text);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.hero-busca p {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 16px 0 0;
+  color: var(--busca-muted);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+}
+
+.hero-busca p strong {
+  color: var(--busca-gold);
+  font-weight: 900;
+}
+
+/* ========================================
+   META DA BUSCA
+======================================== */
+
+.busca-meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.busca-meta span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 30px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--busca-gold), var(--busca-gold-2));
+  font-size: 0.78rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* ========================================
+   FORMULÁRIO DE BUSCA
+======================================== */
+
+.card-busca-form,
+.card-resultados-busca,
+.card-mensagem-vazia {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--busca-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.card-busca-form {
+  margin-bottom: 24px;
+}
+
+.card-resultados-busca {
+  margin-top: 24px;
+}
+
+.card-busca-form::after,
+.card-resultados-busca::after,
+.card-mensagem-vazia::after {
+  content: '';
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.08), transparent 68%);
+  pointer-events: none;
+}
+
+.form-busca {
+  position: relative;
+  z-index: 1;
+}
+
+.form-busca label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--busca-gold);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+.campo-busca {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.campo-busca input[type="text"] {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(0, 0, 0, 0.22);
+  color: var(--busca-text);
+  font-size: 0.98rem;
+  font-family: inherit;
+  font-weight: 700;
+  transition:
+    border-color var(--busca-transition),
+    box-shadow var(--busca-transition),
+    background-color var(--busca-transition);
+}
+
+.campo-busca input[type="text"]::placeholder {
+  color: var(--busca-muted-2);
+}
+
+.campo-busca input[type="text"]:focus {
+  outline: none;
+  border-color: rgba(255, 215, 0, 0.38);
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.10);
+  background-color: rgba(0, 0, 0, 0.30);
+}
+
+.campo-busca button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--busca-gold), var(--busca-gold-2));
+  font-size: 0.96rem;
+  font-family: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 10px 22px rgba(255, 215, 0, 0.16);
+  transition:
+    transform var(--busca-transition),
+    filter var(--busca-transition),
+    box-shadow var(--busca-transition);
+}
+
+.campo-busca button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 14px 26px rgba(255, 215, 0, 0.22);
+}
+
+/* ========================================
+   TÍTULO DA LISTA
+======================================== */
+
+.titulo-bloco-busca {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.titulo-bloco-busca h2 {
+  margin: 0;
+  color: var(--busca-gold);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.titulo-bloco-busca span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--busca-gold), var(--busca-gold-2));
+  font-size: 0.74rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* ========================================
+   RESULTADOS
+======================================== */
+
+.resultados-lista {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 16px;
+}
+
+.resultado-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent),
+    rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  transition:
+    transform var(--busca-transition),
+    border-color var(--busca-transition),
+    background-color var(--busca-transition),
+    box-shadow var(--busca-transition);
+}
+
+.resultado-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 215, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.34);
+}
+
+.resultado-link {
+  display: block;
+  padding: 18px;
+  text-decoration: none;
+  color: var(--busca-text);
+}
+
+.resultado-topo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+
+.badge-tipo,
+.data-resultado {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 26px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--busca-gold), var(--busca-gold-2));
+  font-size: 0.7rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.data-resultado {
+  color: var(--busca-text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), transparent),
+    rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.resultado-item h3 {
+  margin: 0 0 9px;
+  color: var(--busca-text);
+  font-size: 1.18rem;
+  line-height: 1.3;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  transition: color var(--busca-transition);
+}
+
+.resultado-item:hover h3 {
+  color: var(--busca-gold);
+}
+
+.resultado-item p {
+  margin: 0;
+  color: var(--busca-muted);
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.card-mensagem-vazia {
+  margin-top: 24px;
+}
+
+.mensagem-vazia {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  color: var(--busca-muted);
+  line-height: 1.6;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+}
+
+.mensagem-vazia strong {
+  color: var(--busca-gold);
+}
+
+/* ========================================
+   COMPATIBILIDADE COM ESTRUTURA ANTIGA
+======================================== */
+
+.busca-main {
+  width: min(var(--busca-container), calc(100% - 32px));
+  margin: 0 auto;
+  padding: 38px 0 54px;
+}
+
+.busca-main > h1 {
+  color: var(--busca-gold);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.busca-main > p {
+  color: var(--busca-muted);
+  line-height: 1.7;
+}
+
+.busca-main .resultados-lista {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+
+.busca-main .resultado-item {
+  padding: 18px;
+}
+
+.busca-main .resultado-item h3 {
+  margin-top: 0;
+}
+
+.busca-main .resultado-item a {
+  color: var(--busca-gold);
+  text-decoration: none;
+}
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+.voltar-link:focus-visible,
+.campo-busca input:focus-visible,
+.campo-busca button:focus-visible,
+.resultado-link:focus-visible,
+.busca-main .resultado-item a:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  .secao-busca {
+    padding: 28px 14px 46px;
+  }
+
+  .hero-busca {
+    border-radius: 22px;
+    padding: 28px;
+  }
+
+  .card-busca-form,
+  .card-resultados-busca,
+  .card-mensagem-vazia {
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .titulo-bloco-busca {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .titulo-bloco-busca h2 {
+    font-size: 1.22rem;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 620px) {
+  .secao-busca {
+    padding: 24px 12px 40px;
+  }
+
+  .hero-busca {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .hero-busca h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-busca p {
+    font-size: 0.96rem;
+  }
+
+  .busca-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .busca-meta span {
+    white-space: normal;
+  }
+
+  .card-busca-form,
+  .card-resultados-busca,
+  .card-mensagem-vazia {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .campo-busca {
+    grid-template-columns: 1fr;
+  }
+
+  .campo-busca button {
+    width: 100%;
+  }
+
+  .resultado-link {
+    padding: 16px;
+  }
+
+  .resultado-item h3 {
+    font-size: 1.05rem;
+  }
+
+  .resultado-item p {
+    font-size: 0.92rem;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  .hero-busca h1,
+  .busca-main > h1 {
+    font-size: 1.62rem;
+  }
+
+  .eyebrow,
+  .hero-busca .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .resultado-topo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

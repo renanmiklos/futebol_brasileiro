@@ -1,74 +1,562 @@
+/* ========================================
+   DETALHES-GALERIA-FOTOS.CSS
+   Detalhes do Álbum de Fotos - Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS
+======================================== */
+
+:root {
+  --det-foto-bg: #0b0f14;
+  --det-foto-bg-2: #101720;
+  --det-foto-card: #151d27;
+  --det-foto-card-2: #1b2633;
+
+  --det-foto-gold: #ffd700;
+  --det-foto-gold-2: #ffb700;
+  --det-foto-green: #0f8b4c;
+
+  --det-foto-text: #f5f7fa;
+  --det-foto-muted: #b8c2cc;
+  --det-foto-muted-2: #8f9ba8;
+
+  --det-foto-border: rgba(255, 255, 255, 0.08);
+  --det-foto-border-gold: rgba(255, 215, 0, 0.26);
+
+  --det-foto-shadow: rgba(0, 0, 0, 0.46);
+  --det-foto-radius: 20px;
+  --det-foto-container: 1220px;
+  --det-foto-transition: 0.25s ease;
+}
+
+/* ========================================
+   BASE
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-    background-color: #121212;
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-/* Título */
-.titulo-galeria {
-    text-align: center;
-    color: #FFD700;
-    font-size: 28px;
-    margin-bottom: 30px;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.09), transparent 32%),
+    linear-gradient(180deg, #0b0f14 0%, #0d131a 55%, #0b0f14 100%);
+  color: var(--det-foto-text);
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
-/* Container principal */
-.container-fotos {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    text-align: center;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-/* Grid de 2 colunas */
+a {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  overflow: visible;
+}
+
+/* ========================================
+   SEÇÃO PRINCIPAL
+======================================== */
+
+.secao-detalhes-galeria-fotos {
+  min-height: 100vh;
+  padding: 38px 16px 54px;
+}
+
+.detalhes-galeria-container {
+  width: min(var(--det-foto-container), 100%);
+  margin: 0 auto;
+}
+
+/* ========================================
+   LINK VOLTAR
+======================================== */
+
+.voltar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: var(--det-foto-gold);
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 0.95rem;
+  transition:
+    color var(--det-foto-transition),
+    transform var(--det-foto-transition);
+}
+
+.voltar-link:hover {
+  color: #fff;
+  transform: translateX(-3px);
+}
+
+/* ========================================
+   HERO DO ÁLBUM
+======================================== */
+
+.hero-detalhes-galeria {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(26px, 4vw, 42px);
+  margin-bottom: 24px;
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--det-foto-card);
+  border: 1px solid var(--det-foto-border-gold);
+  box-shadow: 0 24px 58px var(--det-foto-shadow);
+}
+
+.hero-detalhes-galeria::before {
+  content: '';
+  position: absolute;
+  inset: -120px auto auto -120px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.hero-detalhes-galeria::after {
+  content: '';
+  position: absolute;
+  inset: auto -120px -170px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.eyebrow,
+.hero-detalhes-galeria .eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--det-foto-gold), var(--det-foto-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-detalhes-galeria h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--det-foto-text);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.hero-detalhes-galeria p {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 16px 0 0;
+  color: var(--det-foto-muted);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+}
+
+/* ========================================
+   METADADOS DO ÁLBUM
+======================================== */
+
+.album-meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.album-meta span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 30px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--det-foto-gold), var(--det-foto-gold-2));
+  font-size: 0.78rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* ========================================
+   GRID DE FOTOS
+======================================== */
+
 .grid-fotos {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    justify-items: center;
-    margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-bottom: 28px;
 }
 
-/* Slot da imagem */
-.foto-slot {
-    background-color: #1e1e1e;
-    padding: 10px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    width: 100%;
-    max-width: 400px;
+.foto-card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--det-foto-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+  transition:
+    transform var(--det-foto-transition),
+    border-color var(--det-foto-transition),
+    background-color var(--det-foto-transition),
+    box-shadow var(--det-foto-transition);
 }
 
-/* Imagens com mesmo tamanho e sem distorção */
-.foto-slot img {
-    width: 100%;
-    height: 300px;
-    object-fit: contain;
-    border-radius: 4px;
+.foto-card::after {
+  content: '';
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.10), transparent 68%);
+  pointer-events: none;
 }
 
-/* Legenda */
-.foto-slot p {
-    margin-top: 10px;
-    color: #ccc;
-    font-size: 14px;
+.foto-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 215, 0, 0.28);
+  background-color: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.44);
 }
 
-/* Botão com margem de 20px do rodapé */
+.foto-link {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--det-foto-text);
+  text-decoration: none;
+}
+
+.foto-imagem-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 260px;
+  background-color: rgba(0, 0, 0, 0.28);
+}
+
+.foto-imagem-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.42)),
+    radial-gradient(circle at top right, rgba(255, 215, 0, 0.10), transparent 40%);
+  pointer-events: none;
+}
+
+.foto-imagem-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 0.45s ease,
+    filter var(--det-foto-transition);
+}
+
+.foto-card:hover .foto-imagem-wrapper img {
+  transform: scale(1.05);
+  filter: saturate(1.05) contrast(1.03);
+}
+
+.foto-info {
+  position: relative;
+  z-index: 1;
+  padding: 18px;
+}
+
+.foto-info h2 {
+  margin: 0;
+  color: var(--det-foto-gold);
+  font-size: 1.05rem;
+  line-height: 1.35;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.foto-info span {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 10px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--det-foto-gold), var(--det-foto-gold-2));
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.card-mensagem-vazia {
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--det-foto-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.mensagem-vazia {
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  color: var(--det-foto-muted);
+  line-height: 1.6;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+}
+
+/* ========================================
+   AÇÕES
+======================================== */
+
+.acoes-galeria {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.botao,
 .voltar-galeria {
-    display: inline-block;
-    background-color: #FFD700;
-    color: #121212;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: background-color 0.2s;
-    margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 44px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  color: #111 !important;
+  background: linear-gradient(135deg, var(--det-foto-gold), var(--det-foto-gold-2));
+  font-size: 0.95rem;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(255, 215, 0, 0.18);
+  transition:
+    transform var(--det-foto-transition),
+    box-shadow var(--det-foto-transition),
+    filter var(--det-foto-transition);
 }
 
-.voltar.galeria:hover {
-    background-color: #FFC107;
+.botao:hover,
+.voltar-galeria:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 16px 30px rgba(255, 215, 0, 0.26);
+}
+
+/* ========================================
+   COMPATIBILIDADE COM CLASSES ANTIGAS
+======================================== */
+
+.container-fotos {
+  width: min(var(--det-foto-container), 100%);
+  margin: 0 auto;
+  padding: 38px 16px 54px;
+}
+
+.titulo-galeria {
+  color: var(--det-foto-gold);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  text-align: center;
+}
+
+.foto-slot {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--det-foto-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.foto-slot img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.foto-slot p {
+  margin: 0;
+  padding: 14px;
+  color: var(--det-foto-muted);
+  line-height: 1.5;
+}
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+.voltar-link:focus-visible,
+.foto-link:focus-visible,
+.botao:focus-visible,
+.voltar-galeria:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - NOTEBOOK
+======================================== */
+
+@media (max-width: 1100px) {
+  .grid-fotos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .foto-imagem-wrapper {
+    height: 250px;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  .secao-detalhes-galeria-fotos {
+    padding: 28px 14px 46px;
+  }
+
+  .hero-detalhes-galeria {
+    border-radius: 22px;
+    padding: 28px;
+  }
+
+  .foto-card,
+  .card-mensagem-vazia {
+    border-radius: 20px;
+  }
+
+  .foto-imagem-wrapper {
+    height: 240px;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 620px) {
+  .secao-detalhes-galeria-fotos {
+    padding: 24px 12px 40px;
+  }
+
+  .hero-detalhes-galeria {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .hero-detalhes-galeria h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-detalhes-galeria p {
+    font-size: 0.96rem;
+  }
+
+  .album-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .grid-fotos {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .foto-card,
+  .card-mensagem-vazia {
+    border-radius: 18px;
+  }
+
+  .foto-imagem-wrapper {
+    height: 230px;
+  }
+
+  .foto-info {
+    padding: 16px;
+  }
+
+  .botao,
+  .voltar-galeria {
+    width: 100%;
+  }
+
+  .acoes-galeria {
+    margin-top: 22px;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  .hero-detalhes-galeria h1,
+  .titulo-galeria {
+    font-size: 1.62rem;
+  }
+
+  .eyebrow,
+  .hero-detalhes-galeria .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .foto-imagem-wrapper,
+  .foto-slot img {
+    height: 200px;
+  }
 }

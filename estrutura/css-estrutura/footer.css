@@ -1,42 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+/* ========================================
+   FOOTER - FUTEBOL BRASILEIRO
+======================================== */
+
+:root {
+  --footer-bg: #080c11;
+  --footer-card: #111820;
+  --footer-gold: #FFD700;
+  --footer-text: #f4f6f8;
+  --footer-muted: #aeb8c2;
+  --footer-border: rgba(255, 215, 0, 0.22);
+}
+
 .rodape {
-    background-color: #1e1e1e;
-    padding: 20px 10px;
-    border-top: 2px solid #FFD700;
-    color: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.10), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(15, 139, 76, 0.08), transparent 34%),
+    linear-gradient(180deg, #101722, var(--footer-bg));
+  border-top: 1px solid var(--footer-border);
+  color: var(--footer-text);
+  font-family: 'Roboto', Arial, sans-serif;
+  text-align: center;
+  padding: 34px 16px 26px;
+  margin-top: 34px;
+}
+
+.rodape::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(900px, 80%);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--footer-gold), transparent);
+}
+
+.rodape-container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+/* ========================================
+   BRAND
+======================================== */
+
+.rodape-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.rodape-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
+}
+
+.rodape-brand div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.rodape-brand strong {
+  color: var(--footer-gold);
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.rodape-brand span {
+  color: var(--footer-muted);
+  font-size: 0.92rem;
+  margin-top: 4px;
+}
+
+/* ========================================
+   LINKS
+======================================== */
+
+.rodape-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rodape-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  color: var(--footer-text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+  background-color: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.rodape-links a:hover {
+  color: var(--footer-gold);
+  background-color: rgba(255, 215, 0, 0.09);
+  border-color: rgba(255, 215, 0, 0.28);
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   ADMIN
+======================================== */
+
+.rodape-admin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 215, 0, 0.14);
+}
+
+.btn-link-admin {
+  background: transparent;
+  border: none;
+  color: var(--footer-gold);
+  cursor: pointer;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-family: 'Roboto', Arial, sans-serif;
+  padding: 0;
+  transition: color 0.25s ease;
+}
+
+.btn-link-admin:hover {
+  color: #fff;
+}
+
+.link-admin-revelado {
+  display: none;
+}
+
+.link-admin-revelado.visivel {
+  display: inline-flex;
+}
+
+.admin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  background: linear-gradient(135deg, var(--footer-gold), #ffb300);
+  padding: 8px 13px;
+  border-radius: 999px;
+  font-weight: 900;
+  text-decoration: none;
+  font-size: 0.88rem;
+  box-shadow: 0 10px 22px rgba(255, 215, 0, 0.18);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.admin-link:hover {
+  color: #111;
+  filter: brightness(1.04);
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   COPYRIGHT
+======================================== */
+
+.rodape-copy {
+  margin: 0;
+  color: var(--footer-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* ========================================
+   RESPONSIVO
+======================================== */
+
+@media (max-width: 640px) {
+  .rodape {
+    padding: 30px 14px 24px;
+  }
+
+  .rodape-brand {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rodape-brand div {
+    align-items: center;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
   }
-  
-  .rodape-container {
-    max-width: 1200px;
-    margin: 0 auto;
+
+  .rodape-brand strong {
+    font-size: 1.2rem;
   }
-  
-  .rodape-container p {
-    margin: 8px 0;
+
+  .rodape-brand span {
+    font-size: 0.86rem;
   }
-  
+
+  .rodape-links {
+    gap: 8px;
+  }
+
+  .rodape-links a {
+    font-size: 0.86rem;
+    padding: 8px 11px;
+  }
+
+  .rodape-admin {
+    width: 100%;
+    border-radius: 16px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .admin-link {
-    color: #FFD700;
-    text-decoration: none;
-    transition: color 0.3s;
+    width: 100%;
   }
-  
-  .admin-link:hover {
-    color: #fff;
-  }
-  
-  .btn-link-admin {
-    background-color: transparent;
-    border: none;
-    color: #FFD700;
-    cursor: pointer;
-    font-weight: bold;
-    text-decoration: underline;
-    font-size: 0.95em;
-  }
-  
-  .btn-link-admin:hover {
-    color: #fff;
-  }
-  
+}

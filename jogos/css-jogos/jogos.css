@@ -1,0 +1,280 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.secao-jogos {
+  background-color: #121212;
+  color: #f0f0f0;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  padding: 30px 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* MENU LATERAL */
+.menu-lateral {
+  width: 220px;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.menu-lateral h2 {
+  color: #FFD700;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.menu-lateral ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-lateral li {
+  margin-bottom: 10px;
+}
+
+.menu-lateral a {
+  color: #ccc;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  display: block;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.menu-lateral a:hover,
+.menu-lateral a.ativo {
+  background-color: #FFD700;
+  color: #121212;
+}
+
+/* CONTEÚDO PRINCIPAL */
+.conteudo-jogos {
+  flex: 1;
+  padding: 10px 0;
+  min-width: 0; /* previne overflow em flex */
+}
+
+.conteudo-jogos h1 {
+  color: #FFD700;
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.conteudo-jogos p {
+  font-size: 15px;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.conteudo-jogos h2 {
+  color: #fff;
+  font-size: 22px;
+  margin: 0 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;
+}
+
+/* === LISTA DE COMPETIÇÕES === */
+.lista {
+  display: flex;
+}
+
+.lista-competicoes {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.lista-competicoes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 40px;
+}
+
+.lista-competicoes li {
+  margin-bottom: 4px;
+  break-inside: avoid;
+}
+
+.lista-competicoes a {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%;
+}
+
+.lista-competicoes a:hover {
+  background-color: #FFD700;
+  color: #121212;
+}
+
+/* === ESTATÍSTICAS === */
+.card-estatisticas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: #1e1e1e;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.stat-item {
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFD700;
+}
+
+.stat-label {
+  display: block;
+  font-size: 13px;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* === RESPONSIVIDADE === */
+
+/* Tablets grandes e desktops pequenos */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 15px;
+    gap: 24px;
+  }
+  .menu-lateral {
+    width: 200px;
+    padding: 18px;
+  }
+  .menu-lateral a {
+    font-size: 14px;
+    padding: 5px 8px;
+  }
+  .lista-competicoes ul {
+    column-gap: 30px;
+  }
+  .lista-competicoes a {
+    font-size: 15px;
+  }
+}
+
+/* Tablets (modo retrato) */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .menu-lateral {
+    width: 100%;
+    max-width: 320px;
+    order: 2;
+  }
+
+  .conteudo-jogos {
+    width: 100%;
+    max-width: 800px;
+    order: 1;
+  }
+
+  .card-estatisticas {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .lista-competicoes ul {
+    columns: 1;
+    column-gap: 0;
+  }
+
+  .lista-competicoes {
+    width: 100%;
+  }
+}
+
+/* Smartphones (600px ou menos) */
+@media (max-width: 600px) {
+  .secao-jogos {
+    padding: 20px 15px;
+  }
+
+  .menu-lateral {
+    padding: 16px;
+    max-width: 100%;
+  }
+
+  .menu-lateral h2 {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  .menu-lateral a {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .conteudo-jogos h1 {
+    font-size: 22px;
+  }
+
+  .conteudo-jogos h2 {
+    font-size: 20px;
+  }
+
+  .lista-competicoes {
+    padding: 16px;
+  }
+
+  .lista-competicoes a {
+    font-size: 15px;
+    padding: 7px 10px;
+  }
+
+  .card-estatisticas {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .stat-item {
+    width: 100%;
+    margin-bottom: 12px;
+    min-width: auto;
+  }
+
+  .stat-num {
+    font-size: 22px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+}

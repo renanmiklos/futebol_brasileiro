@@ -1,55 +1,60 @@
-
 document.addEventListener("DOMContentLoaded", function () {
-            const carrosselItems = document.querySelectorAll(".carrossel-item");
-            let currentIndex = 0;
+  // ===============
+  // CARROSSEL PRINCIPAL (notícias/fotos)
+  // ===============
+  const carrosselItems = document.querySelectorAll(".carrossel-item");
+  if (carrosselItems.length > 0) {
+    let currentIndex = 0;
 
-            function showNextSlide() {
-                // Remove a classe 'active' do slide atual
-                carrosselItems[currentIndex].classList.remove("active");
+    function showNextSlideMain() {
+      carrosselItems[currentIndex].classList.remove("active");
+      currentIndex = (currentIndex + 1) % carrosselItems.length;
+      carrosselItems[currentIndex].classList.add("active");
+    }
 
-                // Calcula o próximo índice
-                currentIndex = (currentIndex + 1) % carrosselItems.length;
+    carrosselItems[0].classList.add("active");
+    setInterval(showNextSlideMain, 5000);
+  }
 
-                // Adiciona a classe 'active' ao próximo slide
-                carrosselItems[currentIndex].classList.add("active");
-            }
+  // ===============
+  // CARROSSEL SECUNDÁRIO (galeria de fotos)
+  // ===============
+  const carrossel2Items = document.querySelectorAll(".carrossel2-item");
+  if (carrossel2Items.length > 0) {
+    let currentIndex2 = 0;
 
-            // Define o intervalo para trocar os slides automaticamente (ex.: a cada 5 segundos)
-            setInterval(showNextSlide, 5000);
+    function showNextSlideGallery() {
+      carrossel2Items[currentIndex2].classList.remove("active");
+      currentIndex2 = (currentIndex2 + 1) % carrossel2Items.length;
+      carrossel2Items[currentIndex2].classList.add("active");
+    }
 
-            // Inicializa o primeiro slide como ativo
-            if (carrosselItems.length > 0) {
-                carrosselItems[0].classList.add("active");
-            }
-        });
+    carrossel2Items[0].classList.add("active");
+    setInterval(showNextSlideGallery, 5000);
+  } else {
+    console.warn("Nenhum item encontrado para o carrossel de galeria de fotos.");
+  }
 
+  // ===============
+  // BOTÃO "VOLTAR AO TOPO"
+  // ===============
+  const btn = document.getElementById("voltar-ao-topo");
+  if (btn) {
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 300) {
+        btn.style.opacity = "1";
+        btn.style.visibility = "visible";
+      } else {
+        btn.style.opacity = "0";
+        btn.style.visibility = "hidden";
+      }
+    });
 
-// Carrossel da galeria de fotos
-
-document.addEventListener("DOMContentLoaded", function () {
-            const carrosselItems = document.querySelectorAll(".carrossel2-item");
-            
-            if (carrosselItems.length === 0) {
-                console.warn("Nenhum item encontrado para o carrossel.");
-                return;
-            }
-
-            let currentIndex = 0;
-
-            function showNextSlide() {
-                // Remove a classe 'active' do slide atual
-                carrosselItems[currentIndex].classList.remove("active");
-
-                // Calcula o próximo índice
-                currentIndex = (currentIndex + 1) % carrosselItems.length;
-
-                // Adiciona a classe 'active' ao próximo slide
-                carrosselItems[currentIndex].classList.add("active");
-            }
-
-            // Troca de slide a cada 5 segundos
-            setInterval(showNextSlide, 5000);
-
-            // Garante que o primeiro slide esteja ativo
-            carrosselItems[0].classList.add("active");
-        });
+    btn.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+});

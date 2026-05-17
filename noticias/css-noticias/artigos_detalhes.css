@@ -1,63 +1,551 @@
-/* CSS exclusivo da página artigos_detalhes.php */
+/* ========================================
+   ARTIGOS_DETALHES.CSS
+   Página de Detalhe do Artigo - Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS
+======================================== */
+
+:root {
+  --det-art-bg: #0b0f14;
+  --det-art-bg-2: #101720;
+  --det-art-card: #151d27;
+  --det-art-card-2: #1b2633;
+
+  --det-art-gold: #ffd700;
+  --det-art-gold-2: #ffb700;
+  --det-art-green: #0f8b4c;
+
+  --det-art-text: #f5f7fa;
+  --det-art-muted: #b8c2cc;
+  --det-art-muted-2: #8f9ba8;
+
+  --det-art-border: rgba(255, 255, 255, 0.08);
+  --det-art-border-gold: rgba(255, 215, 0, 0.26);
+
+  --det-art-shadow: rgba(0, 0, 0, 0.46);
+  --det-art-radius: 20px;
+  --det-art-container: 980px;
+  --det-art-transition: 0.25s ease;
+}
+
+/* ========================================
+   BASE
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #121212;
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.09), transparent 32%),
+    linear-gradient(180deg, #0b0f14 0%, #0d131a 55%, #0b0f14 100%);
+  color: var(--det-art-text);
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
-.artigo-detalhe {
-  padding: 40px 20px;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-.artigo-detalhe .container {
-  max-width: 800px;
+a {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  overflow: visible;
+}
+
+/* ========================================
+   SEÇÃO PRINCIPAL
+======================================== */
+
+.secao-artigo-detalhe {
+  min-height: 100vh;
+  padding: 38px 16px 54px;
+}
+
+.secao-artigo-detalhe .container {
+  width: min(var(--det-art-container), 100%);
   margin: 0 auto;
 }
 
-h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  color: #FFD700;
-}
-
-h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #ccc;
-}
-
-.data {
-  font-size: 14px;
-  color: #999;
-  margin-bottom: 20px;
-}
-
-.artigo-detalhe img {
-  width: auto; 
-  height: 500px; 
-  object-fit: contain;
-  border-radius: 6px;
-  margin-bottom: 20px;
-}
-
-.conteudo {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #eaeaea;
-  white-space: pre-wrap;
-}
+/* ========================================
+   LINK VOLTAR
+======================================== */
 
 .voltar-link {
-  display: inline-block;
-  margin-top: 30px;
-  color: #FFD700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: var(--det-art-gold);
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
+  font-weight: 900;
+  font-size: 0.95rem;
+  transition:
+    color var(--det-art-transition),
+    transform var(--det-art-transition);
 }
 
 .voltar-link:hover {
   color: #fff;
+  transform: translateX(-3px);
+}
+
+/* ========================================
+   ARTIGO
+======================================== */
+
+.artigo-detalhe {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ========================================
+   HERO DO ARTIGO
+======================================== */
+
+.hero-artigo-detalhe {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(26px, 4vw, 42px);
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--det-art-card);
+  border: 1px solid var(--det-art-border-gold);
+  box-shadow: 0 24px 58px var(--det-art-shadow);
+}
+
+.hero-artigo-detalhe::before {
+  content: '';
+  position: absolute;
+  inset: -120px auto auto -120px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.hero-artigo-detalhe::after {
+  content: '';
+  position: absolute;
+  inset: auto -120px -170px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.eyebrow,
+.hero-artigo-detalhe .eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--det-art-gold), var(--det-art-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-artigo-detalhe h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--det-art-text);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.subtitulo-artigo,
+.hero-artigo-detalhe p {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 16px 0 0;
+  color: var(--det-art-muted);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.7;
+}
+
+/* ========================================
+   META DO ARTIGO
+======================================== */
+
+.meta-artigo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.meta-artigo span,
+.data-publicacao {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 30px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--det-art-gold), var(--det-art-gold-2));
+  font-size: 0.78rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* ========================================
+   IMAGEM PRINCIPAL
+======================================== */
+
+.imagem-artigo-detalhe-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--det-art-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.imagem-artigo-detalhe-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.38)),
+    radial-gradient(circle at top right, rgba(255, 215, 0, 0.10), transparent 42%);
+  pointer-events: none;
+}
+
+.imagem-artigo-detalhe,
+.artigo-detalhe img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+}
+
+.imagem-artigo-detalhe {
+  min-height: 320px;
+}
+
+/* ========================================
+   CONTEÚDO DO ARTIGO
+======================================== */
+
+.conteudo-artigo {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(22px, 3vw, 34px);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--det-art-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.conteudo-artigo::after {
+  content: '';
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.08), transparent 68%);
+  pointer-events: none;
+}
+
+.conteudo-artigo p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--det-art-text);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  white-space: normal;
+}
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.card-mensagem-vazia {
+  padding: 24px;
+  margin-top: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--det-art-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.mensagem-vazia {
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  color: var(--det-art-muted);
+  line-height: 1.6;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+}
+
+/* ========================================
+   COMPATIBILIDADE COM ESTRUTURA ANTIGA
+======================================== */
+
+.artigo-detalhe .container {
+  width: min(var(--det-art-container), 100%);
+  margin: 0 auto;
+}
+
+.artigo-detalhe h1 {
+  color: var(--det-art-gold);
+  font-weight: 900;
+}
+
+.artigo-detalhe h2,
+.artigo-detalhe h4 {
+  color: var(--det-art-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.artigo-detalhe .conteudo {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(22px, 3vw, 34px);
+  border-radius: 24px;
+  color: var(--det-art-text);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  white-space: pre-wrap;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--det-art-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+/* ========================================
+   BOTÃO VOLTAR AO TOPO
+======================================== */
+
+#voltar-ao-topo {
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+  z-index: 1000;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--det-art-gold), var(--det-art-gold-2));
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.36);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--det-art-transition),
+    visibility var(--det-art-transition),
+    transform var(--det-art-transition);
+  overflow: visible;
+}
+
+#voltar-ao-topo:hover {
+  transform: translateY(-3px);
+}
+
+#voltar-ao-topo .tooltip-text {
+  position: absolute;
+  bottom: 62px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  color: var(--det-art-gold);
+  background-color: #111922;
+  border: 1px solid rgba(255, 215, 0, 0.20);
+  font-size: 0.82rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--det-art-transition),
+    visibility var(--det-art-transition);
+  pointer-events: none;
+}
+
+#voltar-ao-topo:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+}
+
+#voltar-ao-topo .tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #111922 transparent transparent transparent;
+}
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+.voltar-link:focus-visible,
+#voltar-ao-topo:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  .secao-artigo-detalhe {
+    padding: 28px 14px 46px;
+  }
+
+  .hero-artigo-detalhe {
+    border-radius: 22px;
+    padding: 28px;
+  }
+
+  .imagem-artigo-detalhe-wrapper,
+  .conteudo-artigo,
+  .artigo-detalhe .conteudo,
+  .card-mensagem-vazia {
+    border-radius: 20px;
+  }
+
+  .imagem-artigo-detalhe {
+    min-height: 280px;
+  }
+
+  .conteudo-artigo p,
+  .artigo-detalhe .conteudo {
+    font-size: 1rem;
+    line-height: 1.78;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 620px) {
+  .secao-artigo-detalhe {
+    padding: 24px 12px 40px;
+  }
+
+  .hero-artigo-detalhe {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .hero-artigo-detalhe h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-artigo-detalhe p,
+  .subtitulo-artigo {
+    font-size: 0.96rem;
+  }
+
+  .meta-artigo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .imagem-artigo-detalhe-wrapper,
+  .conteudo-artigo,
+  .artigo-detalhe .conteudo,
+  .card-mensagem-vazia {
+    border-radius: 18px;
+  }
+
+  .imagem-artigo-detalhe {
+    min-height: 220px;
+    max-height: 330px;
+  }
+
+  .conteudo-artigo,
+  .artigo-detalhe .conteudo {
+    padding: 20px 18px;
+  }
+
+  .conteudo-artigo p,
+  .artigo-detalhe .conteudo {
+    font-size: 0.97rem;
+    line-height: 1.72;
+  }
+
+  #voltar-ao-topo {
+    width: 48px;
+    height: 48px;
+    left: 18px;
+    bottom: 18px;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  .hero-artigo-detalhe h1 {
+    font-size: 1.62rem;
+  }
+
+  .eyebrow,
+  .hero-artigo-detalhe .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .imagem-artigo-detalhe {
+    min-height: 190px;
+  }
 }

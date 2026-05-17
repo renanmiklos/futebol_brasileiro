@@ -1,312 +1,221 @@
+/* ========================================
+   INDEX.CSS
+   Página inicial - Portal Futebol Brasileiro
+   Base global + Botões gerais + Voltar ao topo
+======================================== */
+
+/* ========================================
+   VARIÁVEIS DA PÁGINA INICIAL
+======================================== */
+
+:root {
+  --cor-fundo: #0b0f14;
+  --cor-fundo-secundario: #111820;
+  --cor-card: #151d27;
+  --cor-card-claro: #1b2633;
+
+  --cor-dourado: #ffd700;
+  --cor-dourado-2: #ffb300;
+  --cor-dourado-escuro: #d6ad00;
+
+  --cor-texto: #f4f6f8;
+  --cor-texto-suave: #b8c2cc;
+  --cor-texto-muted: #8f9ba8;
+
+  --cor-borda: rgba(255, 215, 0, 0.22);
+  --cor-borda-suave: rgba(255, 255, 255, 0.075);
+  --cor-sombra: rgba(0, 0, 0, 0.45);
+  --cor-verde: #0f8b4c;
+
+  --largura-container: 1200px;
+  --raio-card: 18px;
+  --transicao: 0.25s ease;
+}
+
+/* ========================================
+   BASE DA PÁGINA
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    background-color: #121212;
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 32%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.08), transparent 30%),
+    var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
-h1 {
-    font-family: 'Roboto', sans-serif;
-    margin-left: 10%;
-    position: relative; /* necessário para posicionar o pseudo-elemento */
-    padding-bottom: 8px; /* espaço entre o texto e a linha */
+main {
+  width: 100%;
+  overflow: hidden;
 }
 
-h1::after {
-    content: '';
-    display: block;
-    width: 5%; /* ajuste conforme o tamanho desejado */
-    height: 2px;
-    background-color: #FFD700;
-    position: absolute;
-    bottom: 0;
-    left: 0;
+main img {
+  max-width: 100%;
+  display: block;
 }
 
-.principal {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
+main a {
+  color: inherit;
 }
 
-.conteudo {
-    display: flex;
-    max-width: 1200px;
+/* ========================================
+   BOTÕES GERAIS
+======================================== */
+
+.botao,
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--cor-dourado), var(--cor-dourado-2));
+  color: #111 !important;
+  text-decoration: none;
+  font-size: 0.98rem;
+  font-weight: 900;
+  box-shadow: 0 10px 22px rgba(255, 215, 0, 0.18);
+  transition:
+    transform var(--transicao),
+    box-shadow var(--transicao),
+    filter var(--transicao);
+}
+
+.botao:hover,
+.btn-link:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 16px 30px rgba(255, 215, 0, 0.26);
+}
+
+/* ========================================
+   BOTÕES FINAIS DO INDEX
+   Compatibilidade temporária com div inline atual
+======================================== */
+
+main > div[style*="justify-content: center"] {
+  flex-wrap: wrap;
+  padding: 0 16px;
+}
+
+/* ========================================
+   VOLTAR AO TOPO
+======================================== */
+
+#voltar-ao-topo {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1000;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cor-dourado), var(--cor-dourado-2));
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.42);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    transform var(--transicao);
+}
+
+#voltar-ao-topo:hover {
+  transform: translateY(-3px);
+}
+
+#voltar-ao-topo .tooltip-text {
+  position: absolute;
+  bottom: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 11px;
+  border-radius: 8px;
+  white-space: nowrap;
+  background-color: #10161d;
+  color: var(--cor-dourado);
+  font-size: 0.85rem;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+}
+
+#voltar-ao-topo:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+}
+
+#voltar-ao-topo .tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #10161d transparent transparent transparent;
+}
+
+/* ========================================
+   ACESSIBILIDADE / FOCUS
+======================================== */
+
+.botao:focus-visible,
+.btn-link:focus-visible,
+#voltar-ao-topo:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 520px) {
+  .botao,
+  .btn-link {
     width: 100%;
-    gap: 20px;
-}
+    padding: 11px 16px;
+    font-size: 0.94rem;
+  }
 
-/* Área de notícias */
-.noticias-container {
-    flex: 70%;
-    display: flex;
+  main > div[style*="justify-content: center"] {
     flex-direction: column;
-    gap: 20px;
-}
+    gap: 12px !important;
+    margin: 24px 0 !important;
+  }
 
-.noticia-principal {
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.noticia-principal img {
-    height: 350px;
-    width: 80%;
-    object-fit: cover;
-    margin: 0 auto;
-    display: block;
-}
-
-.noticia-principal h2 {
-    font-size: 24px;
-    margin: 15px 0 5px;
-}
-
-.noticia-principal h4 {
-    font-size: 18px;
-    color: #FFD700;
-    margin: 5px 0 0;
-    letter-spacing: 1.3px;
-}
-
-.cards-noticias {
-    display: flex;
-    gap: 15px;
-}
-
-.card {
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    padding: 10px;
-    flex: 1;
-    text-align: center;
-}
-
-.card img {
-    height: 150px;
-    object-fit: cover;
-    width: 100%;
-    border-radius: 4px;
-}
-
-.card h4 {
-    font-size: 16px;
-    color: #fff;
-    margin: 10px 0 5px;
-}
-
-.card h5 {
-    font-size: 14px;
-    color: #FFD700;
-    margin: 0;
-    letter-spacing: 1.3px;
-}
-
-/* Barra lateral */
-.barra-lateral {
-    flex: 30%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-h3 {
-    margin-top: 0;
-}
-
-.links-importantes {
-    background-color: #1e1e1e;
-    padding: 15px;
-    border-radius: 8px;
-}
-
-.links-importantes h3 {
-    color: #FFD700;
-}
-
-.links-importantes ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.links-importantes li {
-    margin-bottom: 6px;
-}
-
-.links-importantes a {
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.2s;
-}
-
-.links-importantes a:hover {
-    color: #FFD700;
-}
-
-/* Carrossel */
-.carrossel {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.carrossel-item {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 100%;
-    height: 100%;
-    transition: left 0.5s ease-in-out;
-}
-
-.carrossel-item.active {
-    left: 0;
-}
-
-.carrossel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
-.carrossel-caption {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 5px;
-    border-radius: 4px;
-}
-
-.carrossel-caption h5 {
-    font-size: 14px;
-    color: #fff;
-    margin: 0;
-}
-
-/* Seção História */
-
-.historia {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.galerias {
-    display: flex;
-    max-width: 1200px;
-    width: 100%;
-    gap: 20px;
-}
-
-.video-principal {
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.video-principal img {
-    height: 350px;
-    width: 80%;
-    object-fit: cover;
-    margin: 0 auto;
-    display: block;
-}
-
-.video-principal h2 {
-    font-size: 24px;
-    margin: 15px 0 5px;
-}
-
-.video-principal h4 {
-    font-size: 18px;
-    color: #FFD700;
-    margin: 5px 0 0;
-}
-
-.botao {
-    display: inline-block;
-    background-color: #FFD700;
-    color: #121212;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: background-color 0.2s;
-}
-
-.botao:hover {
-    background-color: #FFC107;
-}
-
-.galeria-video,
-.galeria-fotos {
-    flex: 1;
-    width: 49%;
-    display: flex;
-    flex-direction: column;
-}
-
-.galeria-video iframe {
-    border-radius: 8px;
-    width: 100%;
-    height: 315px;
-}
-
-.galeria-video h3,
-.galeria-fotos h3 {
-    font-size: 22px;
-    color: #FFD700;
-    margin-bottom: 15px;
-}
-
-.carrossel2-fotos {
-    position: relative;
-    width: 100%;
-    height: 315px;
-    overflow: hidden;
-}
-
-.carrossel2-item {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 100%;
-    height: 100%;
-    transition: left 0.5s ease-in-out;
-}
-
-.carrossel2-item.active {
-    left: 0;
-}
-
-.carrossel2-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
-.carrossel2-caption {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 5px;
-    border-radius: 4px;
-}
-
-.carrossel2-caption h5 {
-    font-size: 14px;
-    color: #fff;
-    margin: 0;
+  #voltar-ao-topo {
+    width: 46px;
+    height: 46px;
+    left: 16px;
+    bottom: 18px;
+  }
 }

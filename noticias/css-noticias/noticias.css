@@ -1,68 +1,526 @@
+/* ========================================
+   NOTICIAS.CSS
+   Página de Notícias - Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS
+======================================== */
+
+:root {
+  --not-bg: #0b0f14;
+  --not-bg-2: #101720;
+  --not-card: #151d27;
+  --not-card-2: #1b2633;
+
+  --not-gold: #ffd700;
+  --not-gold-2: #ffb700;
+  --not-green: #0f8b4c;
+
+  --not-text: #f5f7fa;
+  --not-muted: #b8c2cc;
+  --not-muted-2: #8f9ba8;
+
+  --not-border: rgba(255, 255, 255, 0.08);
+  --not-border-gold: rgba(255, 215, 0, 0.26);
+
+  --not-shadow: rgba(0, 0, 0, 0.46);
+  --not-radius: 20px;
+  --not-container: 1220px;
+  --not-transition: 0.25s ease;
+}
+
+/* ========================================
+   BASE
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    background-color: #121212;
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .secao-noticias .container {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-  
-  .secao-noticias h1 {
-    font-size: 28px;
-    color: #FFD700;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.09), transparent 32%),
+    linear-gradient(180deg, #0b0f14 0%, #0d131a 55%, #0b0f14 100%);
+  color: var(--not-text);
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  overflow: visible;
+}
+
+/* ========================================
+   SEÇÃO PRINCIPAL
+======================================== */
+
+.secao-noticias {
+  min-height: 100vh;
+  padding: 38px 16px 54px;
+}
+
+.secao-noticias .container {
+  width: min(var(--not-container), 100%);
+  margin: 0 auto;
+}
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero-noticias {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(26px, 4vw, 42px);
+  margin-bottom: 24px;
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--not-card);
+  border: 1px solid var(--not-border-gold);
+  box-shadow: 0 24px 58px var(--not-shadow);
+}
+
+.hero-noticias::before {
+  content: '';
+  position: absolute;
+  inset: -120px auto auto -120px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.hero-noticias::after {
+  content: '';
+  position: absolute;
+  inset: auto -120px -170px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.eyebrow,
+.hero-noticias .eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--not-gold), var(--not-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-noticias h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--not-text);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.hero-noticias p {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 16px 0 0;
+  color: var(--not-muted);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+}
+
+/* ========================================
+   GRADE DE NOTÍCIAS
+======================================== */
+
+.grade-noticias {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.card-noticia {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--not-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+  transition:
+    transform var(--not-transition),
+    border-color var(--not-transition),
+    background-color var(--not-transition),
+    box-shadow var(--not-transition);
+}
+
+.card-noticia::after {
+  content: '';
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.10), transparent 68%);
+  pointer-events: none;
+}
+
+.card-noticia:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 215, 0, 0.28);
+  background-color: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.44);
+}
+
+.card-noticia-link {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--not-text);
+  text-decoration: none;
+}
+
+/* ========================================
+   IMAGEM DO CARD
+======================================== */
+
+.imagem-noticia-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 220px;
+  background-color: rgba(0, 0, 0, 0.28);
+}
+
+.imagem-noticia-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.56)),
+    radial-gradient(circle at top right, rgba(255, 215, 0, 0.10), transparent 42%);
+  pointer-events: none;
+}
+
+.imagem-noticia {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 0.45s ease,
+    filter var(--not-transition);
+}
+
+.card-noticia:hover .imagem-noticia {
+  transform: scale(1.05);
+  filter: saturate(1.05) contrast(1.03);
+}
+
+/* ========================================
+   INFORMAÇÕES DO CARD
+======================================== */
+
+.card-noticia .info {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+}
+
+.data-noticia {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--not-gold), var(--not-gold-2));
+  font-size: 0.74rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.card-noticia h2 {
+  margin: 0 0 10px;
+  color: var(--not-gold);
+  font-size: 1.22rem;
+  line-height: 1.25;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.card-noticia p {
+  margin: 0;
+  color: var(--not-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.card-mensagem-vazia {
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--not-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.mensagem-vazia {
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  color: var(--not-muted);
+  line-height: 1.6;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+}
+
+/* ========================================
+   COMPATIBILIDADE COM ESTRUTURA ANTIGA
+======================================== */
+
+.card-noticia img {
+  width: 100%;
+}
+
+.card-noticia h3 {
+  color: var(--not-gold);
+  font-weight: 900;
+}
+
+/* ========================================
+   BOTÃO VOLTAR AO TOPO
+======================================== */
+
+#voltar-ao-topo {
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+  z-index: 1000;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--not-gold), var(--not-gold-2));
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.36);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--not-transition),
+    visibility var(--not-transition),
+    transform var(--not-transition);
+  overflow: visible;
+}
+
+#voltar-ao-topo:hover {
+  transform: translateY(-3px);
+}
+
+#voltar-ao-topo .tooltip-text {
+  position: absolute;
+  bottom: 62px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  color: var(--not-gold);
+  background-color: #111922;
+  border: 1px solid rgba(255, 215, 0, 0.20);
+  font-size: 0.82rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--not-transition),
+    visibility var(--not-transition);
+  pointer-events: none;
+}
+
+#voltar-ao-topo:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+}
+
+#voltar-ao-topo .tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #111922 transparent transparent transparent;
+}
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+.card-noticia-link:focus-visible,
+#voltar-ao-topo:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - NOTEBOOK
+======================================== */
+
+@media (max-width: 1100px) {
   .grade-noticias {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  
-  .card-noticia {
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    overflow: hidden;
-    color: #fff;
-    text-decoration: none;
-    transition: transform 0.3s ease;
+
+  .imagem-noticia-wrapper {
+    height: 215px;
   }
-  
-  .card-noticia:hover {
-    transform: scale(1.03);
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  .secao-noticias {
+    padding: 28px 14px 46px;
   }
-  
-  .card-noticia img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-bottom: 3px solid #FFD700;
+
+  .hero-noticias {
+    border-radius: 22px;
+    padding: 28px;
   }
-  
+
+  .card-noticia,
+  .card-mensagem-vazia {
+    border-radius: 20px;
+  }
+
+  .imagem-noticia-wrapper {
+    height: 210px;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 620px) {
+  .secao-noticias {
+    padding: 24px 12px 40px;
+  }
+
+  .hero-noticias {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .hero-noticias h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-noticias p {
+    font-size: 0.96rem;
+  }
+
+  .grade-noticias {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card-noticia,
+  .card-mensagem-vazia {
+    border-radius: 18px;
+  }
+
   .card-noticia .info {
-    padding: 10px 15px;
+    padding: 18px;
   }
-  
-  .card-noticia h3 {
-    font-size: 16px;
-    color: #FFD700;
-    margin: 5px 0;
+
+  .card-noticia h2 {
+    font-size: 1.12rem;
   }
-  
-  .card-noticia p {
-    font-size: 14px;
-    color: #ccc;
-    margin: 5px 0;
+
+  .imagem-noticia-wrapper {
+    height: 205px;
   }
-  
-  .card-noticia span {
-    font-size: 12px;
-    color: #aaa;
+
+  #voltar-ao-topo {
+    width: 48px;
+    height: 48px;
+    left: 18px;
+    bottom: 18px;
   }
-  
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  .hero-noticias h1 {
+    font-size: 1.62rem;
+  }
+
+  .eyebrow,
+  .hero-noticias .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .imagem-noticia-wrapper {
+    height: 180px;
+  }
+}

@@ -1,0 +1,942 @@
+/* ========================================
+   INDEX_TIMES.CSS
+   Bloco de Times da Página Inicial
+   Portal Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS LOCAIS
+======================================== */
+
+:root {
+  --times-bg: #0b0f14;
+  --times-bg-2: #101720;
+  --times-card: #151d27;
+  --times-card-2: #1b2633;
+  --times-card-3: #202d3c;
+
+  --times-gold: #ffd700;
+  --times-gold-2: #ffb700;
+  --times-green: #0f8b4c;
+  --times-green-2: #12a85c;
+
+  --times-text: #f5f7fa;
+  --times-muted: #b8c2cc;
+  --times-muted-2: #8f9ba8;
+
+  --times-border: rgba(255, 255, 255, 0.08);
+  --times-border-gold: rgba(255, 215, 0, 0.26);
+
+  --times-shadow: rgba(0, 0, 0, 0.46);
+  --times-radius: 20px;
+  --times-radius-sm: 14px;
+
+  --times-container: 1220px;
+  --times-transition: 0.25s ease;
+}
+
+/* ========================================
+   TÍTULO E DESCRIÇÃO DO BLOCO TIMES
+   Agora ficam aqui, pois o index.css foi limpo
+======================================== */
+
+main > h1 {
+  width: min(var(--times-container), calc(100% - 32px));
+  margin: 42px auto 18px;
+  position: relative;
+  padding-bottom: 12px;
+  color: var(--times-text);
+  font-size: clamp(2rem, 4vw, 3.15rem);
+  line-height: 1.08;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+main > h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 86px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--times-gold), transparent);
+}
+
+main > .descricao {
+  width: min(var(--times-container), calc(100% - 32px));
+  margin: -2px auto 28px;
+  color: var(--times-muted);
+  font-size: clamp(1rem, 1.3vw, 1.08rem);
+  line-height: 1.65;
+}
+
+/* ========================================
+   CARROSSEL / MARQUEE DE ESCUDOS
+======================================== */
+
+.carrossel-container {
+  width: min(var(--times-container), calc(100% - 32px));
+  margin: 8px auto 28px;
+}
+
+.marquee-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 18px 0;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--times-border);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+}
+
+.marquee-wrapper::before,
+.marquee-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  width: 90px;
+  height: 100%;
+  pointer-events: none;
+}
+
+.marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(11, 15, 20, 0.98), transparent);
+}
+
+.marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(11, 15, 20, 0.98), transparent);
+}
+
+.marquee {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  will-change: transform;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  padding: 0 6px;
+}
+
+.marquee-item {
+  flex: 0 0 118px;
+  min-width: 118px;
+}
+
+.marquee-item a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 116px;
+  padding: 10px 8px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--times-text);
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid transparent;
+  transition:
+    transform var(--times-transition),
+    border-color var(--times-transition),
+    background-color var(--times-transition);
+}
+
+.marquee-item a:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 215, 0, 0.24);
+  background-color: rgba(255, 215, 0, 0.07);
+}
+
+.escudo-marquee,
+.marquee-item img {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  padding: 6px;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.26);
+}
+
+.sem-escudo {
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  color: #111;
+  background: linear-gradient(135deg, var(--times-gold), var(--times-gold-2));
+  border-radius: 15px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.marquee-caption {
+  width: 100%;
+  margin-top: 9px;
+  color: var(--times-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.animate {
+  animation: marquee-animation linear infinite;
+  animation-duration: var(--marquee-duration, 20s);
+  animation-timing-function: linear;
+  animation-play-state: running;
+}
+
+.marquee-wrapper:hover .animate,
+.marquee-wrapper:focus-within .animate {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-animation {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-1 * var(--marquee-distance)), 0, 0);
+  }
+}
+
+/* ========================================
+   LAYOUT PRINCIPAL DO BLOCO TIMES
+======================================== */
+
+.principal-times {
+  display: block;
+  width: 100%;
+  padding: 4px 16px 26px;
+}
+
+.conteudo-times {
+  width: min(var(--times-container), 100%);
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 28px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.barra-lateral-esquerda {
+  position: sticky;
+  top: 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+  height: fit-content;
+}
+
+.conteudo-direita {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ========================================
+   BLOCO DAS DIVISÕES NACIONAIS
+======================================== */
+
+.bloco-divisoes {
+  padding: 18px;
+  border-radius: var(--times-radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--times-border);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.34);
+}
+
+.bloco-divisoes > h2 {
+  margin: 0 0 16px;
+  color: var(--times-gold);
+  font-size: 1.18rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.tabela-divisao {
+  padding: 14px;
+  margin-bottom: 14px;
+  border-radius: 17px;
+  background-color: rgba(0, 0, 0, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.tabela-divisao:last-child {
+  margin-bottom: 0;
+}
+
+.cabecalho-divisao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cabecalho-divisao h3,
+.tabela-divisao h3 {
+  margin: 0;
+  color: var(--times-text);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.cabecalho-divisao span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--times-gold), var(--times-gold-2));
+  font-size: 0.74rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.grade-escudos-divisao {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.escudo-divisao-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 5px;
+  border-radius: 13px;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.045);
+  border: 1px solid transparent;
+  transition:
+    transform var(--times-transition),
+    border-color var(--times-transition),
+    background-color var(--times-transition);
+}
+
+.escudo-divisao-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 215, 0, 0.24);
+  background-color: rgba(255, 215, 0, 0.075);
+}
+
+.escudo-divisao-link img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  padding: 3px;
+  border-radius: 9px;
+  background-color: #fff;
+}
+
+.sem-escudo-divisao {
+  color: var(--times-muted);
+  font-size: 0.7rem;
+  line-height: 1.1;
+  text-align: center;
+  font-weight: 800;
+}
+
+/* ========================================
+   BOTÃO VER TODOS
+======================================== */
+
+.botao-ver-todos-times {
+  width: 100%;
+}
+
+/* ========================================
+   HERO DO BLOCO TIMES
+======================================== */
+
+.hero-times {
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--times-card);
+  border: 1px solid var(--times-border-gold);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.40);
+}
+
+.hero-times::before {
+  content: '';
+  position: absolute;
+  inset: -120px auto auto -120px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.hero-times::after {
+  content: '';
+  position: absolute;
+  inset: auto -120px -170px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.eyebrow,
+.hero-times .eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--times-gold), var(--times-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-times h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--times-text);
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+}
+
+.hero-times p {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 14px 0 0;
+  color: var(--times-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* ========================================
+   DESTAQUES POR COMPETIÇÃO
+======================================== */
+
+.grid-destaques-times {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.card-destaque-time {
+  position: relative;
+  overflow: hidden;
+  min-height: 128px;
+  padding: 17px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--times-border);
+  box-shadow: 0 15px 34px rgba(0, 0, 0, 0.32);
+  transition:
+    transform var(--times-transition),
+    border-color var(--times-transition),
+    background-color var(--times-transition),
+    box-shadow var(--times-transition);
+}
+
+.card-destaque-time::after {
+  content: '';
+  position: absolute;
+  inset: auto -70px -100px auto;
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.09), transparent 70%);
+  pointer-events: none;
+}
+
+.card-destaque-time:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 215, 0, 0.30);
+  background-color: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.38);
+}
+
+.titulo-bloco-times {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 12px;
+}
+
+.titulo-bloco-times h2 {
+  margin: 0;
+  color: var(--times-text);
+  font-size: 1.03rem;
+  line-height: 1.3;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.titulo-bloco-times span {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--times-gold), var(--times-gold-2));
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.clube-destaque-link {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(225px, 0.95fr) minmax(0, 1.3fr);
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--times-text);
+}
+
+.clube-destaque-identidade {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 255, 255, 0.025)),
+    rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 215, 0, 0.16);
+}
+
+.clube-destaque-identidade img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex: 0 0 56px;
+  padding: 6px;
+  border-radius: 14px;
+  background-color: #fff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.clube-destaque-identidade strong {
+  color: var(--times-text);
+  font-size: 0.98rem;
+  line-height: 1.3;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+  transition: color var(--times-transition);
+}
+
+.clube-destaque-link:hover .clube-destaque-identidade strong {
+  color: var(--times-gold);
+}
+
+.sem-escudo-destaque {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  color: #111;
+  background: linear-gradient(135deg, var(--times-gold), var(--times-gold-2));
+  border-radius: 14px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.metricas-destaque-time {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.metrica-time {
+  min-width: 0;
+  min-height: 74px;
+  padding: 11px;
+  border-radius: 14px;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.metrica-time span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--times-muted-2);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.22;
+}
+
+.metrica-time strong {
+  display: block;
+  color: var(--times-gold);
+  font-size: 0.94rem;
+  line-height: 1.25;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.mensagem-vazia {
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+  color: var(--times-muted);
+  line-height: 1.6;
+}
+
+/* ========================================
+   ACESSIBILIDADE / FOCUS
+======================================== */
+
+.marquee-item a:focus-visible,
+.escudo-divisao-link:focus-visible,
+.clube-destaque-link:focus-visible,
+.botao-ver-todos-times:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - NOTEBOOK
+======================================== */
+
+@media (max-width: 1100px) {
+  .conteudo-times {
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .grade-escudos-divisao {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .hero-times {
+    padding: 26px;
+  }
+
+  .hero-times h2 {
+    font-size: 1.72rem;
+  }
+
+  .clube-destaque-link {
+    grid-template-columns: minmax(205px, 0.95fr) minmax(0, 1.25fr);
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  main > h1 {
+    width: calc(100% - 28px);
+    margin-top: 36px;
+  }
+
+  main > .descricao {
+    width: calc(100% - 28px);
+  }
+
+  .carrossel-container {
+    width: calc(100% - 28px);
+  }
+
+  .conteudo-times {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .barra-lateral-esquerda {
+    position: static;
+    height: auto;
+  }
+
+  .conteudo-direita {
+    height: auto;
+  }
+
+  .bloco-divisoes {
+    border-radius: 18px;
+  }
+
+  .grade-escudos-divisao {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .hero-times {
+    border-radius: 22px;
+    padding: 26px;
+  }
+
+  .hero-times h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero-times p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .card-destaque-time {
+    padding: 17px;
+    min-height: auto;
+  }
+
+  .clube-destaque-link {
+    grid-template-columns: 1fr;
+  }
+
+  .clube-destaque-identidade {
+    padding: 13px;
+  }
+
+  .clube-destaque-identidade img,
+  .sem-escudo-destaque {
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+  }
+
+  .metrica-time {
+    min-height: 76px;
+    padding: 11px;
+  }
+
+  .metrica-time span {
+    font-size: 0.7rem;
+  }
+
+  .metrica-time strong {
+    font-size: 0.96rem;
+  }
+
+  .marquee-item {
+    flex-basis: 100px;
+    min-width: 100px;
+  }
+
+  .marquee-item a {
+    min-height: 106px;
+  }
+
+  .escudo-marquee,
+  .marquee-item img,
+  .sem-escudo {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 620px) {
+  main > h1 {
+    width: calc(100% - 24px);
+    margin: 32px auto 16px;
+    font-size: 1.85rem;
+  }
+
+  main > .descricao {
+    width: calc(100% - 24px);
+    margin-bottom: 24px;
+    font-size: 0.96rem;
+  }
+
+  .carrossel-container {
+    width: calc(100% - 24px);
+    margin-bottom: 22px;
+  }
+
+  .marquee-wrapper {
+    border-radius: 18px;
+    padding: 14px 0;
+  }
+
+  .marquee-wrapper::before,
+  .marquee-wrapper::after {
+    width: 48px;
+  }
+
+  .marquee-track {
+    gap: 8px;
+  }
+
+  .marquee-item {
+    flex-basis: 86px;
+    min-width: 86px;
+  }
+
+  .marquee-item a {
+    min-height: 94px;
+    padding: 8px 6px;
+    border-radius: 14px;
+  }
+
+  .escudo-marquee,
+  .marquee-item img,
+  .sem-escudo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+
+  .marquee-caption {
+    font-size: 0.68rem;
+  }
+
+  .principal-times {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .bloco-divisoes,
+  .hero-times,
+  .card-destaque-time {
+    border-radius: 18px;
+  }
+
+  .bloco-divisoes {
+    padding: 16px;
+  }
+
+  .tabela-divisao {
+    padding: 12px;
+    border-radius: 15px;
+  }
+
+  .grade-escudos-divisao {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .escudo-divisao-link {
+    min-height: 46px;
+    border-radius: 12px;
+  }
+
+  .escudo-divisao-link img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hero-times {
+    padding: 24px 18px;
+  }
+
+  .hero-times h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero-times p {
+    font-size: 0.95rem;
+  }
+
+  .card-destaque-time {
+    padding: 16px;
+    min-height: auto;
+  }
+
+  .titulo-bloco-times h2 {
+    font-size: 1.02rem;
+  }
+
+  .clube-destaque-identidade {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .metricas-destaque-time {
+    grid-template-columns: 1fr;
+  }
+
+  .metrica-time {
+    min-height: auto;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  main > h1 {
+    font-size: 1.62rem;
+  }
+
+  .grade-escudos-divisao {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .cabecalho-divisao {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-times h2 {
+    font-size: 1.32rem;
+  }
+
+  .clube-destaque-identidade img,
+  .sem-escudo-destaque {
+    width: 54px;
+    height: 54px;
+    flex-basis: 54px;
+  }
+}

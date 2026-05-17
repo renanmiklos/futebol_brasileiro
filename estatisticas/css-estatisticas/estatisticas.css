@@ -1,0 +1,1135 @@
+/* ========================================
+   ESTATISTICAS.CSS
+   Área de Estatísticas - Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS
+======================================== */
+
+:root {
+  --estat-bg: #0b0f14;
+  --estat-bg-2: #101720;
+  --estat-card: #151d27;
+  --estat-card-2: #1b2633;
+  --estat-card-3: #202d3c;
+
+  --estat-gold: #ffd700;
+  --estat-gold-2: #ffb700;
+  --estat-green: #0f8b4c;
+  --estat-green-2: #12a85c;
+
+  --estat-text: #f5f7fa;
+  --estat-muted: #b8c2cc;
+  --estat-muted-2: #8f9ba8;
+
+  --estat-border: rgba(255, 255, 255, 0.08);
+  --estat-border-gold: rgba(255, 215, 0, 0.26);
+
+  --estat-shadow: rgba(0, 0, 0, 0.46);
+  --estat-radius: 20px;
+  --estat-radius-sm: 14px;
+
+  --estat-container: 1220px;
+  --estat-transition: 0.25s ease;
+}
+
+/* ========================================
+   BASE DA PÁGINA
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.09), transparent 32%),
+    linear-gradient(180deg, #0b0f14 0%, #0d131a 55%, #0b0f14 100%);
+  color: var(--estat-text);
+  font-family: 'Roboto', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  overflow: visible;
+}
+
+/* ========================================
+   SEÇÃO PRINCIPAL
+======================================== */
+
+.secao-estatisticas,
+.secao-ranking {
+  min-height: 100vh;
+  padding: 38px 16px 54px;
+}
+
+.container {
+  width: min(var(--estat-container), 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+/* ========================================
+   MENU LATERAL
+======================================== */
+
+.menu-lateral,
+.menu-estatisticas {
+  position: sticky;
+  top: 112px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: calc(100vh - 132px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.menu-lateral::-webkit-scrollbar,
+.menu-estatisticas::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb,
+.menu-estatisticas::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.35);
+  border-radius: 999px;
+}
+
+.menu-bloco,
+.menu-lateral {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--estat-border);
+  border-radius: var(--estat-radius);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.34);
+}
+
+.menu-bloco {
+  padding: 18px;
+}
+
+.menu-lateral:not(.menu-estatisticas) {
+  padding: 18px;
+}
+
+.menu-bloco h2,
+.menu-lateral h2 {
+  margin: 0 0 14px;
+  color: var(--estat-gold);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.menu-bloco ul,
+.menu-lateral ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.menu-bloco li,
+.menu-lateral li {
+  margin: 0;
+}
+
+.menu-bloco a,
+.menu-lateral a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--estat-text);
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid transparent;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.25;
+  transition:
+    transform var(--estat-transition),
+    border-color var(--estat-transition),
+    background-color var(--estat-transition),
+    color var(--estat-transition);
+}
+
+.menu-bloco a:hover,
+.menu-bloco a.ativo,
+.menu-lateral a:hover,
+.menu-lateral a.ativo {
+  transform: translateX(4px);
+  color: var(--estat-gold);
+  background-color: rgba(255, 215, 0, 0.09);
+  border-color: rgba(255, 215, 0, 0.20);
+}
+
+/* ========================================
+   CONTEÚDO PRINCIPAL
+======================================== */
+
+.conteudo-estatisticas,
+.conteudo-ranking {
+  min-width: 0;
+}
+
+.conteudo-categoria-estatisticas {
+  min-width: 0;
+}
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero-estatisticas {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(26px, 4vw, 42px);
+  margin-bottom: 24px;
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--estat-card);
+  border: 1px solid var(--estat-border-gold);
+  box-shadow: 0 24px 58px var(--estat-shadow);
+}
+
+.hero-estatisticas::before {
+  content: '';
+  position: absolute;
+  inset: -120px auto auto -120px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.13), transparent 64%);
+  pointer-events: none;
+}
+
+.hero-estatisticas::after {
+  content: '';
+  position: absolute;
+  inset: auto -120px -170px auto;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.eyebrow,
+.hero-estatisticas .eyebrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--estat-gold), var(--estat-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-estatisticas h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--estat-text);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.descricao-intro,
+.hero-estatisticas p {
+  position: relative;
+  z-index: 1;
+  max-width: 840px;
+  margin: 16px 0 0;
+  color: var(--estat-muted);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+}
+
+.descricao-intro strong {
+  color: var(--estat-gold);
+}
+
+/* ========================================
+   CARDS GERAIS
+======================================== */
+
+.card-estatisticas {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--estat-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.card-estatisticas::after {
+  content: '';
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.10), transparent 68%);
+  pointer-events: none;
+}
+
+.titulo-bloco-estatisticas {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.titulo-bloco-estatisticas h2 {
+  margin: 0;
+  color: var(--estat-gold);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.titulo-bloco-estatisticas span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--estat-gold), var(--estat-gold-2));
+  font-size: 0.74rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.bloco-texto-estatisticas p {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 14px;
+  color: var(--estat-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.bloco-texto-estatisticas p:last-child {
+  margin-bottom: 0;
+}
+
+.bloco-texto-estatisticas strong {
+  color: var(--estat-gold);
+}
+
+/* ========================================
+   ESTATÍSTICAS RESUMO
+======================================== */
+
+.stats-resumo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.stat-resumo-item {
+  position: relative;
+  overflow: hidden;
+  min-height: 145px;
+  padding: 24px;
+  border-radius: 24px;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.10), rgba(15, 139, 76, 0.08)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--estat-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.stat-resumo-item::after {
+  content: '';
+  position: absolute;
+  inset: auto -70px -100px auto;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.11), transparent 70%);
+  pointer-events: none;
+}
+
+.stat-resumo-num {
+  position: relative;
+  z-index: 1;
+  display: block;
+  color: var(--estat-gold);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.stat-resumo-label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 10px;
+  color: var(--estat-muted);
+  font-size: 0.98rem;
+  font-weight: 800;
+}
+
+/* ========================================
+   TOP 5 RANKING
+======================================== */
+
+.top5-ranking {
+  margin-bottom: 24px;
+}
+
+.ranking-lista {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ranking-item {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  min-height: 66px;
+  padding: 12px;
+  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.ranking-pos {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border-radius: 13px;
+  color: #111;
+  background: linear-gradient(135deg, var(--estat-gold), var(--estat-gold-2));
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+.ranking-nome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  text-decoration: none;
+  color: var(--estat-text);
+  font-weight: 900;
+}
+
+.ranking-nome img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  flex: 0 0 42px;
+  padding: 4px;
+  border-radius: 11px;
+  background-color: #fff;
+}
+
+.ranking-nome span {
+  overflow-wrap: anywhere;
+}
+
+.ranking-nome:hover span {
+  color: var(--estat-gold);
+}
+
+.ranking-pontos {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--estat-gold);
+  background-color: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  font-size: 0.9rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* ========================================
+   MAIOR CAMPEÃO
+======================================== */
+
+.clube-destaque-wrapper {
+  margin-bottom: 24px;
+}
+
+.clube-destaque-item {
+  position: relative;
+  z-index: 1;
+  display: block;
+  text-decoration: none;
+  color: var(--estat-text);
+}
+
+.clube-detalhe {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 255, 255, 0.025)),
+    rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 215, 0, 0.16);
+}
+
+.clube-detalhe img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex: 0 0 72px;
+  padding: 8px;
+  border-radius: 18px;
+  background-color: #fff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+.clube-nome {
+  display: block;
+  color: var(--estat-text);
+  font-size: 1.3rem;
+  line-height: 1.25;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.clube-dado {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--estat-gold), var(--estat-gold-2));
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.clube-destaque-item:hover .clube-nome {
+  color: var(--estat-gold);
+}
+
+/* ========================================
+   BOTÕES DE ACESSO
+======================================== */
+
+.botoes-acesso {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.botao-acesso {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 13px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #111;
+  background: linear-gradient(135deg, var(--estat-gold), var(--estat-gold-2));
+  font-size: 0.95rem;
+  font-weight: 900;
+  text-align: center;
+  box-shadow: 0 12px 26px rgba(255, 215, 0, 0.18);
+  transition:
+    transform var(--estat-transition),
+    filter var(--estat-transition),
+    box-shadow var(--estat-transition);
+}
+
+.botao-acesso:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.05);
+  box-shadow: 0 18px 34px rgba(255, 215, 0, 0.26);
+}
+
+/* ========================================
+   LISTA DE LINKS / CATEGORIAS
+======================================== */
+
+.lista-categoria-estatisticas {
+  margin-bottom: 24px;
+}
+
+.grid-links-estatisticas {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.link-estatistica-item {
+  position: relative;
+  overflow: hidden;
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--estat-text);
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  font-weight: 900;
+  line-height: 1.35;
+  transition:
+    transform var(--estat-transition),
+    border-color var(--estat-transition),
+    background-color var(--estat-transition),
+    color var(--estat-transition);
+}
+
+.link-estatistica-item::after {
+  content: '';
+  position: absolute;
+  inset: auto -50px -80px auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.11), transparent 70%);
+  pointer-events: none;
+}
+
+.link-estatistica-item span {
+  position: relative;
+  z-index: 1;
+}
+
+.link-estatistica-item:hover {
+  transform: translateY(-3px);
+  color: var(--estat-gold);
+  border-color: rgba(255, 215, 0, 0.30);
+  background-color: rgba(255, 255, 255, 0.045);
+}
+
+/* Compatibilidade com versão antiga */
+.lista,
+.lista-estatisticas {
+  width: 100%;
+}
+
+.lista-estatisticas {
+  position: relative;
+  z-index: 1;
+  padding: 22px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--estat-border);
+}
+
+.lista-estatisticas ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 26px;
+}
+
+.lista-estatisticas li {
+  margin-bottom: 8px;
+  break-inside: avoid;
+}
+
+.lista-estatisticas span {
+  display: inline-flex;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 13px;
+  color: var(--estat-text);
+  background-color: rgba(255, 255, 255, 0.045);
+  font-size: 0.95rem;
+  font-weight: 800;
+  transition:
+    background-color var(--estat-transition),
+    color var(--estat-transition);
+}
+
+.lista-estatisticas span:hover {
+  background-color: rgba(255, 215, 0, 0.12);
+  color: var(--estat-gold);
+}
+
+/* ========================================
+   TABELAS
+======================================== */
+
+.tabela-wrapper-estatisticas {
+  margin-bottom: 24px;
+}
+
+.tabela-scroll {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  background-color: rgba(0, 0, 0, 0.20);
+}
+
+.tabela-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tabela-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.35);
+  border-radius: 999px;
+}
+
+.tabela-estatisticas,
+.tabela-pontuacoes table,
+.tabela-pontuacoes-detalhada table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.tabela-estatisticas th,
+.tabela-estatisticas td,
+.tabela-pontuacoes th,
+.tabela-pontuacoes td,
+.tabela-pontuacoes-detalhada th,
+.tabela-pontuacoes-detalhada td {
+  padding: 13px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+  color: var(--estat-muted);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.tabela-estatisticas th,
+.tabela-pontuacoes th,
+.tabela-pontuacoes-detalhada th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  color: var(--estat-gold);
+  background-color: #111922;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.tabela-estatisticas tr,
+.tabela-pontuacoes tr,
+.tabela-pontuacoes-detalhada tr {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.tabela-estatisticas tbody tr:hover,
+.tabela-pontuacoes tbody tr:hover,
+.tabela-pontuacoes-detalhada tbody tr:hover {
+  background-color: rgba(255, 215, 0, 0.055);
+}
+
+.tabela-estatisticas td strong {
+  color: var(--estat-text);
+  font-weight: 900;
+}
+
+.badge-pontos {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--estat-gold), var(--estat-gold-2));
+  font-size: 0.82rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+/* ========================================
+   PONTUAÇÕES POR FASE
+======================================== */
+
+.fases-pontuacao-lista {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.fase-pontuacao-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.065);
+}
+
+.fase-pontuacao-item span {
+  color: var(--estat-muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.fase-pontuacao-item strong {
+  color: var(--estat-gold);
+  font-size: 0.84rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.texto-vazio,
+.mensagem-vazia {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+  color: var(--estat-muted);
+  line-height: 1.6;
+}
+
+.texto-vazio {
+  display: inline-flex;
+  width: fit-content;
+}
+
+/* ========================================
+   LINK VOLTAR
+======================================== */
+
+.voltar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: var(--estat-gold);
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 0.95rem;
+  transition:
+    color var(--estat-transition),
+    transform var(--estat-transition);
+}
+
+.voltar-link:hover {
+  color: #fff;
+  transform: translateX(-3px);
+}
+
+/* ========================================
+   ACESSIBILIDADE / FOCUS
+======================================== */
+
+.menu-bloco a:focus-visible,
+.menu-lateral a:focus-visible,
+.botao-acesso:focus-visible,
+.link-estatistica-item:focus-visible,
+.ranking-nome:focus-visible,
+.clube-destaque-item:focus-visible,
+.voltar-link:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - NOTEBOOK
+======================================== */
+
+@media (max-width: 1100px) {
+  .container {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .grid-links-estatisticas {
+    grid-template-columns: 1fr;
+  }
+
+  .fases-pontuacao-lista {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  .secao-estatisticas,
+  .secao-ranking {
+    padding: 28px 14px 46px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-lateral,
+  .menu-estatisticas {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .menu-estatisticas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .menu-bloco,
+  .menu-lateral {
+    border-radius: 18px;
+  }
+
+  .hero-estatisticas {
+    border-radius: 22px;
+  }
+
+  .stats-resumo {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .botoes-acesso {
+    grid-template-columns: 1fr;
+  }
+
+  .ranking-item {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .ranking-pontos {
+    grid-column: 2;
+    width: fit-content;
+  }
+
+  .lista-estatisticas ul {
+    columns: 1;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 620px) {
+  .secao-estatisticas,
+  .secao-ranking {
+    padding: 24px 12px 40px;
+  }
+
+  .menu-estatisticas {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-bloco,
+  .menu-lateral,
+  .card-estatisticas,
+  .stat-resumo-item,
+  .hero-estatisticas {
+    border-radius: 18px;
+  }
+
+  .hero-estatisticas {
+    padding: 24px 18px;
+  }
+
+  .hero-estatisticas h1 {
+    font-size: 1.85rem;
+  }
+
+  .descricao-intro,
+  .hero-estatisticas p {
+    font-size: 0.96rem;
+  }
+
+  .stats-resumo {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .stat-resumo-item {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .card-estatisticas {
+    padding: 18px;
+  }
+
+  .titulo-bloco-estatisticas {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .titulo-bloco-estatisticas h2 {
+    font-size: 1.22rem;
+  }
+
+  .ranking-item {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .ranking-pos {
+    min-height: 34px;
+    font-size: 0.86rem;
+  }
+
+  .ranking-nome img {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .clube-detalhe {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .clube-detalhe img {
+    width: 66px;
+    height: 66px;
+    flex-basis: 66px;
+  }
+
+  .clube-dado {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .grid-links-estatisticas {
+    grid-template-columns: 1fr;
+  }
+
+  .link-estatistica-item {
+    min-height: 56px;
+    font-size: 0.92rem;
+  }
+
+  .tabela-estatisticas,
+  .tabela-pontuacoes table,
+  .tabela-pontuacoes-detalhada table {
+    min-width: 640px;
+  }
+
+  .tabela-estatisticas th,
+  .tabela-estatisticas td,
+  .tabela-pontuacoes th,
+  .tabela-pontuacoes td,
+  .tabela-pontuacoes-detalhada th,
+  .tabela-pontuacoes-detalhada td {
+    padding: 11px 12px;
+    font-size: 0.86rem;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  .hero-estatisticas h1 {
+    font-size: 1.62rem;
+  }
+
+  .eyebrow,
+  .hero-estatisticas .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .stat-resumo-num {
+    font-size: 2rem;
+  }
+
+  .ranking-nome {
+    gap: 8px;
+  }
+
+  .ranking-nome img {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+
+  .botao-acesso {
+    font-size: 0.86rem;
+  }
+}

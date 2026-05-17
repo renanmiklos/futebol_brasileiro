@@ -1,105 +1,486 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+/* ========================================
+   HEADER.CSS
+   Cabeçalho - Portal Futebol Brasileiro
+======================================== */
+
+:root {
+  --header-bg: rgba(8, 12, 17, 0.97);
+  --header-bg-solid: #080c11;
+  --header-card: #111922;
+  --header-card-hover: #182434;
+  --header-gold: #FFD700;
+  --header-gold-soft: rgba(255, 215, 0, 0.13);
+  --header-gold-border: rgba(255, 215, 0, 0.28);
+  --header-text: #f6f8fa;
+  --header-muted: #aeb8c2;
+  --header-shadow: rgba(0, 0, 0, 0.50);
+}
+
+/* ========================================
+   ESTRUTURA DO HEADER
+======================================== */
 
 .site-header {
-    background-color: #121212;
-    border-bottom: 2px solid #FFD700;
-    padding: 10px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-  }
-  
-  .logo-area {
-    display: flex;
-    align-items: center;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .logo {
-    height: 80px;
-    width: auto;
-    margin-right: 10px;
-  }
-  
-  .logo-text {
-    font-size: 24px;
-    font-weight: bold;
-    color: #FFD700;
-  }
-  
-  .menu-area {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  
-  .search-bar {
-    display: flex;
-    margin-bottom: 15px;
-  }
-  
-  .input-search[type="text"] {
-    padding: 8px;
-    border: 1px solid #FFD700;
-    border-radius: 4px 0 0 4px;
-    background-color: #2c2c2c;
-    color: #fff;
-    width: 300px;
-  }
-  
-  .botao-search {
-    padding: 8px 12px;
-    background-color: #FFD700;
-    border: none;
-    border-radius: 0 4px 4px 0;
-    color: #121212;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .botao-search:hover {
-    background-color: #e6c200;
-  }
-  
-  .menu-principal ul {
-    list-style: none;
-    display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 5000;
+  width: 100%;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--header-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--header-gold-border);
+  box-shadow: 0 14px 34px var(--header-shadow);
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.site-header,
+.site-header * {
+  box-sizing: border-box;
+}
+
+.site-header::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.88),
+    transparent
+  );
+}
+
+.site-header .header-container {
+  width: min(1220px, calc(100% - 32px));
+  min-height: 96px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  position: relative;
+}
+
+/* ========================================
+   LOGO / MARCA
+======================================== */
+
+.site-header .logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none !important;
+  color: inherit;
+  flex-shrink: 0;
+  min-width: 250px;
+  border: 0 !important;
+  outline: none;
+}
+
+.site-header .logo-area:hover,
+.site-header .logo-area:focus,
+.site-header .logo-area:visited,
+.site-header .logo-area:active {
+  text-decoration: none !important;
+}
+
+.site-header .logo {
+  height: 72px;
+  width: auto;
+  max-width: none;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 15px rgba(0, 0, 0, 0.38));
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+.site-header .logo-area:hover .logo {
+  transform: scale(1.035);
+  filter: drop-shadow(0 9px 18px rgba(255, 215, 0, 0.18));
+}
+
+.site-header .brand-text {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none !important;
+  border: none !important;
+}
+
+.site-header .brand-main,
+.site-header .brand-highlight {
+  display: inline-block;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: clamp(1.45rem, 2.15vw, 1.95rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  text-decoration: none !important;
+  border: none !important;
+}
+
+.site-header .brand-main {
+  color: #ffffff;
+}
+
+.site-header .brand-highlight {
+  color: var(--header-gold);
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.16);
+}
+
+/* ========================================
+   ÁREA DO MENU
+======================================== */
+
+.site-header .menu-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+/* ========================================
+   BUSCA
+======================================== */
+
+.site-header .search-bar {
+  display: flex;
+  width: min(100%, 390px);
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 215, 0, 0.24);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+    0 8px 20px rgba(0, 0, 0, 0.20);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.site-header .search-bar:focus-within {
+  border-color: rgba(255, 215, 0, 0.76);
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 4px rgba(255, 215, 0, 0.11),
+    0 10px 24px rgba(0, 0, 0, 0.26);
+}
+
+.site-header .input-search[type="text"] {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 15px 11px 18px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--header-text);
+  font-size: 0.95rem;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.site-header .input-search::placeholder {
+  color: rgba(245, 247, 250, 0.58);
+}
+
+.site-header .botao-search {
+  width: 48px;
+  min-width: 48px;
+  border: none;
+  background: linear-gradient(135deg, #FFD700, #ffb700);
+  color: #101010;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    filter 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.site-header .botao-search:hover {
+  filter: brightness(1.06);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.22);
+}
+
+.site-header .botao-search:active {
+  transform: scale(0.96);
+}
+
+/* ========================================
+   MENU PRINCIPAL
+======================================== */
+
+.site-header .menu-principal {
+  width: 100%;
+}
+
+.site-header .menu-principal ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.site-header .menu-principal li {
+  margin: 0;
+  padding: 0;
+}
+
+.site-header .menu-principal a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 11px;
+  border-radius: 999px;
+  text-decoration: none !important;
+  color: var(--header-text);
+  font-size: 0.91rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.site-header .menu-principal a:hover {
+  color: var(--header-gold);
+  background-color: var(--header-gold-soft);
+  border-color: rgba(255, 215, 0, 0.20);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+.site-header .menu-principal a:focus-visible,
+.site-header .logo-area:focus-visible,
+.site-header .menu-toggle:focus-visible,
+.site-header .botao-search:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.35);
+  outline-offset: 3px;
+}
+
+/* ========================================
+   BOTÃO HAMBÚRGUER
+======================================== */
+
+.site-header .menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 215, 0, 0.34);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.site-header .menu-toggle:hover {
+  background-color: rgba(255, 215, 0, 0.10);
+  border-color: rgba(255, 215, 0, 0.68);
+}
+
+.site-header .menu-toggle span {
+  width: 22px;
+  height: 3px;
+  background-color: var(--header-gold);
+  border-radius: 999px;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.site-header .menu-toggle.ativo span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.site-header .menu-toggle.ativo span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header .menu-toggle.ativo span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 1160px) {
+  .site-header .header-container {
+    min-height: 90px;
     gap: 20px;
-    padding: 0;
-    margin: 0;
   }
-  
-  .menu-principal a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    transition: color 0.3s;
-    font-family: 'Roboto', sans-serif;
+
+  .site-header .logo {
+    height: 64px;
   }
-  
-  .menu-principal a:hover {
-    color: #FFD700;
+
+  .site-header .logo-area {
+    min-width: 220px;
   }
-  
-  @media (max-width: 768px) {
-    .menu-area {
-      align-items: flex-start;
-    }
-  
-    .menu-principal ul {
-      flex-direction: column;
-      gap: 10px;
-    }
+
+  .site-header .brand-main,
+  .site-header .brand-highlight {
+    font-size: 1.45rem;
   }
-  
+
+  .site-header .search-bar {
+    width: min(100%, 340px);
+  }
+
+  .site-header .menu-principal a {
+    font-size: 0.84rem;
+    padding: 7px 8px;
+  }
+}
+
+@media (max-width: 940px) {
+  .site-header .header-container {
+    min-height: 82px;
+  }
+
+  .site-header .menu-toggle {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .site-header .menu-area {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: min(390px, calc(100vw - 32px));
+    display: none;
+    align-items: stretch;
+    padding: 16px;
+    border-radius: 20px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent),
+      var(--header-bg-solid);
+    border: 1px solid rgba(255, 215, 0, 0.26);
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.62);
+  }
+
+  .site-header .menu-area.ativo {
+    display: flex;
+  }
+
+  .site-header .search-bar {
+    width: 100%;
+    max-width: none;
+  }
+
+  .site-header .menu-principal ul {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 7px;
+    margin-top: 2px;
+  }
+
+  .site-header .menu-principal a {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 12px 13px;
+    border-radius: 13px;
+    font-size: 0.96rem;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.055);
+  }
+
+  .site-header .menu-principal a:hover {
+    transform: none;
+    background-color: rgba(255, 215, 0, 0.11);
+    border-color: rgba(255, 215, 0, 0.24);
+  }
+}
+
+@media (max-width: 600px) {
+  .site-header .header-container {
+    width: calc(100% - 24px);
+    min-height: 74px;
+    gap: 12px;
+  }
+
+  .site-header .logo-area {
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .site-header .logo {
+    height: 50px;
+  }
+
+  .site-header .brand-text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+  }
+
+  .site-header .brand-main,
+  .site-header .brand-highlight {
+    font-size: 1.08rem;
+    letter-spacing: -0.03em;
+  }
+
+  .site-header .menu-toggle {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .site-header .menu-area {
+    width: calc(100vw - 24px);
+    right: 0;
+    padding: 14px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .site-header .logo {
+    height: 44px;
+  }
+
+  .site-header .brand-main,
+  .site-header .brand-highlight {
+    font-size: 0.96rem;
+  }
+
+  .site-header .header-container {
+    min-height: 68px;
+  }
+}

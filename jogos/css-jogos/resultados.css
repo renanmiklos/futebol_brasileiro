@@ -1,0 +1,538 @@
+/* === RESET E CONFIGURAÇÕES GERAIS === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* === SEÇÃO PRINCIPAL === */
+.secao-resultados {
+  background-color: #121212;
+  color: #f0f0f0;
+  min-height: 100vh;
+  padding: 30px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* === CABEÇALHO === */
+.voltar-link {
+  display: inline-block;
+  color: #FFD700;
+  text-decoration: none;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.voltar-link:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  color: #FFD700;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+/* === LAYOUT DE COLUNAS === */
+.conteudo-com-coluna {
+  display: flex;
+  gap: 30px;
+}
+
+.coluna-esquerda {
+  flex: 2;
+  min-width: 0;
+}
+
+.coluna-direita {
+  flex: 1;
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  align-self: flex-start;
+  min-width: 220px;
+}
+
+/* Correção de typo: "colula-direita" → "coluna-direita" */
+/* (já corrigido acima) */
+
+/* === FILTROS (ANO E CLUBE) === */
+.seletor-ano {
+  margin-bottom: 20px;
+}
+
+.seletor-ano label {
+  display: block;
+  margin-bottom: 6px;
+  color: #ddd;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.seletor-ano select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.seletor-ano select:focus {
+  outline: none;
+  border-color: #FFD700;
+}
+
+/* === LISTA DE TEMPORADAS (COLUNA DIREITA) === */
+.lista-temporadas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-temporadas li {
+  margin-bottom: 10px;
+}
+
+.lista-temporadas a {
+  color: #ccc;
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.lista-temporadas a:hover,
+.lista-temporadas a.ativo {
+  background: #FFD700;
+  color: #121212;
+}
+
+/* === RESULTADOS DOS JOGOS === */
+.lista-jogos {
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.dia-jogos {
+  margin-bottom: 24px;
+}
+
+.data-jogos {
+  color: #FFD700;
+  font-size: 18px;
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #333;
+}
+
+/* === JOGO CARD (flexível, sem position:absolute) === */
+.jogo-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #252525;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  transition: background 0.2s;
+}
+
+.jogo-card:hover {
+  background: #2a2a2a;
+}
+
+.time-esquerdo,
+.time-direito {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  color: #fff;
+  min-width: 0;
+  flex: 1;
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: right;
+}
+
+.time-direito {
+  text-align: left;
+}
+
+.time-esquerdo img,
+.time-direito img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  background: #000;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* === PLACAR CENTRAL (sem position:absolute) === */
+.placar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #FFD700;
+  min-width: 90px;
+  text-align: center;
+  flex-shrink: 0;
+  padding: 0 12px;
+}
+
+.placar-principal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gols {
+  color: #FFD700;
+}
+
+.separador {
+  font-size: 20px;
+}
+
+.placar-penaltis {
+  font-size: 0.65em;
+  color: #aaa;
+  margin-top: 2px;
+}
+
+.em-andamento {
+  color: #666;
+}
+
+/* Local do jogo e rodada */
+.info-local {
+  text-align: center;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #888;
+}
+
+.info-estadio,
+.info-rodada {
+  margin: 2px 0;
+}
+
+/* === ESTATÍSTICAS GERAIS === */
+.card-estatisticas-geral {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0;
+  width: 100%;
+}
+
+.stat-item {
+  flex: 1; /* divide igualmente entre os 6 itens */
+  text-align: center;
+  background: #252525;
+  padding: 12px 4px;
+  border-radius: 8px;
+  min-width: 0; /* permite que o flex funcione mesmo com conteúdo largo */
+}
+
+.stat-num {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFD700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-label {
+  display: block;
+  font-size: 11px;
+  color: #ccc;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* === DESTAQUES DE CLUBES === */
+.destaque-clube {
+  margin: 20px 0;
+  padding: 16px;
+  background: #252525;
+  border-radius: 8px;
+}
+
+.destaque-clube h3 {
+  color: #FFD700;
+  font-size: 16px;
+  margin: 0 0 12px;
+  font-weight: bold;
+}
+
+.clube-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.clube-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.clube-item img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  background: #000;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.clube-item span {
+  color: #fff;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ✨ VALOR EM DESTAQUE */
+.clube-item .valor {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 22px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* ========================================
+   VOLTAR AO TOPO
+======================================== */
+
+#voltar-ao-topo {
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #FFD700;
+  color: #1e1e1e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
+}
+
+#voltar-ao-topo .tooltip-text {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1e1e1e;
+  color: #FFD700;
+  padding: 6px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+#voltar-ao-topo:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+}
+
+#voltar-ao-topo .tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1e1e1e transparent transparent transparent;
+}
+
+/* === RESPONSIVIDADE === */
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 20px;
+  }
+  .conteudo-com-coluna {
+    gap: 24px;
+  }
+  .coluna-direita {
+    padding: 18px;
+    min-width: 200px;
+  }
+  .stat-item {
+    padding: 12px;
+    min-width: 90px;
+  }
+  .seletor-ano select {
+    font-size: 14px;
+  }
+  .time-esquerdo img,
+  .time-direito img {
+    width: 28px;
+    height: 28px;
+  }
+  .placar {
+    font-size: 16px;
+    min-width: 80px;
+    padding: 0 8px;
+  }
+  .gols, .separador {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .conteudo-com-coluna {
+    flex-direction: column;
+  }
+  .coluna-direita {
+    width: 100%;
+    min-width: auto;
+    order: 2;
+    margin-top: 20px;
+  }
+  .coluna-esquerda {
+    order: 1;
+  }
+  .seletor-ano {
+    margin-bottom: 16px;
+  }
+
+  /* Em mobile, layout em coluna */
+  .jogo-card {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    text-align: center;
+    height: auto;
+  }
+
+  .time-esquerdo,
+  .time-direito {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    flex: none;
+    gap: 8px;
+  }
+
+  .time-direito {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .placar {
+    margin: 8px 0;
+    padding: 0;
+    min-width: auto;
+  }
+
+  .placar-penaltis {
+    font-size: 0.85em;
+    margin-top: 4px;
+  }
+
+  .card-estatisticas-geral {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stat-item {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .clube-item {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    white-space: normal;
+  }
+
+  .clube-item .valor {
+    margin-left: 0;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .secao-resultados {
+    padding: 20px 12px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  .destaque-clube,
+  .stat-item,
+  .jogo-card {
+    padding: 12px;
+  }
+  .seletor-ano select,
+  .lista-temporadas a {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .clube-item .valor {
+    font-size: 16px;
+  }
+  .placar {
+    font-size: 15px;
+  }
+  .placar-principal {
+    gap: 4px;
+  }
+  .gols, .separador {
+    font-size: 16px;
+  }
+  .placar-penaltis {
+    font-size: 0.75em;
+  }
+  .time-esquerdo img,
+  .time-direito img {
+    width: 28px;
+    height: 28px;
+  }
+}

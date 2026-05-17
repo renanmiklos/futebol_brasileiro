@@ -1,75 +1,707 @@
+/* ========================================
+   DETALHES_TIME.CSS
+   Página individual do clube - Futebol Brasileiro
+======================================== */
+
+/* ========================================
+   VARIÁVEIS
+======================================== */
+
+:root {
+  --times-bg: #0b0f14;
+  --times-bg-2: #101720;
+  --times-card: #151d27;
+  --times-card-2: #1b2633;
+  --times-card-3: #202d3c;
+
+  --times-gold: #ffd700;
+  --times-gold-2: #ffb700;
+  --times-green: #0f8b4c;
+  --times-green-2: #12a85c;
+
+  --times-text: #f5f7fa;
+  --times-muted: #b8c2cc;
+  --times-muted-2: #8f9ba8;
+
+  --times-border: rgba(255, 255, 255, 0.08);
+  --times-border-gold: rgba(255, 215, 0, 0.26);
+
+  --times-shadow: rgba(0, 0, 0, 0.46);
+  --times-radius: 20px;
+  --times-radius-sm: 14px;
+
+  --times-container: 1220px;
+  --times-transition: 0.25s ease;
+}
+
+/* ========================================
+   BASE DA PÁGINA
+======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: #121212;
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(15, 139, 76, 0.09), transparent 32%),
+    linear-gradient(180deg, #0b0f14 0%, #0d131a 55%, #0b0f14 100%);
+  color: var(--times-text);
+  font-family: 'Roboto', Arial, sans-serif;
+  min-height: 100vh;
 }
 
-.detalhes-time .container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 40px 20px;
+img {
+  max-width: 100%;
+  display: block;
 }
+
+a {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  overflow: visible;
+}
+
+/* ========================================
+   SEÇÃO PRINCIPAL
+======================================== */
+
+.detalhes-time {
+  min-height: 100vh;
+  padding: 34px 16px 54px;
+}
+
+.container {
+  width: min(var(--times-container), 100%);
+  margin: 0 auto;
+}
+
+/* ========================================
+   LINK VOLTAR
+======================================== */
 
 .voltar-link {
-  display: inline-block;
-  margin-bottom: 20px;
-  color: #FFD700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: var(--times-gold);
   text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-  transition: color 0.3s;
+  font-weight: 900;
+  font-size: 0.95rem;
+  transition:
+    color var(--times-transition),
+    transform var(--times-transition);
 }
 
 .voltar-link:hover {
   color: #fff;
+  transform: translateX(-3px);
 }
 
-.perfil-time {
+/* ========================================
+   LAYOUT PRINCIPAL
+======================================== */
+
+.layout-detalhes-time {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.coluna-perfil-time,
+.coluna-conteudo-time {
+  min-width: 0;
+}
+
+.coluna-perfil-time {
+  position: sticky;
+  top: 112px;
   display: flex;
-  gap: 30px;
-  align-items: flex-start;
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.perfil-time .escudo {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  background-color: #fff;
+/* ========================================
+   CARD DE PERFIL DO CLUBE
+======================================== */
+
+.card-perfil-time {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 22px;
+  border-radius: 26px;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(15, 139, 76, 0.10)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--times-card);
+  border: 1px solid var(--times-border-gold);
+  box-shadow: 0 24px 58px var(--times-shadow);
+}
+
+.card-perfil-time::before {
+  content: '';
+  position: absolute;
+  inset: -110px auto auto -110px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-  padding: 10px;
+  background: radial-gradient(circle, rgba(18, 168, 92, 0.12), transparent 64%);
+  pointer-events: none;
 }
 
-.perfil-time .info h1 {
-  color: #FFD700;
-  margin-bottom: 10px;
-  font-size: 24px;
+.card-perfil-time::after {
+  content: '';
+  position: absolute;
+  inset: auto -110px -150px auto;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.13), transparent 66%);
+  pointer-events: none;
 }
 
-.perfil-time .info p {
-  margin: 6px 0;
-  font-size: 15px;
-  color: #ddd;
+.escudo-time {
+  position: relative;
+  z-index: 1;
+  width: 132px;
+  height: 132px;
+  object-fit: contain;
+  margin: 0 auto 18px;
+  padding: 12px;
+  border-radius: 26px;
+  background-color: #fff;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
 }
 
-.descricao-time h2 {
-  color: #FFD700;
-  margin-top: 30px;
-  font-size: 20px;
+.etiqueta-time {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto 14px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--times-gold), var(--times-gold-2));
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 0 10px 22px rgba(255, 215, 0, 0.18);
 }
 
-.descricao-time p {
-  background-color: #1e1e1e;
+.card-perfil-time h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--times-text);
+  font-size: clamp(1.55rem, 2.6vw, 2.35rem);
+  line-height: 1.08;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+}
+
+.nome-curto {
+  position: relative;
+  z-index: 1;
+  margin: 10px 0 0;
+  color: var(--times-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+/* ========================================
+   SELO DA DIVISÃO ATUAL
+======================================== */
+
+.badge-serie {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 34px;
+  border-radius: 999px;
+  color: #111;
+  background: linear-gradient(135deg, var(--times-gold), var(--times-gold-2));
+  font-size: 0.88rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(255, 215, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.serie-a {
+  background: linear-gradient(135deg, var(--times-gold), var(--times-gold-2));
+  color: #111;
+}
+
+.serie-b {
+  background: linear-gradient(135deg, #d8dde5, #aeb8c5);
+  color: #111;
+}
+
+.serie-c {
+  background: linear-gradient(135deg, #cd7f32, #a45f1c);
+  color: #111;
+}
+
+.serie-d {
+  background: linear-gradient(135deg, var(--times-green), var(--times-green-2));
+  color: #fff;
+}
+
+/* ========================================
+   CARD DE INFORMAÇÕES
+   Agora fica na coluna principal, acima de História
+======================================== */
+
+.card-dados-time {
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--times-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.card-dados-time h2 {
+  margin: 0 0 18px;
+  color: var(--times-gold);
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.dados-time-lista {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.dado-time {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 86px;
   padding: 15px;
-  border-radius: 6px;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(0, 0, 0, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.dado-time span {
+  color: var(--times-muted-2);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.dado-time strong {
+  color: var(--times-text);
+  font-size: 1rem;
+  line-height: 1.35;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.dado-time.destaque-divisao {
+  background:
+    linear-gradient(135deg, rgba(255, 215, 0, 0.11), rgba(15, 139, 76, 0.08)),
+    rgba(0, 0, 0, 0.20);
+  border-color: rgba(255, 215, 0, 0.24);
+}
+
+.dado-time.destaque-divisao strong {
+  color: var(--times-gold);
+}
+
+/* ========================================
+   BLOCOS DE CONTEÚDO
+======================================== */
+
+.bloco-historia-time,
+.bloco-titulos-time,
+.bloco-galeria-time {
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(21, 29, 39, 0.92);
+  border: 1px solid var(--times-border);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.36);
+}
+
+.bloco-historia-time h2,
+.bloco-titulos-time h2,
+.bloco-galeria-time h2 {
+  margin: 0 0 16px;
+  color: var(--times-gold);
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.bloco-historia-time p {
+  margin: 0;
+  color: var(--times-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* ========================================
+   TÍTULO DE BLOCO
+======================================== */
+
+.titulo-bloco {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.titulo-bloco h2 {
+  margin: 0;
+}
+
+.titulo-bloco span {
+  color: var(--times-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* ========================================
+   TÍTULOS DO CLUBE
+   Ajustado para muitos anos, especialmente estaduais
+======================================== */
+
+.lista-titulos-time {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.grupo-titulos {
+  padding: 18px;
+  border-radius: 18px;
+  background-color: rgba(0, 0, 0, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.grupo-titulos h3 {
+  margin: 0 0 14px;
+  color: var(--times-text);
+  font-size: 1.12rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.titulo-time-item {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.titulo-time-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.titulo-time-item strong {
+  color: var(--times-text);
+  font-size: 0.98rem;
+  line-height: 1.4;
+  font-weight: 900;
+}
+
+.titulo-time-item span,
+.anos-titulo-time {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  color: #111;
+  background: linear-gradient(135deg, var(--times-gold), var(--times-gold-2));
+  font-size: 0.86rem;
+  font-weight: 900;
+  line-height: 1.55;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  text-align: left;
+}
+
+/* ========================================
+   GALERIA
+======================================== */
+
+.grid-galeria-time {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.foto-time-item {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background-color: rgba(0, 0, 0, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.26);
+}
+
+.foto-time-item img {
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 62%),
+    #0a0d12;
+  padding: 12px;
+}
+
+.foto-time-item figcaption {
+  margin: 0;
+  padding: 12px 14px 14px;
+  color: var(--times-muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  font-style: italic;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.mensagem-vazia {
+  margin: 0;
+  padding: 18px;
+  border-radius: 14px;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 215, 0, 0.25);
+  color: var(--times-muted);
   line-height: 1.6;
-  margin-bottom: 25px;
-  white-space: pre-line;
-  font-size: 15px;
-  color: #f0f0f0;
+}
+
+/* ========================================
+   ACESSIBILIDADE / FOCUS
+======================================== */
+
+.voltar-link:focus-visible,
+.card-perfil-time:focus-visible,
+.foto-time-item:focus-visible {
+  outline: 3px solid rgba(255, 215, 0, 0.34);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVIDADE - NOTEBOOK
+======================================== */
+
+@media (max-width: 1080px) {
+  .layout-detalhes-time {
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .escudo-time {
+    width: 118px;
+    height: 118px;
+    border-radius: 22px;
+  }
+
+  .dados-time-lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .foto-time-item img {
+    height: 240px;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 860px) {
+  .detalhes-time {
+    padding: 28px 14px 46px;
+  }
+
+  .layout-detalhes-time {
+    grid-template-columns: 1fr;
+  }
+
+  .coluna-perfil-time {
+    position: static;
+    display: block;
+  }
+
+  .card-perfil-time {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .dados-time-lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-galeria-time {
+    grid-template-columns: 1fr;
+  }
+
+  .foto-time-item img {
+    height: 300px;
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - SMARTPHONE
+======================================== */
+
+@media (max-width: 640px) {
+  .detalhes-time {
+    padding: 24px 12px 40px;
+  }
+
+  .voltar-link {
+    font-size: 0.9rem;
+  }
+
+  .card-perfil-time {
+    padding: 24px 18px;
+    border-radius: 22px;
+  }
+
+  .escudo-time {
+    width: 106px;
+    height: 106px;
+    border-radius: 20px;
+  }
+
+  .card-perfil-time h1 {
+    font-size: 1.55rem;
+  }
+
+  .nome-curto {
+    font-size: 0.95rem;
+  }
+
+  .badge-serie {
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .dados-time-lista {
+    grid-template-columns: 1fr;
+  }
+
+  .card-dados-time,
+  .bloco-historia-time,
+  .bloco-titulos-time,
+  .bloco-galeria-time {
+    border-radius: 18px;
+    padding: 18px;
+  }
+
+  .titulo-bloco {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .bloco-historia-time h2,
+  .bloco-titulos-time h2,
+  .bloco-galeria-time h2,
+  .card-dados-time h2 {
+    font-size: 1.28rem;
+  }
+
+  .bloco-historia-time p {
+    font-size: 0.96rem;
+  }
+
+  .grupo-titulos {
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .titulo-time-item {
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .titulo-time-item span,
+  .anos-titulo-time {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    padding: 9px 10px;
+  }
+
+  .foto-time-item img {
+    height: 240px;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 380px) {
+  .card-perfil-time h1 {
+    font-size: 1.38rem;
+  }
+
+  .escudo-time {
+    width: 92px;
+    height: 92px;
+  }
+
+  .etiqueta-time {
+    font-size: 0.68rem;
+  }
+
+  .dado-time {
+    padding: 12px;
+  }
+
+  .dado-time strong {
+    font-size: 0.92rem;
+  }
+
+  .foto-time-item img {
+    height: 210px;
+  }
 }
